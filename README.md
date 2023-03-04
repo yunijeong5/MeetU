@@ -2,7 +2,7 @@
 
 ## Team Overview
 - Yuni Jeong (@yunijeong5)
-- 
+- Kushagra Srivastava (@suobset)
 
 
 ## Innovative Idea
