@@ -3,6 +3,7 @@
 ## Team Overview
 - Yuni Jeong (@yunijeong5)
 - Kushagra Srivastava (@suobset)
+- James Leone (@JLeone123)
 - Nhi Ha (@hacherio)
 
 ## Innovative Idea
