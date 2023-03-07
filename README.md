@@ -1,6 +1,6 @@
 # Team 6 Project: A Better Version of When2Meet
 
-App names: Let's Meet | Better Meet | Hang Out | Simple Meet | Meet up | MeetU | Meet Days | Meetful
+App name: MeetU
 
 ## Team Overview
 - Yuni Jeong (@yunijeong5)
