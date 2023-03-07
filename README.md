@@ -1,4 +1,4 @@
-# Team 6 Project: [insert name]
+# Team 6 Project: A Better Version of When2Meet
 
 App names: Let's Meet | Better Meet | Hang Out | Simple Meet | Meet up | MeetU | Meet Days | Meetful
 
@@ -10,11 +10,11 @@ App names: Let's Meet | Better Meet | Hang Out | Simple Meet | Meet up | MeetU |
 
 
 ## Innovative Idea
-Existing application: When To Meet, CATME
+Existing application: When2Meet (https://www.when2meet.com/), CATME
 wtm: Bad UI, Hard to use on phones, cannot choose location, commenting functionality
 cm: Confusing UI (accidentally fill out the survey wrong)
 
-We want to make a better version of scheduling web app that overcomes these limitations.
+We want to make a better version of scheduling web app that overcomes these limitations, and then add some extra functionality which we believe would benefit everyone.
 
 
 
@@ -23,8 +23,13 @@ We want to make a better version of scheduling web app that overcomes these limi
 - Username: (email)
 - Password: 
 - Time selecter per user: 
+- Recurrence of meeting
 - Meeting location:
-- Comments: 
+- Specific text boxes for Meeting agenda, roadmap, etc. Can give a markdown to end-user to define it to their liking.
+- Links for Zoom/Discord/Meeting Platforms
+- Links for shared Google Drive Folders, Pooled-in Resources
+- A unified system for people to mention if they can make it or not on specific days (think as marking attendance...if they can typically make it but did not on a specific day, they can mention why)
+- Other Comments: 
 
 
 
@@ -51,7 +56,7 @@ We want to make a better version of scheduling web app that overcomes these limi
 ## License
 [MIT License](https://opensource.org/licenses/MIT)
 
-Copyright (c) 2023 Team 6
+Copyright (c) 2023 James, Kush, Nhi, Yuni
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
