@@ -1,4 +1,4 @@
-# Team 6 Project: App name: MeetU
+# Team 6 Project: MeetU
 
 A Better Version of When2Meet
 
