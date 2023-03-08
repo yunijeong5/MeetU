@@ -1,6 +1,6 @@
-# Team 6 Project: A Better Version of When2Meet
+# Team 6 Project: App name: MeetU
 
-App name: MeetU
+A Better Version of When2Meet
 
 ## Team Overview
 - Yuni Jeong (@yunijeong5)
@@ -11,25 +11,28 @@ App name: MeetU
 
 ## Innovative Idea
 Existing application: When2Meet (https://www.when2meet.com/), CATME
-wtm: Bad UI, Hard to use on phones, cannot choose location, commenting functionality
-cm: Confusing UI (can accidentally fill out the survey wrong)
 
-We want to make a better version of a scheduling web app that overcomes these limitations, and then add some extra functionality which we believe would benefit everyone.
+Their limitations are:
+When2Meet-- Bad UI, hard to use on phones, cannot choose location, no commenting functionality
+CATME-- Confusing UI (can accidentally fill out the survey wrong)
+
+We want to make a scheduling web app that overcomes these limitations, and add extra functionality which we believe would benefit anyone who want to organize a group meeting. Our goal is to create an app that's simple and easy to use, but also gives intuitive UX to its users.
 
 
 
 ## Data
-- Meeting title:
-- Username: (email)
-- Password: 
-- Time selecter per user: 
+- Meeting title
+- Username (email)
+- Password 
+- Time selection votes
 - Recurrence of meeting
-- Meeting location:
-- Specific text boxes for Meeting agenda, roadmap, etc. Can give a markdown to end-user to define it to their liking.
+- Meeting location votes
+- Comments about the meeting
+- Specific text boxes for meeting agenda, roadmap, etc. Can give a markdown to end-user to define it to their liking.
 - Links for Zoom/Discord/Meeting Platforms
 - Links for shared Google Drive Folders, Pooled-in Resources
 - A unified system for people to mention if they can make it or not on specific days (think as marking attendance...if they can typically make it but did not on a specific day, they can mention why)
-- Other Comments: 
+
 
 
 
