@@ -12,9 +12,9 @@ App name: MeetU
 ## Innovative Idea
 Existing application: When2Meet (https://www.when2meet.com/), CATME
 wtm: Bad UI, Hard to use on phones, cannot choose location, commenting functionality
-cm: Confusing UI (accidentally fill out the survey wrong)
+cm: Confusing UI (can accidentally fill out the survey wrong)
 
-We want to make a better version of scheduling web app that overcomes these limitations, and then add some extra functionality which we believe would benefit everyone.
+We want to make a better version of a scheduling web app that overcomes these limitations, and then add some extra functionality which we believe would benefit everyone.
 
 
 
@@ -36,7 +36,7 @@ We want to make a better version of scheduling web app that overcomes these limi
 ## Functionality
 - Create profile with email and password.
 - Create a new event
-- Users can add their availabilities and vote for the location they want to meet.
+- Users can add their availabilities and vote for the location they want to meet at.
 - Show times with the most overlap (color coded)
 
 - Private/public events: e.g. Only UMass emails can schedule an event
