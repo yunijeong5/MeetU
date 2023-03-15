@@ -2,7 +2,7 @@
 
 ## Wireframe
 
-Facilis quas ut iste nam et. Doloribus ut nostrum nobis ut ut eos quia vel soluta. Minus dolorem error neque voluptas ex.
+MeetU: A better way to schedule and organize meetings. 
 
 ![Wireframe 1](wireframe-1.png)
 
@@ -18,25 +18,25 @@ Qui commodi beatae. Quaerat saepe tempora nisi labore ducimus corporis adipisci 
 
 ## Stories
 
-### Story 1
+### Story 1: Success story of a user
 
-Omnis sed consequatur beatae laudantium voluptatem tenetur. Exercitationem omnis quisquam omnis. Tenetur vitae excepturi rerum quia corporis soluta qui iste necessitatibus. Aut quam autem cum et. Harum consequatur perspiciatis eum et temporibus nisi qui pariatur.
+A CS 326 student wants to schedule a new meeting to discuss their project. The leader decides to register on MeetU using their own Google account. Once the account is created, the “Create New Event” window is shown, which will include the user profile (username), along with a navigation bar with “dashboard” and “logout” options.  The student decides to make the meeting name “idk😀” and selects a date time on December 21. For the time section, the leader chooses their own preferred start/end times and location options. Finally, they decided to submit their new meeting, and the browser shows a clickable timetable with a unique URL.
 
-### Story 2
+### Story 2: Registered user logs in and use dashboard
 
-Blanditiis et esse ipsa soluta. Temporibus sunt possimus ut veritatis sint ut in quia eum. Omnis ea vel quae eligendi. Illo optio est doloremque autem. Sit ea dolorum architecto.
- 
-Fuga ea culpa eaque molestiae illo quod odio culpa. Et aut repellendus aut temporibus quae quia et. Quia consectetur quod est. Repellat animi amet quia velit.
- 
-Voluptatum accusantium dolores cumque sit accusamus. Eaque quia qui commodi rerum eos doloribus. Sint aliquam quae ut ut tempora pariatur qui.
+The user logs into MeetU by clicking on the “Log In” button at the top navigation bar. Once he’s logged in, next to the user profile, the “Dashboard” button shows up and leads to the user’s dashboard. It lists meeting items in a grid view (each item shows the meeting title. Clicking on the item leads to the time selection view of the event). On the dashboard, the user can browse events by event title and sort by creation date, or create/delete the event. The event created by the user is automatically added to the dashboard, but the events he participates in as a “member” can be added by “add item > enter URL”.
 
-### Story 3
+### Story 3: Guest user decides to register (will include microservices):
 
-Esse itaque quia est nam. Ut voluptate voluptatem tempora officia. Minus et repellendus ut aut. Aut sint sint distinctio perferendis voluptas. Aut libero qui reprehenderit. Quia dolor ratione dolore porro.
- 
-Est quod dolor natus. Nihil provident omnis. Exercitationem voluptate earum. Earum doloremque voluptates quia eos qui suscipit dicta.
- 
-Optio ea sit minima cum consequatur at ut incidunt. Ea voluptatem iure modi officiis. Distinctio eum nemo soluta nulla.
+A user visits the MeetU website.  Since this is a new user, who has not logged in before, the user is brought to a login form. However, this user would like to create a new account and register on this website. The user has three options: the user can register with Google, using his/her username and password, or just using the platform as a guest user.  Even though the user has a Google account, the user chooses to create a new username and passes his/her email.  The email is not typed correctly, and the website shares an error message saying to provide a valid email. The user provides a valid email and username (microservices are used here to send OTP to email + do a CAPTCHA verification), and is brought to the home page.
+
+### Story 4: User chooses a not applicable time and date for a meeting
+
+When given a dropdown menu to select exactly what time they are available for their meeting, a user selects a start time which is in the future as compared to their end time. For example, they choose the meeting to start at 11PM on 3rd March, and end at 12AM on 3rd March. The app gives an error message stating that “Start Time Cannot Be After End Time”, and prompts the user to choose a proper valid time and date. The message goes away once the user chooses a valid End time and Start time. The user goes on with the rest of the process of setting up a meeting time and sending further invite links.
+
+### Story 5: Selecting a meeting time when everyone has put in their availability
+
+After every group member inputs their preferred date and time schedules, the website sends a notification in the form of an email to the original person who created the meeting. The original user then logs in and gets redirected to the home screen. Under their profile, the user can see all their meetings that they have either created or given their schedule to. The user finds the meeting for which they had got a notification for and is presented with a dashboard showcasing each user and their availability. There is also a graph view which shows what is the most popular times based on every user's time votes.
 
 ## HTML & CSS Mockup
 
