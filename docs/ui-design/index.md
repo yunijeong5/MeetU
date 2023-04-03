@@ -38,7 +38,7 @@ With the login all set up, the user can then choose their preferred time availab
 
 And with that, we are done! 
 All of the wireframe pages shown above.  
-This image here is just the style and color pallete we choose from for the entirety of our Figma wireframe.
+This image here is just the style and color palette we choose from for the entirety of our Figma wireframe.
 
 
 ## Stories
