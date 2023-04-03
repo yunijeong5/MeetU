@@ -4,7 +4,7 @@
 
 MeetU: A better way to schedule and organize meetings. 
 
-![Wireframe 1](wireframe-1.png)
+![Wireframe 1](image/dashboard.png)
 
 Consequuntur reiciendis illo non suscipit necessitatibus dolores doloribus sed atque. Quos rem excepturi ut eum et eaque facere et. Illo quos voluptatem ratione sint numquam dolor assumenda. Ea et et sapiente distinctio et aut aspernatur necessitatibus est.
  
