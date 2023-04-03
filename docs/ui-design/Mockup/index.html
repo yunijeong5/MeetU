@@ -22,12 +22,17 @@
     />
     <!-- Custom CSS -->
     <link rel="stylesheet" href="./style/style.css" />
+    <!-- JS script -->
+    <script src="calendar.js" type="module"></script>
+
     <title>MeetU Mockup: Create New Event</title>
   </head>
   <body>
     <!-- Nav Bar -->
     <nav class="navbar-light navbar navbar-expand-sm">
-      <a class="navbar-brand navbar-link" href="#" id="logo-text"> MeetU </a>
+      <a class="navbar-brand navbar-link ml-2" href="#" id="logo-text">
+        MeetU
+      </a>
 
       <button
         class="navbar-toggler"
@@ -42,39 +47,108 @@
       </button>
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <!-- Make the follow elements into a nav component: -->
-        <ul class="navbar-nav ml-auto">
+        <!--  nav component: -->
+        <ul class="navbar-nav ml-auto d-lg-flex align-items-center">
           <li class="nav-item active">
             <a class="nav-link" href="#"
               >Dashboard <span class="sr-only">(current)</span></a
             >
           </li>
 
-          <li class="nav-item">
+          <!-- <li class="nav-item h-100">
             <a class="nav-link" href="#">
-              <img src="./assets/moon-svgrepo-com.svg" />
+              <img class="moon-icon" src="./assets/moon-svgrepo-com.svg" />
+            </a>
+          </li> -->
+          <li class="nav-item h-100">
+            <a class="nav-link" href="#">
+              <img class="sun-icon" src="./assets/sun-svgrepo-com.svg" />
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <img src="./assets/sun-svgrepo-com.svg" />
-            </a>
-          </li>
-          <li class="nav-item">
-            <button type="button" class="btn btn-dark">Sign Up</button>
+          <li class="nav-item nav-sign-in text-center h-100">
+            <a class="nav-link text-white" href="#"> Sign In </a>
           </li>
         </ul>
       </div>
     </nav>
     <!-- Page Content -->
-    <div class="container">
+    <div class="container mt-5 mb-5">
       <div class="row">
-        <div class="col">helo</div>
+        <!-- Col 1 -->
+        <div class="col-12 col-md-6">
+          <div class="row m-3">
+            <h1 class="mt-3 mb-3">Meeting Title</h1>
+            <div class="input-group">
+              <textarea
+                class="form-control"
+                aria-label="With textarea"
+              ></textarea>
+            </div>
+          </div>
+          <div class="row m-3">
+            <h1 class="mt-3 mb-3">Meeting Description</h1>
+            <div class="input-group">
+              <textarea
+                class="form-control"
+                aria-label="With textarea"
+              ></textarea>
+            </div>
+          </div>
+          <div class="row m-3">
+            <h1 class="mt-3 mb-3">Meeting Days</h1>
+            <div class="input-group date form-group" id="datepicker">
+              <input
+                type="text"
+                class="form-control"
+                id="Dates"
+                name="Dates"
+                placeholder="Select days"
+                required
+              />
+              <span class="input-group-addon"
+                ><i class="glyphicon glyphicon-calendar"></i
+                ><span class="count"></span
+              ></span>
+            </div>
+          </div>
+        </div>
+        <!-- Col 2 -->
+        <div class="col-12 col-md-6">
+          <div class="row m-3">
+            <h1 class="mt-3 mb-3">Meeting Time</h1>
+          </div>
+          <div class="row m-3">
+            <h1 class="mt-3 mb-3">Poll</h1>
+          </div>
+        </div>
       </div>
-
-      <!-- Footer -->
-      <div id="footer" class="row">footer</div>
     </div>
+
+    <!-- Footer -->
+    <footer id="footer" class="page-footer fixed-bottom">
+      <div class="container-fluid text-md-left">
+        <div class="row">
+          <div class="col-md-6">
+            <ul class="list-unstyled m-5">
+              <li>
+                <a class="link" href="#!">About Us</a>
+              </li>
+              <li>
+                <a class="link" href="#!">Buy Us a Coffee</a>
+              </li>
+              <li>
+                <a class="link" href="#!">Link 3</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- Copyright -->
+      <div class="footer-copyright text-center pb-3">
+        © 2023 Copyright:
+        <a href="/"> meetu.com</a>
+      </div>
+    </footer>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

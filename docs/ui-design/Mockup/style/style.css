@@ -1,10 +1,27 @@
+/* ************************************** */
+/*    GENERAL SETUP      */
+/* ************************************** */
+html {
+  /* Does not work with Safari and MS Edge */
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: "Inter";
 }
 
+h1 {
+  font-weight: 600;
+  font-size: 1.5rem;
+}
+
+/* ************************************** */
+/*    NAVBAR      */
+/* ************************************** */
+
 #logo-text {
   font-weight: 800;
-  font-size: 35px;
+  font-size: 1.8rem;
   background: linear-gradient(93.15deg, #1085d3 20.1%, #29c5f6 79.49%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -12,14 +29,70 @@ body {
   /* text-fill-color: transparent; */
 }
 
-.btn {
-  border-radius: 50px;
+.navbar {
+  border-bottom: 1px solid #f1f1f1;
+}
+
+.navbar li {
+  margin-right: 5px;
 }
 
 .nav-link {
-  font-weight: bold;
+  font-size: 1rem;
+  font-weight: 600;
 }
 
-.navbar {
-  border-bottom: 1px solid #f1f1f1;
+.nav-sign-in {
+  border-radius: 100px;
+  width: 5rem;
+  background-color: black;
+  transition: all 200ms;
+}
+
+.nav-sign-in:hover {
+  background: #29c5f6 0%;
+}
+
+.sun-icon {
+  border-radius: 100px;
+}
+
+.sun-icon:hover {
+  transition: all 200ms;
+  background-color: #d3d3d3;
+}
+
+.moon-icon {
+  border-radius: 100px;
+}
+
+.moon-icon {
+  transition: all 200ms;
+  background-color: #d3d3d3;
+}
+
+/* ************************************** */
+/*    CREATE NEW EVENT     */
+/* ************************************** */
+
+/* ************************************** */
+/*    FOOTER     */
+/* ************************************** */
+#footer {
+  border-top: 1px solid #f1f1f1;
+}
+
+#footer li {
+  margin: 10px 0;
+}
+
+.link:link {
+  color: black;
+  text-decoration: none;
+  transition: all 200ms;
+}
+
+.link:hover,
+.link:active {
+  color: #29c5f6;
 }
