@@ -4,15 +4,12 @@
 
 MeetU: A better way to schedule and organize meetings. 
 
-![Wireframe 1](image/dashboard.png)
+![Wireframe 1](images/dashboard.png)
 
-Consequuntur reiciendis illo non suscipit necessitatibus dolores doloribus sed atque. Quos rem excepturi ut eum et eaque facere et. Illo quos voluptatem ratione sint numquam dolor assumenda. Ea et et sapiente distinctio et aut aspernatur necessitatibus est.
+This page displays a dashboard of a list of past meetings. Each meetings are given a description by the user about the event itself. By right clicking the event, the user can view a delete event option if they want to remove the meeting on the dashboard. The user can click +Create New Event box on the bottom right corner to create a new meeting which will direct them to a "Create New Event" page. On the top right corner, there is your user profile and dashboard button shown. There is also an optional darkmode button on the top right corner if you are the type of user who hates light theme.
  
-Est velit debitis enim. Esse et et quos animi animi. Quibusdam et porro et praesentium maiores dolores facilis. Voluptas molestias sapiente aperiam culpa. Et doloribus maiores omnis quisquam dolores.
- 
-Esse est et ut rem et praesentium quibusdam eaque. Aut consectetur illum placeat repellendus nam. Exercitationem dolorem tempora.
 
-![Wireframe 2](wireframe-2.png)
+![Wireframe 2](images/CreateNew.png) (images/CraeteEvent.png)
 
 Qui commodi beatae. Quaerat saepe tempora nisi labore ducimus corporis adipisci repellat nihil. Dolores est sed ratione consequatur est magnam cupiditate. Repellendus molestias qui doloribus. Deserunt quidem temporibus. Sunt hic laudantium vitae natus est.
 
