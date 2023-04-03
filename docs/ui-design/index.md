@@ -32,6 +32,14 @@ After creating a new event, the user must enter their name and an optional passw
 
 With the login all set up, the user can then choose their preferred time availabilities by dragging down and highlighting the times for any day they choose. The right side of your availability is the group's availability which displays all member's time avaialability. The darker the availability times art, the more people is on that time. The poll shown below is set by the creator of this meeting and displays a list of poll options. Summary section just displays extra description of the meeting (participant members, preferred meeting times and polls).
 
+### **WireFrame 4: Styles**
+
+![Wireframe 4](images/style.png)
+
+And with that, we are done! 
+All of the wireframe pages shown above.  
+This image here is just the style and color pallete we choose from for the entirety of our Figma wireframe.
+
 
 ## Stories
 
