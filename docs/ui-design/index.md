@@ -4,17 +4,42 @@
 
 MeetU: A better way to schedule and organize meetings. 
 
-![Wireframe 1](wireframe-1.png)
+### **WireFrame 1: Dashboard**
 
-Consequuntur reiciendis illo non suscipit necessitatibus dolores doloribus sed atque. Quos rem excepturi ut eum et eaque facere et. Illo quos voluptatem ratione sint numquam dolor assumenda. Ea et et sapiente distinctio et aut aspernatur necessitatibus est.
+![Wireframe 1](images/dashboard.png)
+
+This page displays a dashboard of a list of past meetings. Each meetings are given a description by the user about the event itself. By right clicking the event, the user can view a delete event option if they want to remove the meeting on the dashboard. The user can click +Create New Event box on the bottom right corner to create a new meeting which will direct them to a "Create New Event" page. On the top right corner, there is your user profile and dashboard button shown. There is also an optional darkmode button if you are a light theme hater 👎
  
-Est velit debitis enim. Esse et et quos animi animi. Quibusdam et porro et praesentium maiores dolores facilis. Voluptas molestias sapiente aperiam culpa. Et doloribus maiores omnis quisquam dolores.
- 
-Esse est et ut rem et praesentium quibusdam eaque. Aut consectetur illum placeat repellendus nam. Exercitationem dolorem tempora.
 
-![Wireframe 2](wireframe-2.png)
+### **WireFrame 2: Create new Events**
 
-Qui commodi beatae. Quaerat saepe tempora nisi labore ducimus corporis adipisci repellat nihil. Dolores est sed ratione consequatur est magnam cupiditate. Repellendus molestias qui doloribus. Deserunt quidem temporibus. Sunt hic laudantium vitae natus est.
+![Wireframe 2](images/CreateEvent.png)
+
+User can type out the title and description within the textbook about the created meeting. The user can also select a specific date or day of the week from the dropdown and choose a specific day based on the given calendar. On the meeting time, there is a dropdown menu for between given specfic times and timezone that the user wishes to choose from. Below that is a poll of whatever subject they want to make it about (e.g. location) that the user can decided to dislay for other members to choose based on the poll option. After filling out everything down, the user can click the button "+Create Meeting". 
+
+![Wireframe 2](images/CreateNew.png)
+
+_Other several features shown above_
+
+
+### **WireFrame 3: Selecting Time Availabilities**
+
+![Wireframe 3](images/LoginNTime.png)
+
+After creating a new event, the user must enter their name and an optional password before selecting time availabilities of the new event. This is so that the meeting can show participants and members of the event. The user can also Sign In to MeetU without having to enter their name for every new created event made.
+
+![Wireframe 3](images/Time.png)
+
+With the login all set up, the user can then choose their preferred time availabilities by dragging down and highlighting the times for any day they choose. The right side of your availability is the group's availability which displays all member's time avaialability. The darker the availability times art, the more people is on that time. The poll shown below is set by the creator of this meeting and displays a list of poll options. Summary section just displays extra description of the meeting (participant members, preferred meeting times and polls).
+
+### **WireFrame 4: Styles**
+
+![Wireframe 4](images/style.png)
+
+And with that, we are done! 
+All of the wireframe pages shown above.  
+This image here is just the style and color palette we choose from for the entirety of our Figma wireframe.
+
 
 ## Stories
 
