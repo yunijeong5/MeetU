@@ -1,16 +1,41 @@
-$(document).ready(function () {
-  $("#datepicker")
-    .datepicker({
-      startDate: new Date(),
-      multidate: true,
-      format: "dd/mm/yyyy",
-      daysOfWeekHighlighted: "5,6",
-      language: "en",
-    })
-    .on("changeDate", function (e) {
-      // `e` here contains the extra attributes
-      $(this)
-        .find(".input-group-addon .count")
-        .text(" " + e.dates.length);
-    });
-});
+// Vanilla JS
+const picker = new tempusDominus.TempusDominus(
+  document.getElementById("date-picker"),
+  {
+    // options here
+
+    localization: {
+      dayViewHeaderFormat: {
+        month: "long",
+        year: "2-digit",
+        today: "Go to today",
+      },
+      locale: "default",
+      startOfTheWeek: 0,
+      format: "YYYY-MM-DD",
+    },
+    multipleDates: true,
+    // dateRange: true,
+
+    multipleDatesSeparator: "; ",
+    display: {
+      buttons: {
+        today: true,
+        clear: true,
+      },
+      components: {
+        clock: false,
+        hours: false,
+        minutes: false,
+      },
+      toolbarPlacement: "top",
+      keepOpen: true,
+      inline: true,
+    },
+  }
+);
+
+// Get date strings
+// document.getElementById("test").addEventListener("click", () => {
+//   console.log(picker.dates.picked);
+// });
