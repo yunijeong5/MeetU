@@ -1,0 +1,12 @@
+body {
+  font-family: "Inter";
+}
+
+#logo-text {
+  font-weight: bold;
+  background: linear-gradient(93.15deg, #1085d3 20.1%, #29c5f6 79.49%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  /* text-fill-color: transparent; */
+}
