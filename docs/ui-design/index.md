@@ -8,7 +8,7 @@ MeetU: A better way to schedule and organize meetings.
 
 ![Wireframe 1](images/dashboard.png)
 
-This page displays a dashboard of a list of past meetings. Each meetings are given a description by the user about the event itself. By right clicking the event, the user can view a delete event option if they want to remove the meeting on the dashboard. The user can click +Create New Event box on the bottom right corner to create a new meeting which will direct them to a "Create New Event" page. On the top right corner, there is your user profile and dashboard button shown. There is also an optional darkmode button on the top right corner if you are a light theme hater.
+This page displays a dashboard of a list of past meetings. Each meetings are given a description by the user about the event itself. By right clicking the event, the user can view a delete event option if they want to remove the meeting on the dashboard. The user can click +Create New Event box on the bottom right corner to create a new meeting which will direct them to a "Create New Event" page. On the top right corner, there is your user profile and dashboard button shown. There is also an optional darkmode button if you are a light theme hater 👎
  
 
 ### **WireFrame 2: Create new Events**
