@@ -79,10 +79,15 @@
     <!-- Page Content -->
     <div class="container mt-5 mb-5">
       <div class="row">
+        <div class="col">
+          <h1 class="mt-3 mb-3 text-center">Create Event</h1>
+        </div>
+      </div>
+      <div class="row">
         <!-- Col 1 -->
         <div class="col-12 col-md-6">
           <div class="row m-3">
-            <h1 class="mt-3 mb-3">Meeting Title</h1>
+            <h2 class="mt-3 mb-3">Meeting Title</h2>
             <div class="input-group">
               <textarea
                 class="form-control"
@@ -91,7 +96,7 @@
             </div>
           </div>
           <div class="row m-3">
-            <h1 class="mt-3 mb-3">Meeting Description</h1>
+            <h2 class="mt-3 mb-3">Meeting Description</h2>
             <div class="input-group">
               <textarea
                 class="form-control"
@@ -100,7 +105,20 @@
             </div>
           </div>
           <div class="row m-3">
-            <h1 class="mt-3 mb-3">Meeting Days</h1>
+            <div class="col-12 col-md-12 col-lg-6">
+              <h2 class="mt-3 mb-lg-3">Meeting Days</h2>
+            </div>
+
+            <div class="col-12 col-md-12 col-lg-6 mt-lg-3 mb-3">
+              <select
+                class="form-select p-1"
+                aria-label="Default select example"
+                id="days-mode"
+              >
+                <option selected>Specific days</option>
+                <option>Days of the week</option>
+              </select>
+            </div>
             <div
               class="col-sm-12 pl-0 pt-3 pb-3 round-corner bg-gray"
               id="date-picker"
@@ -112,9 +130,9 @@
         <!-- Col 2 -->
         <div class="col-12 col-md-6">
           <div class="row mt-3 ms-3">
-            <h1 class="mt-3">Meeting Time</h1>
+            <h2 class="mt-3">Meeting Time</h2>
           </div>
-          <div class="row mt-2 ms-3">
+          <div class="row mt-2 ms-3 me-3">
             <div class="col-4">
               <label for="earliest" class="form-label">Earliest time:</label>
             </div>
@@ -132,7 +150,7 @@
               </select>
             </div>
           </div>
-          <div class="row mt-3 ms-3">
+          <div class="row mt-3 ms-3 me-3">
             <div class="col-4">
               <label for="earliest" class="form-label">Lastest time:</label>
             </div>
@@ -151,9 +169,9 @@
           </div>
 
           <div class="row mt-3 ms-3">
-            <h1 class="mt-0">Poll</h1>
+            <h2 class="mt-0">Poll</h2>
           </div>
-          <div class="row mt-3 ms-3">
+          <div class="row mt-3 ms-3 me-3">
             <div class="col pt-3 pb-3 round-corner bg-gray" id="poll-box">
               <div class="row ms-2 mb-1" style="font-weight: 500">Title</div>
               <div class="row">
@@ -181,7 +199,7 @@
               </div>
             </div>
           </div>
-          <div class="row mt-3 ms-3">
+          <div class="row mt-3 ms-3 me-3">
             <button
               type="button"
               class="form-control p-3"
