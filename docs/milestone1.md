@@ -10,3 +10,6 @@ Showcase of light and dark mode switch.
 
 ![Showcase of responsive design](size_change.gif)
 We used Bootstrap 5 to ensure responsive design. The app changes layout depending on the user device's screen size, creating a better user experience for those who access MeetU with their mobile devices.
+
+![Dashboard](dashboard.png)
+An uninteractive HTML mockup of the dashboard. Create new item button is missing.

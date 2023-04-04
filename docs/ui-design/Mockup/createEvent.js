@@ -40,7 +40,7 @@ init();
 // Switch theme button functionality
 
 const htmlDiv = document.querySelector("html");
-const themeButton = document.getElementById("theme-icon");
+const themeButton = document.getElementsByClassName("theme-icon")[0];
 const calendar = document.getElementsByClassName("tempus-dominus-widget")[0];
 const pollBox = document.getElementById("poll-box");
 const datePickerBox = document.getElementById("date-picker");
@@ -68,9 +68,6 @@ function switchTheme() {
     navBar.style.borderBottom = "1px solid #e9ecef";
     footer.style.borderTop = "1px solid #e9ecef";
   }
-  calendar.style.accentColor = "red";
-  const clearText = document.createElement("span");
-  clearText.textContent = "Clear All";
 }
 
 themeButton.addEventListener("click", switchTheme);
@@ -134,16 +131,18 @@ function addPollOption(num) {
 
 addPollButton.addEventListener("click", () => addPollOption(numOptions));
 
-// <li id="input-0" class="mb-2">
-//   <div class="input-group" >
-//     <input
-//       type="text"
-//       class="form-control"
-//       placeholder="Enter poll option"
-//       aria-label="Poll option"
-//     />
-//     <div class="input-group-append" id="remove-0">
-//       <span class="input-group-text">🗑️</span>
-//     </div>
-//   </div>
-// </li>;
+{
+  /* <li id="input-0" class="mb-2">
+  <div class="input-group">
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Enter poll option"
+      aria-label="Poll option"
+    />
+    <div class="input-group-append" id="remove-0">
+      <span class="input-group-text">🗑️</span>
+    </div>
+  </div>
+</li>; */
+}

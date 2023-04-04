@@ -11,7 +11,7 @@ body {
 }
 
 h1 {
-  font-weight: 600;
+  font-weight: 700;
   font-size: 1.5rem;
 }
 
@@ -69,11 +69,11 @@ h1 {
   background-image: "docs/ui-design/Mockup/assets/sun-svgrepo-com.svg";
 }
 
-#theme-icon {
+.theme-icon {
   border-radius: 100px;
 }
 
-#theme-icon:hover {
+.theme-icon:hover {
   transition: all 200ms;
   background-color: #e9ecef;
 }
@@ -88,10 +88,16 @@ h1 {
 /* ************************************** */
 
 #add-poll-btn {
-  background-color: #29c5f6;
-  color: white;
+  background-color: white;
+  color: black;
   font-weight: 500;
   border-color: #29c5f6;
+  transition: all 200ms;
+}
+
+#add-poll-btn:hover {
+  background-color: #29c5f6;
+  color: white;
 }
 
 #create-event-btn {
@@ -100,6 +106,39 @@ h1 {
   font-size: 1.2rem;
   background: linear-gradient(90deg, #0d6efd 0%, #29c5f6 100%);
   border-radius: 100px;
+  transition: all 200ms;
+}
+
+#create-event-btn:hover {
+  color: black;
+  box-shadow: inset 0 0 0 4px black;
+}
+
+/* ************************************** */
+/*    DASHBOARD     */
+/* ************************************** */
+.meeting-item {
+  height: 13rem;
+  width: 13rem;
+  background-color: #e9ecef;
+  border-radius: 10px;
+}
+
+.meeting-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.meeting-desc {
+  font-size: 1rem;
+}
+
+.add-meeting-btn {
+  height: 13rem;
+  width: 13rem;
+  border-radius: 10px;
+  border-style: dashed;
+  border-color: #6c757d;
 }
 
 /* ************************************** */
@@ -107,6 +146,7 @@ h1 {
 /* ************************************** */
 #footer {
   border-top: 1px solid #e9ecef;
+  max-height: 20rem;
 }
 
 #footer li {
