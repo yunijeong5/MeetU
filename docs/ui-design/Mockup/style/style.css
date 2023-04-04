@@ -53,27 +53,55 @@ h1 {
   background: #29c5f6 0%;
 }
 
-.sun-icon {
+#theme-div {
+  background-image: "docs/ui-design/Mockup/assets/sun-svgrepo-com.svg";
+}
+
+#theme-icon {
   border-radius: 100px;
 }
 
-.sun-icon:hover {
+#theme-icon:hover {
   transition: all 200ms;
   background-color: #d3d3d3;
 }
 
-.moon-icon {
+/* .moon-icon {
   border-radius: 100px;
 }
 
 .moon-icon {
   transition: all 200ms;
   background-color: #d3d3d3;
-}
+} */
 
 /* ************************************** */
 /*    CREATE NEW EVENT     */
 /* ************************************** */
+.tempus-dominus-widget.light .date-container-days div:not(.no-highlight).active,
+.tempus-dominus-widget.light
+  .date-container-decades
+  div:not(.no-highlight).active,
+.tempus-dominus-widget.light
+  .date-container-months
+  div:not(.no-highlight).active,
+.tempus-dominus-widget.light
+  .date-container-years
+  div:not(.no-highlight).active,
+.tempus-dominus-widget.light
+  .time-container-clock
+  div:not(.no-highlight).active,
+.tempus-dominus-widget.light .time-container-hour div:not(.no-highlight).active,
+.tempus-dominus-widget.light
+  .time-container-minute
+  div:not(.no-highlight).active,
+.tempus-dominus-widget.light
+  .time-container-second
+  div:not(.no-highlight).active {
+  background-color: red;
+  color: #fff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
 
 /* ************************************** */
 /*    FOOTER     */

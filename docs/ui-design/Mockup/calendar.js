@@ -20,7 +20,6 @@ const picker = new tempusDominus.TempusDominus(
     multipleDatesSeparator: "; ",
     display: {
       buttons: {
-        today: true,
         clear: true,
       },
       components: {
