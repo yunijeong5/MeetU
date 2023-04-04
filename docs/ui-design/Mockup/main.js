@@ -29,7 +29,7 @@ function init() {
   const calendar = document.getElementsByClassName("tempus-dominus-widget")[0];
   calendar.style.width = "100%";
   calendar.style.borderRadius = "10px";
-  // calendar.style.boxShadow = "none";
+  calendar.style.boxShadow = "none";
 
   const clearButton = calendar.children[0].children[0];
   clearButton.innerText = "🗑️ Clear All Selections";
@@ -37,13 +37,15 @@ function init() {
 
 init();
 
+// Switch theme button functionality
+
 const htmlDiv = document.querySelector("html");
-const themeDiv = document.getElementById("theme-div");
 const themeButton = document.getElementById("theme-icon");
 const calendar = document.getElementsByClassName("tempus-dominus-widget")[0];
-const calendarCollection = document.getElementsByClassName(
-  "tempus-dominus-widget"
-);
+const pollBox = document.getElementById("poll-box");
+const datePickerBox = document.getElementById("date-picker");
+const navBar = document.getElementsByClassName("navbar")[0];
+const footer = document.getElementById("footer");
 
 function switchTheme() {
   const theme = htmlDiv.getAttribute("data-bs-theme");
@@ -52,11 +54,19 @@ function switchTheme() {
     themeButton.src = "./moon-svgrepo-com.svg";
     calendar.classList.remove("light");
     calendar.classList.add("dark");
+    pollBox.style.backgroundColor = "#343a40";
+    datePickerBox.style.backgroundColor = "#343a40";
+    navBar.style.borderBottom = "1px solid #343a40";
+    footer.style.borderTop = "1px solid #343a40";
   } else {
     htmlDiv.setAttribute("data-bs-theme", "light");
     themeButton.src = "./sun-svgrepo-com.svg";
     calendar.classList.remove("dark");
     calendar.classList.add("light");
+    pollBox.style.backgroundColor = "#e9ecef";
+    datePickerBox.style.backgroundColor = "#e9ecef";
+    navBar.style.borderBottom = "1px solid #e9ecef";
+    footer.style.borderTop = "1px solid #e9ecef";
   }
   calendar.style.accentColor = "red";
   const clearText = document.createElement("span");
@@ -73,3 +83,67 @@ themeButton.addEventListener("click", switchTheme);
 // console.log(calendar.style);
 
 // console.log(document.getElementsByClassName("active"));
+
+// RemoveAdd poll option functionality
+// TODO: Save poll options in the local storage?  or in the DB
+let numOptions = 0;
+const addPollButton = document.getElementById("add-poll-btn");
+const pollList = document.getElementById("poll-options");
+
+function removePollOption(num) {
+  document.getElementById(`input-${num}`).remove();
+  numOptions -= 1;
+  if (numOptions === 0) {
+    pollList.classList.add("d-none");
+  }
+}
+
+function addPollOption(num) {
+  pollList.classList.remove("d-none");
+  const liElem = document.createElement("li");
+  const divInputElem = document.createElement("div");
+  const inputElem = document.createElement("input");
+  const divRemoveElem = document.createElement("div");
+  const spanElem = document.createElement("span");
+
+  spanElem.textContent = "🗑️";
+  spanElem.classList.add("input-group-text");
+  spanElem.classList.add("cursor-pointer");
+
+  divRemoveElem.classList.add("input-group-append");
+  divRemoveElem.id = `remove-${num}`;
+  divRemoveElem.appendChild(spanElem);
+  divRemoveElem.addEventListener("click", () => removePollOption(num));
+
+  inputElem.setAttribute("type", "text");
+  inputElem.setAttribute("placeholder", "Enter poll option");
+  inputElem.setAttribute("aria-label", "Poll option");
+  inputElem.classList.add("form-control");
+
+  divInputElem.classList.add("input-group");
+  divInputElem.appendChild(inputElem);
+  divInputElem.appendChild(divRemoveElem);
+
+  liElem.id = `input-${num}`;
+  liElem.classList.add("mb-2");
+  liElem.appendChild(divInputElem);
+  pollList.appendChild(liElem);
+
+  numOptions += 1;
+}
+
+addPollButton.addEventListener("click", () => addPollOption(numOptions));
+
+// <li id="input-0" class="mb-2">
+//   <div class="input-group" >
+//     <input
+//       type="text"
+//       class="form-control"
+//       placeholder="Enter poll option"
+//       aria-label="Poll option"
+//     />
+//     <div class="input-group-append" id="remove-0">
+//       <span class="input-group-text">🗑️</span>
+//     </div>
+//   </div>
+// </li>;
