@@ -111,6 +111,7 @@ function addPollOption(num) {
   divRemoveElem.id = `remove-${num}`;
   divRemoveElem.appendChild(spanElem);
   divRemoveElem.addEventListener("click", () => removePollOption(num));
+  divRemoveElem.setAttribute("title", "Delete poll item");
 
   inputElem.setAttribute("type", "text");
   inputElem.setAttribute("placeholder", "Enter poll option");
