@@ -12,7 +12,7 @@ body {
 
 h1 {
   font-weight: 700;
-  font-size: 1.5rem;
+  font-size: 1.8rem;
 }
 
 h2 {
@@ -24,12 +24,25 @@ h2 {
   border-radius: 10px;
 }
 
+.pill-corner {
+  border-radius: 100px;
+}
+
 .bg-gray {
   background-color: #e9ecef;
 }
 
 .cursor-pointer {
   cursor: pointer;
+}
+
+.bg-blue {
+  background-color: #0d6efd;
+  color: white;
+}
+
+.small-text {
+  font-size: 0.9rem;
 }
 
 /* ************************************** */
@@ -88,6 +101,10 @@ h2 {
   color: #29c5f6;
 }
 
+.hide {
+  display: none;
+}
+
 /* ************************************** */
 /*    CREATE NEW EVENT     */
 /* ************************************** */
@@ -117,6 +134,10 @@ h2 {
 #create-event-btn:hover {
   color: black;
   box-shadow: inset 0 0 0 4px black;
+}
+
+.day-btn {
+  border: none;
 }
 
 /* ************************************** */
@@ -152,6 +173,7 @@ h2 {
 #footer {
   border-top: 1px solid #e9ecef;
   max-height: 20rem;
+  font-size: 0.9rem;
 }
 
 #footer li {
