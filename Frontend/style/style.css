@@ -46,6 +46,32 @@ h2 {
 }
 
 /* ************************************** */
+/*    LOGIN      */
+/* ************************************** */
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70vh;
+}
+
+.g_id_signin{
+  width: 200px;
+  height: 50px;
+}
+
+.profile {
+  display: inline-block;
+  width: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-left: 10px;
+  margin-right: 10px;
+
+}
+
+/* ************************************** */
 /*    NAVBAR      */
 /* ************************************** */
 
