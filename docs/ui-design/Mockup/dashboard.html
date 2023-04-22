@@ -23,35 +23,35 @@
 </head>
 
 <body>
+  <!-- Nav Bar -->
+  <nav class="navbar-light navbar navbar-expand-sm">
+    <a class="navbar-brand navbar-link ms-3" href="./index.html" id="logo-text">MeetU</a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <!--  nav component: -->
+      <ul class="navbar-nav ms-auto me-3 d-lg-flex align-items-center">
+        <li class="nav-item active">
+          <a id="nav-dashboard" class="nav-link" href="./dashboard.html">Dashboard
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+        <li class="nav-item h-100">
+          <a id="theme-div" class="nav-link" href="#">
+            <img class="theme-icon" src="sun-svgrepo-com.svg" />
+          </a>
+        </li>
+        <li class="nav-item nav-sign-in text-center h-100">
+          <a class="nav-link text-white" href="#"> Sign In </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
   <div class="container">
-    <!-- Nav Bar -->
-    <nav class="navbar-light navbar navbar-expand-sm">
-      <a class="navbar-brand navbar-link ms-3" href="./index.html" id="logo-text">MeetU</a>
-
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <!--  nav component: -->
-        <ul class="navbar-nav ms-auto me-3 d-lg-flex align-items-center">
-          <li class="nav-item active">
-            <a id="nav-dashboard" class="nav-link" href="./dashboard.html">Dashboard
-              <span class="sr-only">(current)</span>
-            </a>
-          </li>
-          <li class="nav-item h-100">
-            <a id="theme-div" class="nav-link" href="#">
-              <img class="theme-icon" src="sun-svgrepo-com.svg" />
-            </a>
-          </li>
-          <li class="nav-item nav-sign-in text-center h-100">
-            <a class="nav-link text-white" href="#"> Sign In </a>
-          </li>
-        </ul>
-      </div>
-    </nav>
     <!-- Page Content -->
     <!-- <div class="container mt-5 mb-5"> -->
     <div class="row ms-1">
@@ -76,21 +76,23 @@
 
     <!-- Footer -->
     <div class="row">
-      <footer id="footer" class="page-footer" style="width: 100%">
-        <!-- <div class="container-fluid text-md-left"> -->
-        <div class="col-md-6">
-          <ul class="list-unstyled m-5">
-            <li><a class="link" href="#!">About Us</a></li>
-            <li><a class="link" href="#!">Support MeetU</a></li>
-            <li><a class="link" href="#!">Link 3</a></li>
-          </ul>
-        </div>
-        <!-- </div> -->
-        <!-- Copyright -->
-        <div class="footer-copyright text-center pb-3">
-          © 2023 Copyright:
-          <a href="./index.html"> meetu.com</a>
-        </div>
+      <div class="col">
+        <footer id="footer" class="page-footer" style="width: 100%">
+          <!-- <div class="container-fluid text-md-left"> -->
+          <div class="col-md-6">
+            <ul class="list-unstyled m-5">
+              <li><a class="link" href="#!">About Us</a></li>
+              <li><a class="link" href="#!">Support MeetU</a></li>
+              <li><a class="link" href="#!">Link 3</a></li>
+            </ul>
+          </div>
+      </div>
+      <!-- </div> -->
+      <!-- Copyright -->
+      <div class="footer-copyright text-center pb-3">
+        © 2023 Copyright:
+        <a href="./index.html"> meetu.com</a>
+      </div>
       </footer>
     </div>
     <!-- end of container -->
