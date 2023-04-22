@@ -146,7 +146,7 @@ h2 {
 .meeting-item {
   height: 13rem;
   width: 13rem;
-  background-color: #e9ecef;
+  background-color: #6c757d;
   border-radius: 10px;
 }
 
@@ -171,13 +171,13 @@ h2 {
 /*    FOOTER     */
 /* ************************************** */
 #footer {
-  border-top: 1px solid #e9ecef;
+  /* border-top: 1px solid #e9ecef;
   max-height: 20rem;
-  font-size: 0.9rem;
+  font-size: 0.9rem; */
 }
 
 #footer li {
-  margin: 10px 0;
+  /* margin: 10px 0; */
 }
 
 .link:link {
