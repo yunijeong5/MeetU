@@ -1,3 +1,23 @@
+const submitBut = document.getElementById("submit");
+
+submitBut.addEventListener("click", (event) => {
+    // stop the form from submission
+    event.preventDefault(); 
+    const emailIn = document.querySelector('input[type="text"]');
+    const passIn = document.querySelector('input[type="password"]');
+    const rePassIn = document.querySelector('input[type="retypePassword"]');
+    if (passIn.value !== rePassIn.value)
+        alert('Passwords do not match.');
+    else {
+        const user = {
+            email: emailIn.value,
+            password: passIn.value,
+        };
+        console.log(user); 
+    }
+});
+
+
 // google authentication code
 var fragmentString = location.hash.substring(1);
 
