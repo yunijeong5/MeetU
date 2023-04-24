@@ -49,39 +49,39 @@ h2 {
 /*    LOGIN      */
 /* ************************************** */
 
-.container {
+/* .container {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 70vh;
-}
+} */
 
-.g_id_signin{
-  width: 200px;
-  height: 50px;
-  margin-left: 10px;
-  margin-top: 10px;
+.g_id_signin {
+    width: 200px;
+    height: 50px;
+    margin-left: 10px;
+    margin-top: 10px;
 }
 
 .profile {
-  display: inline-block;
-  width: 40px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-left: 10px;
-  margin-right: 10px;
+    display: inline-block;
+    width: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 #submit {
-  border-radius: 100px;
-  width: 5rem;
-  background-color: black;
-  transition: all 200ms;
-  display: block;
-  margin-left: 70px;
-  margin-top: 10px;
-  background-color: black;
-  color: white;
+    border-radius: 100px;
+    width: 5rem;
+    background-color: black;
+    transition: all 200ms;
+    display: block;
+    margin-left: 70px;
+    margin-top: 10px;
+    background-color: black;
+    color: white;
 }
 
 /* ************************************** */
