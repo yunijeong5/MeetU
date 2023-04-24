@@ -1,9 +1,10 @@
 const submitBut = document.getElementById("submit");
-// hide profile for now till user signs in
-const hideProfile = document.querySelectorAll('.profileReplace');
-hideProfile.forEach(elem => {
-    elem.style.display = 'none';
-});
+// unhide sign-in and hide profile 
+const navItem = document.querySelector('.nav-item.nav-sign-in');
+const profileReplace = document.querySelector('.profileReplace');
+// navItem.style.display = 'block';
+// profileReplace.style.display = 'none';
+
 
 submitBut.addEventListener("click", (event) => {
     // stop the form from submission
@@ -49,14 +50,20 @@ function trySampleRequest() {
             'https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=' + params['access_token']);
         xhr.onreadystatechange = function (e) {
             if (xhr.readyState === 4 && xhr.status === 200) {
-                // unhide the sign in when successful login
-                hideProfile.forEach(elem => {
-                    elem.style.display = 'block';
-                });
+                // retrieve profile
+                var responseJson = JSON.parse(xhr.responseText);
+                console.log(responseJson);
+                var name = responseJson.name;
+                var pfpUrl = responseJson.picture;
+                // set HTML dom
                 var nameElem = document.getElementById('name');
-                nameElem.textContent = name;
                 var pfpElem = document.getElementById('pic');
+                nameElem.textContent = name;
                 pfpElem.setAttribute('src', pfpUrl);
+                //unhide the sign in when successful login
+                navItem.style.display = 'none';
+                profileReplace.style.display = 'block';
+
                 // retrieve name and pfp
 
             } else if (xhr.readyState === 4 && xhr.status === 401) {
