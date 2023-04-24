@@ -1,4 +1,8 @@
 import { picker } from "./calendar.js";
+import { create } from './server/pouchCrud.js';
+import PouchDB from './pouchdb';
+// local pouchDB database
+const db = new PouchDB('eventData');
 
 function init() {
     // populate time options
@@ -41,6 +45,11 @@ function init() {
 }
 
 init();
+
+async function allEvents() {
+    const json = await crud.readAllCounters();
+    all.innerHTML = JSON.stringify(json);
+}
 
 // RemoveAdd poll option functionality
 // TODO: Save poll options in the local storage?  or in the DB
@@ -161,7 +170,7 @@ const monthNames = [
     "Dec",
 ];
 
-function createNewEvent() {
+async function createNewEvent() {
     const event = {};
     // Get title and description
     event["title"] = meetingTitle.value;
@@ -189,10 +198,12 @@ function createNewEvent() {
     pollInfo["options"] = options;
     event["poll"] = pollInfo;
 
+
     // convert to JSON object
     const jsonEvent = JSON.stringify(event);
 
     // TODO: store this in pouchDB
+
 }
 
 submitButton.addEventListener("submit", createNewEvent);
