@@ -97,10 +97,10 @@
                             <input
                                 class="form-control"
                                 aria-label="With textarea"
-                                aria-describedby="inputGroupPrepend"
+                                aria-describedby="title-feedback"
                                 required
                             ></input>
-                            <div class="invalid-feedback">
+                            <div id="title-feedback" class="invalid-feedback">
                                 Please choose a meeting title
                             </div>
                         </div>
@@ -111,7 +111,6 @@
                             <textarea
                                 class="form-control"
                                 aria-label="With textarea"
-                                novalidate
                             ></textarea>
                         </div>
                     </div>
@@ -122,9 +121,10 @@
 
                         <div class="col-12 col-md-12 col-lg-6 mt-lg-3 mb-3">
                             <select
-                                class="form-select p-1 ps-3 pill-corner"
+                                class="form-select has-validation p-1 ps-3 pill-corner"
                                 aria-label="Default select example"
                                 id="days-mode"
+                                
                             >
                                 <option selected>Specific days</option>
                                 <option>Days of the week</option>
@@ -195,16 +195,21 @@
                         </div>
                         <div class="col">
                             <select
-                                class="form-select p-1 ps-3 pill-corner"
+                                class="form-select has-validation p-1 ps-3 pill-corner"
                                 aria-label="Default select example"
+                                aria-describedby="starttime-feedback"
                                 id="earliest"
+                                required
                             >
-                                <option selected>Select time</option>
+                                <option selected disabled value="">Select time</option>
                                 <!-- <option value="1">One</option>
                 <option value="2">Two</option>
                 <option value="3">Three</option> 
                 Populate with main.js-->
                             </select>
+                            <div id="earliest-feedback" class="invalid-feedback">
+                                Please choose a starting time
+                            </div>
                         </div>
                     </div>
                     <div class="row mt-3 ms-3 me-3">
@@ -215,15 +220,20 @@
                         </div>
                         <div class="col">
                             <select
-                                class="form-select p-1 ps-3 pill-corner"
+                                class="form-select has-validation p-1 ps-3 pill-corner"
                                 aria-label="Default select example"
+                                aria-describedby="latest-feedback"
                                 id="latest"
+                                required
                             >
-                                <option selected>Select time</option>
+                                <option selected disabled value="">Select time</option>
                                 <!-- <option value="1">One</option>
                 <option value="2">Two</option>
                 <option value="3">Three</option> -->
                             </select>
+                            <div id="latest-feedback" class="invalid-feedback">
+                                Please choose a ending time
+                            </div>
                         </div>
                     </div>
 
