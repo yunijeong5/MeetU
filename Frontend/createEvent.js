@@ -1,8 +1,4 @@
 import { picker } from "./calendar.js";
-import { create } from './server/pouchCrud.js';
-import PouchDB from './pouchdb';
-// local pouchDB database
-const db = new PouchDB('eventData');
 
 function init() {
     // populate time options
@@ -170,7 +166,7 @@ const monthNames = [
     "Dec",
 ];
 
-async function createNewEvent() {
+export function createNewEvent() {
     const event = {};
     // Get title and description
     event["title"] = meetingTitle.value;
@@ -200,10 +196,8 @@ async function createNewEvent() {
 
 
     // convert to JSON object
-    const jsonEvent = JSON.stringify(event);
-
-    // TODO: store this in pouchDB
-
-}
+    //const jsonEvent = JSON.stringify(event);
+    return event;
+}   
 
 submitButton.addEventListener("submit", createNewEvent);

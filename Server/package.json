@@ -1,0 +1,15 @@
+{
+  "name": "pouchcrud",
+  "version": "1.0.0",
+  "description": "",
+  "main": "pouchCrud.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Nhi Ha",
+  "license": "ISC",
+  "dependencies": {
+    "pouchdb": "^8.0.1"
+  }
+}
