@@ -77,6 +77,7 @@ function addPollOption(num) {
     inputElem.setAttribute("placeholder", "Enter poll option");
     inputElem.setAttribute("aria-label", "Poll option");
     inputElem.classList.add("form-control");
+    inputElem.id = `poll-option-${num}`;
 
     divInputElem.classList.add("input-group");
     divInputElem.appendChild(inputElem);
@@ -144,6 +145,20 @@ const latestTime = document.getElementById("latest");
 const pollTitle = document.getElementById("poll-title");
 
 const submitButton = document.getElementById("create-event-btn");
+const monthNames = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+];
 function createNewEvent() {
     const event = {};
     // Get title and description
@@ -151,20 +166,27 @@ function createNewEvent() {
     event["description"] = meetingDescription.value;
     // Get dates or days selected, depending on current mode
     if (daySelection.value === "Specific days") {
-        const dates = picker.dates.picked;
+        const dates = [...picker.dates.picked].map((date) => [
+            monthNames[date.month],
+            date.date,
+            date.year,
+        ]);
+        event["dates"] = dates;
+        console.log(dates);
     } else {
         // weekdays
     }
     // Get earliest and latest times
     event["time"] = [earliestTime.value, latestTime.value];
     // Get poll title and options, if any
+    const pollOptions = document.querySelectorAll('[id^="poll-option-"]');
+    const options = [...pollOptions].map((option) => option.value);
     const pollInfo = {};
     pollInfo["title"] = pollTitle.value;
-    const pollOptions = document.querySelectorAll('[id^="input-"]');
-
+    pollInfo["options"] = options;
     event["poll"] = pollInfo;
     console.log(event);
 }
 
 console.log(picker.dates.picked[0]);
-submitButton.addEventListener("submit", createNewEvent);
+submitButton.addEventListener("click", createNewEvent);
