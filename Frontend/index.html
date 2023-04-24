@@ -24,7 +24,7 @@
         <link rel="stylesheet" href="./style/style.css" />
         <!-- JS script -->
         <script src="calendar.js" type="module"></script>
-        <script src="createEvent.js" defer></script>
+        <script src="createEvent.js" type="module" defer></script>
         <script src="colorTheme.js" defer></script>
 
         <title>MeetU Mockup: Create New Event</title>
@@ -96,6 +96,7 @@
                         <h2 class="mt-3 mb-3">Meeting Title</h2>
                         <div class="input-group has-validation">
                             <input
+                                id="meeting-title"
                                 class="form-control"
                                 aria-label="With textarea"
                                 aria-describedby="title-feedback"
@@ -110,6 +111,7 @@
                         <h2 class="mt-3 mb-3">Meeting Description</h2>
                         <div class="input-group">
                             <textarea
+                            id="meeting-desc"
                                 class="form-control"
                                 aria-label="With textarea"
                             ></textarea>
@@ -252,6 +254,7 @@
                             <div class="row">
                                 <div class="input-group mb-2">
                                     <input
+                                        id="poll-title"
                                         type="text"
                                         class="form-control"
                                         placeholder="Enter poll title"

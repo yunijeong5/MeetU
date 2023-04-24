@@ -1,3 +1,5 @@
+import { picker } from "./calendar.js";
+
 function init() {
     const earliestPicker = document.getElementById("earliest");
     const latestPicker = document.getElementById("latest");
@@ -13,14 +15,14 @@ function init() {
         timeStrings.push(timeString);
     }
 
-    timeStrings.map((time, i) => {
+    timeStrings.map((time) => {
         let opt1 = document.createElement("option");
-        opt1.value = i; // the index
+        opt1.value = time; // the index
         opt1.innerHTML = time;
         earliestPicker.append(opt1);
 
         let opt2 = document.createElement("option");
-        opt2.value = i; // the index
+        opt2.value = time; // the index
         opt2.innerHTML = time;
         latestPicker.append(opt2);
     });
@@ -132,3 +134,37 @@ function formValidation() {
 }
 
 formValidation();
+
+// collect all data when create new event button is clicked, and crate JSON object
+const meetingTitle = document.getElementById("meeting-title");
+const meetingDescription = document.getElementById("meeting-desc");
+const daySelection = document.getElementById("days-mode");
+const earliestTime = document.getElementById("earliest");
+const latestTime = document.getElementById("latest");
+const pollTitle = document.getElementById("poll-title");
+
+const submitButton = document.getElementById("create-event-btn");
+function createNewEvent() {
+    const event = {};
+    // Get title and description
+    event["title"] = meetingTitle.value;
+    event["description"] = meetingDescription.value;
+    // Get dates or days selected, depending on current mode
+    if (daySelection.value === "Specific days") {
+        const dates = picker.dates.picked;
+    } else {
+        // weekdays
+    }
+    // Get earliest and latest times
+    event["time"] = [earliestTime.value, latestTime.value];
+    // Get poll title and options, if any
+    const pollInfo = {};
+    pollInfo["title"] = pollTitle.value;
+    const pollOptions = document.querySelectorAll('[id^="input-"]');
+
+    event["poll"] = pollInfo;
+    console.log(event);
+}
+
+console.log(picker.dates.picked[0]);
+submitButton.addEventListener("submit", createNewEvent);
