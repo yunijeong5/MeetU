@@ -1,8 +1,13 @@
 const submitBut = document.getElementById("submit");
+// hide profile for now till user signs in
+const hideProfile = document.querySelectorAll('.profileReplace');
+hideProfile.forEach(elem => {
+    elem.style.display = 'none';
+});
 
 submitBut.addEventListener("click", (event) => {
     // stop the form from submission
-    event.preventDefault(); 
+    event.preventDefault();
     const emailIn = document.querySelector('input[type="text"]');
     const passIn = document.querySelector('input[type="password"]');
     const rePassIn = document.querySelector('input[type="retypePassword"]');
@@ -13,7 +18,7 @@ submitBut.addEventListener("click", (event) => {
             email: emailIn.value,
             password: passIn.value,
         };
-        console.log(user); 
+        console.log(user);
     }
 });
 
@@ -44,16 +49,16 @@ function trySampleRequest() {
             'https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=' + params['access_token']);
         xhr.onreadystatechange = function (e) {
             if (xhr.readyState === 4 && xhr.status === 200) {
-                var response = JSON.parse(xhr.responseText);
-                var name = response.name;
-                var pfpUrl = response.picture;
-                // retrieve name and pfp
+                // unhide the sign in when successful login
+                hideProfile.forEach(elem => {
+                    elem.style.display = 'block';
+                });
                 var nameElem = document.getElementById('name');
                 nameElem.textContent = name;
                 var pfpElem = document.getElementById('pic');
-                pfpElem.setAttribute('src', pfpUrl);                
+                pfpElem.setAttribute('src', pfpUrl);
+                // retrieve name and pfp
 
-                
             } else if (xhr.readyState === 4 && xhr.status === 401) {
                 // Token invalid, so prompt for user permission.
                 oauth2SignIn();
@@ -80,7 +85,7 @@ function oauth2SignIn() {
     // Parameters to pass to OAuth 2.0 endpoint.
     var params = {
         'client_id': '1080838086532-pmff8ghjp0ltiab2b49t9u0m9g3hnloo.apps.googleusercontent.com',
-        'redirect_uri': 'http://localhost:5501/Frontend/dashboard.html',
+        'redirect_uri': 'http://127.0.0.1:5500/Frontend/dashboard.html',
         'scope': 'https://www.googleapis.com/auth/drive.metadata.readonly https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile',
         'state': 'try_sample_request',
         'include_granted_scopes': 'true',
