@@ -99,6 +99,7 @@ const dayButtons = document.getElementsByClassName("day-btn");
 
 function switchBackgroundColor() {
     this.classList.toggle("bg-blue");
+    this.classList.toggle("chosen-day");
 }
 
 for (let i = 0; i < dayButtons.length; i++) {
@@ -159,6 +160,7 @@ const monthNames = [
     "Nov",
     "Dec",
 ];
+
 function createNewEvent() {
     const event = {};
     // Get title and description
@@ -172,9 +174,10 @@ function createNewEvent() {
             date.year,
         ]);
         event["dates"] = dates;
-        console.log(dates);
     } else {
-        // weekdays
+        const selectedDays = document.getElementsByClassName("chosen-day");
+        const days = [...selectedDays].map((day) => day.innerText);
+        event["days"] = days;
     }
     // Get earliest and latest times
     event["time"] = [earliestTime.value, latestTime.value];
@@ -185,8 +188,9 @@ function createNewEvent() {
     pollInfo["title"] = pollTitle.value;
     pollInfo["options"] = options;
     event["poll"] = pollInfo;
-    console.log(event);
+
+    // convert to JSON object
+    return JSON.stringify(event);
 }
 
-console.log(picker.dates.picked[0]);
-submitButton.addEventListener("click", createNewEvent);
+submitButton.addEventListener("submit", createNewEvent);
