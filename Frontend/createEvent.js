@@ -5,6 +5,7 @@ import PouchDB from './pouchdb';
 const db = new PouchDB('eventData');
 
 function init() {
+    // populate time options
     const earliestPicker = document.getElementById("earliest");
     const latestPicker = document.getElementById("latest");
 
@@ -103,7 +104,6 @@ function addPollOption(num) {
 addPollButton.addEventListener("click", () => addPollOption(numOptions));
 
 // color swith when clicking on day of week button
-
 const dayButtons = document.getElementsByClassName("day-btn");
 
 function switchBackgroundColor() {
@@ -198,11 +198,12 @@ async function createNewEvent() {
     pollInfo["options"] = options;
     event["poll"] = pollInfo;
 
-    // retrieve JSON event object to crud file -> pouchDB
-    const createEvent = await create(JSON.stringify(event));
 
-    // display if it works
-    console.log("Event success: ", createEvent);
+    // convert to JSON object
+    const jsonEvent = JSON.stringify(event);
+
+    // TODO: store this in pouchDB
+
 }
 
 submitButton.addEventListener("submit", createNewEvent);
