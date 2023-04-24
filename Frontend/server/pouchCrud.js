@@ -12,6 +12,14 @@ export async function create(event) {
   return dbEvent;
 }
 
+async function basicServer(request, response) {
+  const options = url.parse(request.url, true).query;
+
+  if (request.url.startsWith('/create')) {
+    create(response, options);
+  } 
+}
+
 // Start the server on port 5500.
 http.createServer(basicServer).listen(5500, () => {
   console.log('Server started on port 5500');

@@ -1,5 +1,5 @@
 import { picker } from "./calendar.js";
-import { create } from './pouchCrud.js';
+import { create } from './server/pouchCrud.js';
 import PouchDB from 'pouchdb';
 // local pouchDB database
 const db = new PouchDB('eventData');
