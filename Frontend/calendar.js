@@ -1,5 +1,3 @@
-import * as tempusDominus from 'tempus-dominus';
-
 // Vanilla JS
 export const picker = new tempusDominus.TempusDominus(
     document.getElementById("date-picker"),

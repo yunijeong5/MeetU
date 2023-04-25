@@ -1,5 +1,8 @@
 import { picker } from "./calendar.js";
 
+// comment this out if you want to see the time menu
+import { createEvent } from "../Backend/pouchCrud.js";
+
 function init() {
     // populate time options
     const earliestPicker = document.getElementById("earliest");
@@ -166,7 +169,7 @@ const monthNames = [
     "Dec",
 ];
 
-export function createNewEvent() {
+async function createNewEvent() {
     const event = {};
     // Get title and description
     event["title"] = meetingTitle.value;
@@ -196,8 +199,8 @@ export function createNewEvent() {
 
 
     // convert to JSON object
-    //const jsonEvent = JSON.stringify(event);
-    return event;
+    const response = await createEvent(event);
+    console.log(response);
 }   
 
 submitButton.addEventListener("submit", createNewEvent);
