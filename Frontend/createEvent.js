@@ -198,6 +198,7 @@ async function createNewEvent() {
     event["poll"] = pollInfo;
 
     // convert to JSON object
+    // TODO: SHOULDN'T CALL CREATE EVENT HERE. Or, any function that directly uses pouchDB.
     const response = await createEvent(event);
     console.log("Event created!");
     console.log(response);
