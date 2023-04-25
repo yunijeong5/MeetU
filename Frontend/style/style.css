@@ -211,6 +211,23 @@ ul {
     border-color: #6c757d;
 }
 
+
+/* ************************************** */
+/*    HOME and ABOUT     */
+/* ************************************** */
+#home1
+{
+    margin-top:10px;
+    width:90%;
+    height:400px auto;
+    margin-left:5%;
+    padding:50px;
+    box-sizing:border-box;
+    background-color: #4e82a1;
+    border-radius:10px;
+    color:white;
+    text-align: center;
+}
 /* ************************************** */
 /*    FOOTER     */
 /* ************************************** */
