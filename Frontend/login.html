@@ -64,7 +64,7 @@
             </a>
           </li>
           <li class="nav-item nav-sign-in text-center h-100">
-            <a class="nav-link text-white" href="#"> Sign In </a>
+            <a class="nav-link text-white" href="./login.html"> Sign In </a>
           </li>
         </ul>
       </div>
@@ -72,18 +72,20 @@
     <!-- Page Content -->
     <script type="module" src="client.js"></script>
     <div class="cred mt-5 ">
+      <script src="./LoginCred/regLogin.js" defer></script>
+      <form id="signup-form">
         <div id="pop-Login">
           <h2>Sign up on MeetU!</h2>
           <p>Please enter your credentials:</p>
           <input type="text" id="email" placeholder="Email" class="underline-input"><br>
           <input type="password" id="password" placeholder="Password" class="underline-input"><br>
           <input type="password" id="retypePassword" placeholder="Re-type Password" class="underline-input"><br>
-          <button id="submit">Submit</button>
+          <button id="submit" type="submit">Submit</button>
           <div class="separatorLine">
             <span class="orText">OR</span>
           </div>
           <!--Google Auth Login-->
-          <script src="authLogin.js" defer></script>
+          <script src="./LoginCred/googleLogin.js" defer></script>
           <script src="https://accounts.google.com/gsi/client" async defer></script>
           <body>
             <div class="g_id_signin" id="g_id_onload" data-context="signin" data-ux_mode="redirect" data-itp_support="true"
@@ -91,7 +93,8 @@
               data-logo_alignment="left" href="./style/style.css" onclick="trySampleRequest();">
             </div>
           </body>
-      </div>
+        </div>
+      </form>
     </div>
 
     <!-- Footer -->
