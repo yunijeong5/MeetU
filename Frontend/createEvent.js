@@ -197,10 +197,10 @@ async function createNewEvent() {
     pollInfo["options"] = options;
     event["poll"] = pollInfo;
 
-
     // convert to JSON object
     const response = await createEvent(event);
+    console.log("Event created!");
     console.log(response);
-}   
+}
 
 submitButton.addEventListener("submit", createNewEvent);
