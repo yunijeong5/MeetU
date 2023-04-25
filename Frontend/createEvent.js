@@ -1,8 +1,5 @@
 import { picker } from "./calendar.js";
 
-// comment this out if you want to see the time menu
-import { createEvent } from "../Backend/pouchCrud.js";
-
 function init() {
     // populate time options
     const earliestPicker = document.getElementById("earliest");

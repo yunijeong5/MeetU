@@ -71,16 +71,17 @@
     </nav>
     <!-- Page Content -->
     <script type="module" src="client.js"></script>
-    <div class="container mt-5 mb-10 ">
-      <div class="row ms-5">
-        <h1 class="row ms-5 mb-3">Login</h1>
+    <div class="cred mt-5 ">
         <div id="pop-Login">
           <h2>Sign up on MeetU!</h2>
           <p>Please enter your credentials:</p>
-          <input type="text" placeholder="Email"><br>
-          <input type="password" placeholder="Password"><br>
-          <input type="retypePassword" placeholder="Re-type Password"><br>
+          <input type="text" id="email" placeholder="Email" class="underline-input"><br>
+          <input type="password" id="password" placeholder="Password" class="underline-input"><br>
+          <input type="password" id="retypePassword" placeholder="Re-type Password" class="underline-input"><br>
           <button id="submit">Submit</button>
+          <div class="separatorLine">
+            <span class="orText">OR</span>
+          </div>
           <!--Google Auth Login-->
           <script src="authLogin.js" defer></script>
           <script src="https://accounts.google.com/gsi/client" async defer></script>
@@ -90,7 +91,6 @@
               data-logo_alignment="left" href="./style/style.css" onclick="trySampleRequest();">
             </div>
           </body>
-        </div>
       </div>
     </div>
 
