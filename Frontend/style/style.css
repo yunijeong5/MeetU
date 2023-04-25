@@ -240,16 +240,16 @@ ul {
   max-height: 20rem;
   font-size: 0.9rem; */
   
-  #footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 100px; /* adjust as needed */
-    background-color: #f8f9fa;
-    border-top: 1px solid #e9ecef;
-    padding: 1rem;
-    box-sizing: border-box;
-  }
+#footer {
+position: absolute;
+bottom: 0;
+width: 100%;
+height: 100px; /* adjust as needed */
+background-color: #f8f9fa;
+border-top: 1px solid #e9ecef;
+padding: 1rem;
+box-sizing: border-box;
+}
   
 /* 
 #footer li {
