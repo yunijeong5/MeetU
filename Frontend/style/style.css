@@ -24,11 +24,6 @@ h2 {
     font-size: 1.3rem;
 }
 
-ul {
-    display: flex;
-    justify-content: center;
-  }  
-
 .round-corner {
     border-radius: 10px;
 }
@@ -63,7 +58,6 @@ ul {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    
 }
 
 .underline-input {
@@ -71,7 +65,6 @@ ul {
     margin-bottom: 10px;
     border-bottom: 1px solid black;
     outline: none;
-
 }
 
 .g_id_signin {
@@ -95,14 +88,14 @@ ul {
     margin: 20px auto;
     background-color: grey;
     position: relative;
-  }
-  
+}
+
 .orText {
     position: absolute;
     top: -8px;
     left: 50%;
     transform: translateX(-50%);
-    font-family: 'Inter';
+    font-family: "Inter";
     background-color: white;
     padding: 0 10px;
     font-weight: bold;
@@ -118,7 +111,7 @@ ul {
     display: block;
     background-color: black;
     color: white;
-    font-family: 'Inter';
+    font-family: "Inter";
     font-size: 16px;
     font-weight: bold;
     margin-left: 10px;
@@ -251,7 +244,6 @@ ul {
     border-color: #6c757d;
 }
 
-
 /* ************************************** */
 /*    HOME and ABOUT     */
 /* ************************************** */
@@ -259,49 +251,50 @@ ul {
     max-width: 1200px;
     margin: 0 auto;
     padding: 50px 0;
-  }
-  
-  .content {
+}
+
+.content {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 50px;
-  }
-  
-  .text {
+}
+
+.text {
     max-width: 500px;
-  }
-  
-  .text h1, .text h2 {
+}
+
+.text h1,
+.text h2 {
     font-size: 36px;
     margin-bottom: 20px;
-  }
-  
-  .text p {
+}
+
+.text p {
     font-size: 20px;
     line-height: 1.5;
     margin-bottom: 20px;
-  }
-  
-  .image {
+}
+
+.image {
     max-width: 500px;
     margin-left: 50px;
-  }
-  
-  .image img {
+}
+
+.image img {
     max-width: 100%;
-  }
-  
-  a {
+}
+
+a {
     text-decoration: none; /* Remove underline */
     color: black;
-  }
-  
-  a:hover {
-    text-decoration: none; /* Add underline on hover */
-  }
+}
 
-  .button {
+a:hover {
+    text-decoration: none; /* Add underline on hover */
+}
+
+.button {
     display: block;
     width: 200px;
     margin: 20px auto 0;
@@ -313,30 +306,30 @@ ul {
     border-radius: 100px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-  }
-  
-  .button:hover {
+}
+
+.button:hover {
     background-color: black;
-  }
-  /* Uh oh mobile */
-  @media screen and (max-width: 700px) {
+}
+/* Uh oh mobile */
+@media screen and (max-width: 700px) {
     .content {
-      flex-direction: column;
-      text-align: center;
+        flex-direction: column;
+        text-align: center;
     }
-  
+
     .text {
-      margin-top: 50px;
-      max-width: 100%;
+        margin-top: 50px;
+        max-width: 100%;
     }
-  
+
     .image {
-      /* margin-left: 0;
+        /* margin-left: 0;
       margin-top: 50px;
       max-width: 100%; */
-      display: none;
+        display: none;
     }
-  }
+}
 /* ************************************** */
 /*    FOOTER     */
 /* ************************************** */
@@ -344,17 +337,17 @@ ul {
     /* border-top: 1px solid #e9ecef;
   max-height: 20rem;
   font-size: 0.9rem; */
-  
+
 #footer {
-position: absolute;
-bottom: 0;
-width: 100%;
-height: 100px; /* adjust as needed */
-border-top: 1px solid #e9ecef;
-padding: 1rem;
-box-sizing: border-box;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100px; /* adjust as needed */
+    border-top: 1px solid #e9ecef;
+    padding: 1rem;
+    box-sizing: border-box;
 }
-  
+
 /* 
 #footer li {
     margin: 10px 0;
@@ -366,7 +359,7 @@ box-sizing: border-box;
     transition: all 200ms;
 }
 
-.link:hover{
+.link:hover {
     color: rgb(66, 167, 201);
 }
 
@@ -375,7 +368,7 @@ html[data-bs-theme="dark"] #footer {
 }
 
 html[data-bs-theme="dark"] a {
-color: white;
+    color: white;
 }
 
 html[data-bs-theme="dark"] .link:link {

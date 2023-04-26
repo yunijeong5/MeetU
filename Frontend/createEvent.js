@@ -1,4 +1,5 @@
 import { picker } from "./calendar.js";
+import * as crud from "./crud.js";
 
 function init() {
     // populate time options
@@ -47,7 +48,7 @@ async function allEvents() {
     all.innerHTML = JSON.stringify(json);
 }
 
-// RemoveAdd poll option functionality
+// Remove / Add poll option functionality
 // TODO: Save poll options in the local storage?  or in the DB
 let numOptions = 0;
 let optionID = 0;
@@ -92,7 +93,7 @@ function addPollOption(num) {
 
     liElem.id = `input-${num}`;
     liElem.classList.add("mb-2");
-    // liElem.classList.add("c");
+    liElem.classList.add("row");
     liElem.appendChild(divInputElem);
     pollList.appendChild(liElem);
 
@@ -198,10 +199,11 @@ async function createNewEvent() {
     event["poll"] = pollInfo;
 
     // convert to JSON object
-    // TODO: SHOULDN'T CALL CREATE EVENT HERE. Or, any function that directly uses pouchDB.
-    // const response = await createEvent(event);
-    console.log("Event created!");
-    console.log(response);
+    const eventJSON = JSON.stringify(event);
+
+    // send to backend
+    const res = await crud.createNewEvent(eventJSON);
+    console.log(res);
 }
 
 submitButton.addEventListener("submit", createNewEvent);
