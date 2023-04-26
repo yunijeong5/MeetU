@@ -50,6 +50,7 @@ async function allEvents() {
 // RemoveAdd poll option functionality
 // TODO: Save poll options in the local storage?  or in the DB
 let numOptions = 0;
+let optionID = 0;
 const addPollButton = document.getElementById("add-poll-btn");
 const pollList = document.getElementById("poll-options");
 
@@ -91,13 +92,15 @@ function addPollOption(num) {
 
     liElem.id = `input-${num}`;
     liElem.classList.add("mb-2");
+    // liElem.classList.add("c");
     liElem.appendChild(divInputElem);
     pollList.appendChild(liElem);
 
     numOptions += 1;
+    optionID += 1;
 }
 
-addPollButton.addEventListener("click", () => addPollOption(numOptions));
+addPollButton.addEventListener("click", () => addPollOption(optionID));
 
 // color swith when clicking on day of week button
 const dayButtons = document.getElementsByClassName("day-btn");
@@ -196,7 +199,7 @@ async function createNewEvent() {
 
     // convert to JSON object
     // TODO: SHOULDN'T CALL CREATE EVENT HERE. Or, any function that directly uses pouchDB.
-    const response = await createEvent(event);
+    // const response = await createEvent(event);
     console.log("Event created!");
     console.log(response);
 }
