@@ -125,8 +125,9 @@ meetingDaysSelector.onchange = () => {
 
 // Submission validation
 function formValidation() {
+    "use strict";
     // Fetch all the forms we want to apply custom Bootstrap validation styles to
-    let forms = document.querySelectorAll(".needs-validation");
+    const forms = document.querySelectorAll(".needs-validation");
     // Loop over them and prevent submission
     Array.prototype.slice.call(forms).forEach(function (form) {
         form.addEventListener(
@@ -170,7 +171,9 @@ const monthNames = [
     "Dec",
 ];
 
-async function createNewEvent() {
+async function createNewEvent(e) {
+    e.preventDefault();
+
     const event = {};
     // Get title and description
     event["title"] = meetingTitle.value;
@@ -198,6 +201,8 @@ async function createNewEvent() {
     pollInfo["options"] = options;
     event["poll"] = pollInfo;
 
+    // TODO: Need to add user information inside event.
+
     // convert to JSON object
     const eventJSON = JSON.stringify(event);
 
@@ -206,4 +211,6 @@ async function createNewEvent() {
     console.log(res);
 }
 
-submitButton.addEventListener("submit", createNewEvent);
+// TODO: figure out why button doesn't work when event type is submit
+// Eventually we'd like it to be submit, to stop entering invalid events.
+submitButton.addEventListener("click", createNewEvent);

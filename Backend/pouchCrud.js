@@ -7,7 +7,7 @@ import PouchDB from "pouchdb";
 const db = new PouchDB("events");
 
 // create event
-export async function createEvent(event) {
+async function createEvent(event) {
     try {
         console.log("createEvent called");
         const response = await db.post(event);
@@ -18,7 +18,7 @@ export async function createEvent(event) {
 }
 
 // read
-export async function getEvent(id) {
+async function getEvent(id) {
     try {
         const event = await db.get(id);
         return event;
@@ -28,7 +28,7 @@ export async function getEvent(id) {
 }
 
 // update
-export async function updateEvent(event) {
+async function updateEvent(event) {
     try {
         const response = await db.put(event);
         return response;
@@ -38,7 +38,7 @@ export async function updateEvent(event) {
 }
 
 // delete
-export async function deleteEvent(event) {
+async function deleteEvent(event) {
     try {
         const response = await db.remove(event);
         return response;
@@ -58,8 +58,10 @@ app.use("/", express.static("../Frontend"));
 
 // send data and stuff
 app.post("/create", async (request, response) => {
-    const options = request.body;
-    console.log(options);
+    console.log("app.post /create called\n");
+    const eventInfo = request.body;
+    console.log(eventInfo);
+    createEvent(eventInfo);
 });
 
 // error page
