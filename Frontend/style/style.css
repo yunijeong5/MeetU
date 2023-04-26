@@ -255,19 +255,6 @@ ul {
 /* ************************************** */
 /*    HOME and ABOUT     */
 /* ************************************** */
-#home1
-{
-    margin-top:10px;
-    width:90%;
-    height:400px auto;
-    margin-left:5%;
-    padding:50px;
-    box-sizing:border-box;
-    background-color: #4e82a1;
-    border-radius:10px;
-    color:white;
-    text-align: center;
-}
 .homepage {
     max-width: 1200px;
     margin: 0 auto;
@@ -305,6 +292,14 @@ ul {
     max-width: 100%;
   }
   
+  a {
+    text-decoration: none; /* Remove underline */
+  }
+  
+  a:hover {
+    text-decoration: none; /* Add underline on hover */
+  }
+
   .button {
     display: block;
     width: 200px;
@@ -314,13 +309,13 @@ ul {
     background-color: #007bff;
     color: #fff;
     border: none;
-    border-radius: 5px;
+    border-radius: 100px;
     cursor: pointer;
     transition: background-color 0.3s ease;
   }
   
   .button:hover {
-    background-color: #0062cc;
+    background-color: black;
   }
   /* Uh oh mobile */
   @media screen and (max-width: 700px) {
