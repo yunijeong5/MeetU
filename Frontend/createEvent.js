@@ -128,26 +128,21 @@ function formValidation() {
     "use strict";
     // Fetch all the forms we want to apply custom Bootstrap validation styles to
     const forms = document.querySelectorAll(".needs-validation");
+    let valid = true;
     // Loop over them and prevent submission
     Array.prototype.slice.call(forms).forEach(function (form) {
-        form.addEventListener(
-            "submit",
-            function (event) {
-                if (!form.checkValidity()) {
-                    event.preventDefault();
-                    event.stopPropagation();
-                }
-
-                form.classList.add("was-validated");
-            },
-            false
-        );
+        if (!form.checkValidity()) {
+            valid = false;
+        }
+        form.classList.add("was-validated");
     });
+    return valid;
 }
 
-formValidation();
+// formValidation();
 
 // collect all data when create new event button is clicked, and crate JSON object
+const meetingForm = document.getElementById("meeting-form");
 const meetingTitle = document.getElementById("meeting-title");
 const meetingDescription = document.getElementById("meeting-desc");
 const daySelection = document.getElementById("days-mode");
@@ -155,7 +150,6 @@ const earliestTime = document.getElementById("earliest");
 const latestTime = document.getElementById("latest");
 const pollTitle = document.getElementById("poll-title");
 
-const submitButton = document.getElementById("create-event-btn");
 const monthNames = [
     "Jan",
     "Feb",
@@ -172,7 +166,10 @@ const monthNames = [
 ];
 
 async function createNewEvent(e) {
-    e.preventDefault();
+    e.preventDefault(); // stop reload
+    if (!formValidation()) {
+        return;
+    }
 
     const event = {};
     // Get title and description
@@ -180,11 +177,9 @@ async function createNewEvent(e) {
     event["description"] = meetingDescription.value;
     // Get dates or days selected, depending on current mode
     if (daySelection.value === "Specific days") {
-        const dates = [...picker.dates.picked].map((date) => [
-            monthNames[date.month],
-            date.date,
-            date.year,
-        ]);
+        const dates = [...picker.dates.picked]
+            .filter((date) => date !== undefined)
+            .map((date) => [monthNames[date.month], date.date, date.year]);
         if (dates.length === 0) {
             alert("Please select meeting dates.");
             return;
@@ -216,8 +211,12 @@ async function createNewEvent(e) {
 
     // send to backend
     const res = await crud.createNewEvent(eventJSON);
+
+    // if successful res, redirect to select time page
+    // window.location.replace
 }
 
 // TODO: figure out why button doesn't work when event type is submit
 // Eventually we'd like it to be submit, to stop entering invalid events.
-submitButton.addEventListener("submit", createNewEvent);
+// submitButton.addEventListener("submit", createNewEvent);
+meetingForm.addEventListener("submit", createNewEvent);
