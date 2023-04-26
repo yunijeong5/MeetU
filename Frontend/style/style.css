@@ -350,7 +350,6 @@ position: absolute;
 bottom: 0;
 width: 100%;
 height: 100px; /* adjust as needed */
-background-color: #f8f9fa;
 border-top: 1px solid #e9ecef;
 padding: 1rem;
 box-sizing: border-box;
@@ -369,4 +368,18 @@ box-sizing: border-box;
 
 .link:hover{
     color: rgb(66, 167, 201);
+}
+
+html[data-bs-theme="dark"] #footer {
+    color: white;
+}
+
+html[data-bs-theme="dark"] a {
+color: white;
+}
+
+html[data-bs-theme="dark"] .link:link {
+    color: white;
+    text-decoration: none;
+    transition: all 200ms;
 }
