@@ -46,3 +46,28 @@ export async function deleteEvent(event) {
         console.error(error);
     }
 }
+
+// express settings
+const app = express();
+const port = 3000;
+app.use(logger("dev"));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+// serve static frontend files
+app.use("/", express.static("../Frontend"));
+
+// send data and stuff
+app.post("/create", async (request, response) => {
+    const options = request.body;
+    console.log(options);
+});
+
+// error page
+app.get("*", async (request, response) => {
+    response.status(404).send(`Not found: ${request.path}`);
+});
+
+// start server
+app.listen(port, () => {
+    console.log(`Server started on port ${port}...`);
+});
