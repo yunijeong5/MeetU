@@ -185,10 +185,18 @@ async function createNewEvent(e) {
             date.date,
             date.year,
         ]);
+        if (dates.length === 0) {
+            alert("Please select meeting dates.");
+            return;
+        }
         event["dates"] = dates;
     } else {
         const selectedDays = document.getElementsByClassName("chosen-day");
         const days = [...selectedDays].map((day) => day.innerText);
+        if (days.length === 0) {
+            alert("Please select meeting days.");
+            return;
+        }
         event["days"] = days;
     }
     // Get earliest and latest times
@@ -208,9 +216,8 @@ async function createNewEvent(e) {
 
     // send to backend
     const res = await crud.createNewEvent(eventJSON);
-    console.log(res);
 }
 
 // TODO: figure out why button doesn't work when event type is submit
 // Eventually we'd like it to be submit, to stop entering invalid events.
-submitButton.addEventListener("click", createNewEvent);
+submitButton.addEventListener("submit", createNewEvent);
