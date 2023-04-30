@@ -185,3 +185,27 @@ h2 {
   text-decoration: none;
   transition: all 200ms;
 }
+
+.select-time-nav {
+  color: red;
+}
+
+/* ************************************** */
+/*    SELECT TIME     */
+/* ************************************** */
+
+.copy-url-button {
+  border-radius: 3.125rem;
+  color: #000000;
+  background-color: #F1F1F1;
+  width: 7.125rem;
+  height: 1.625rem;
+}
+
+.send-email-button {
+  border-radius: 3.125rem;
+  color: #000000;
+  background-color: #29C5F6;
+  width: 7.125rem;
+  height: 1.625rem;
+}
