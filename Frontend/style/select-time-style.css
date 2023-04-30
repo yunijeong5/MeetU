@@ -1,3 +1,10 @@
 .footer-copyright {
-    color: #6D6D6D;
 }
+
+.footer-advertisement {
+    border: 1px #923030 solid;
+}
+
+/* .about-us-link {
+    color: #6D6D6D !important;
+} */

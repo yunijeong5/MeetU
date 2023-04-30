@@ -17,6 +17,11 @@
     <!-- Additional CSS styling -->
     <link rel="stylesheet" href="./style/style.css" type="text/css" />
 
+    <!-- Google Adsense -->
+    <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3976570715489572"
+        crossorigin="anonymous"></script> -->
+    <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
+
     <!-- JS script -->
     <script src="createEvent.js" defer></script>
     <title>MeetU: Select Time and Poll</title>
@@ -76,7 +81,7 @@
                     <div class="col">
                         <!-- Main content of page -->
                         <main>
-                            
+
                         </main>
                     </div>
                 </div>
@@ -116,13 +121,27 @@
 
     <!-- Footer -->
     <footer id="footer" class="page-footer">
-        <!-- Copyright -->
-        <div class="d-flex flex-column footer-copyright text-left pb-3">
-            <a class="link" href="./about.html">About Us!</a>
-            <a class="link" href="#!">Support MeetU</a>
-            <a class="link" href="#!">Link 3</a>
-            <br>© 2023 Copyright:
-            <a href="/"> meetu.com</a>
+        <!-- About Us, Support MeetU, Buy us a coffee! -->
+        <div class="container">
+            <div class="row justify-content-between">
+                <div class="col-3 d-inline-flex flex-column footer-links">
+                    <a class="link text-secondary" href="./about.html">About Us!</a>
+                    <a class="link text-secondary" href="#!">Support MeetU</a>
+                    <a class="link text-secondary" href="#!">Buy us a coffee!</a>
+                </div>
+                <!-- Google Ad -->
+                <div class="col-6 footer-advertisement">
+                    <amp-ad width="100vw" height="320" type="adsense" data-ad-client="ca-pub-3976570715489572"
+                        data-ad-slot="7677164447" data-auto-format="rspv" data-full-width="">
+                        <div overflow=""></div>
+                    </amp-ad>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-1 d-inline-flex text-secondary footer-copyright">
+                    © MeetU
+                </div>
+            </div>
         </div>
     </footer>
 
