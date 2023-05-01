@@ -15,26 +15,21 @@ signupForm.addEventListener('submit', async (event) => {
     }
     const user = {
         email: emailIn.value,
-        password: passIn.value,
+        pwd: passIn.value,
     };
     
     // ROUTING 
     // have user object into json 
-    try {
-        const res = await fetch('/signup', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(user),
-        });
-        // redirect to the dashboard
-        if (res.redirected) {
-            window.location.href = res.url;
-        } else {
-            alert('Failed to sign up.');
-        }
-    } catch (err) {
-        // send login error
-        console.log(err);
-        alert('Failed to sign up.');
+    const res = await fetch('/signup', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(user)
+    });
+    // redirect
+    if (!res.ok) {
+        throw new Error('Signup failed.');
     }
+        //window.location.href = '/dashboard.html';
+    window.location.href = '/dashboard.html';
+
 });
