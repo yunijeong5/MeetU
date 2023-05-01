@@ -383,3 +383,31 @@ html[data-bs-theme="dark"] .link:link {
     text-decoration: none;
     transition: all 200ms;
 }
+
+.copy-url-button {
+    background-color: #F1F1F1;
+    border-radius: 50px;
+}
+
+.send-email-button {
+    background-color: #29c5f6;
+    border-radius: 50px;
+}
+
+.user-availability {
+    background-color: #cacbcc;
+    border-radius: 10px;
+}
+
+.table-row-header {
+    border-top: none;
+    border-bottom: none;
+}
+
+.user-table {
+    border-color: black;
+}
+
+.td {
+    border: 0.07em solid black;
+}

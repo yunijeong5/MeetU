@@ -71,93 +71,193 @@
                 </div>
 
                 <!-- Meeting description set during creation of event -->
-                <div class="row">
-                    <div class="col">
-                        <p class="p-3 text-center">Event Description set by user during creation</p>
+                <div class="row justify-content-center">
+                    <div class="col-6">
+                        <p class="p-3 text-center">Event Description set by user during creation: Lorem ipsum dolor sit
+                            amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+                            magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                            aliquip ex ea commodo consequat.</p>
                     </div>
                 </div>
 
-                <div class="row main">
-                    <div class="col">
-                        <!-- Main content of page -->
-                        <main>
-
-                        </main>
-                    </div>
-                </div>
-
-                <div class="row ">
+                <!-- main section -->
+                <!-- Share Event (copy url to event and send email button)-->
+                <div class="row justify-content-start main">
                     <div class="col-2">
-                        <h2 class="text-left share-event-header">Share Event</h2>
+                        <h2 class="share-event-header">Share Event</h2>
                     </div>
-                    <div class="col-1">
-                        <button type="button" class="btn copy-url-button">Copy</button>
+                    <div class="col-2">
+                        <button type="button" class="btn copy-url-button">Copy URL</button>
                     </div>
-                    <div class="col">
+                    <div class="col-2">
                         <button type="button" class="btn send-email-button">Send Email</button>
                     </div>
                 </div>
-            </div>
-        </div>
-        <!-- main section -->
-        <!-- row #2 - contains: user's availability and group's availability -->
-        <div class="row row-two">
-            <!-- user's availability -->
-            <div class="col">
-                <div class="row">
 
+                <div class="row justify-content-start availability m-4">
+                    <div class="col-6 user-availability p-3">
+                        <div class="row user-availability-header">
+                            <div class="col-4 offset-md-1">
+                                <h2>Your Availability</h2>
+                            </div>
+                        </div>
+                        <div class="row user-availability-explanation">
+                            <div class="col-10 offset-md-1">
+                                <p>Click or drag on the time cell that you are available. Each cell is 15 minutes.</p>
+                            </div>
+                        </div>
+                        <div class="row user-time-table">
+                            <div class="col-12">
+                                <table class="table user-table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" class="table-row-header"></th>
+                                            <th scope="col">SUN</th>
+                                            <th scope="col">MON</th>
+                                            <th scope="col">TUE</th>
+                                            <th scope="col">WED</th>
+                                            <th scope="col">THU</th>
+                                            <th scope="col">FRI</th>
+                                            <th scope="col">SAT</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th scope="row" class="table-row-header">8:00 AM </th>
+                                            <td class="td"></td>
+                                            <td class="td"></td>
+                                            <td class="td"></td>
+                                            <td class="td"></td>
+                                            <td class="td"></td>
+                                            <td class="td"></td>
+                                            <td class="td"></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row" class="table-row-header">8:30 AM </th>
+                                            <td class="td"></td>
+                                            <td class="td"></td>
+                                            <td class="td"></td>
+                                            <td class="td"></td>
+                                            <td class="td"></td>
+                                            <td class="td"></td>
+                                            <td class="td"></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row" class="table-row-header">9:00 AM </th>
+                                            <td class="td"></td>
+                                            <td class="td"></td>
+                                            <td class="td"></td>
+                                            <td class="td"></td>
+                                            <td class="td"></td>
+                                            <td class="td"></td>
+                                            <td class="td"></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row" class="table-row-header">9:30 AM </th>
+                                            <td class="td"></td>
+                                            <td class="td"></td>
+                                            <td class="td"></td>
+                                            <td class="td"></td>
+                                            <td class="td"></td>
+                                            <td class="td"></td>
+                                            <td class="td"></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row" class="table-row-header">10:00 AM </th>
+                                            <td class="td"></td>
+                                            <td class="td"></td>
+                                            <td class="td"></td>
+                                            <td class="td"></td>
+                                            <td class="td"></td>
+                                            <td class="td"></td>
+                                            <td class="td"></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row" class="table-row-header">10:30 AM </th>
+                                            <td class="td"></td>
+                                            <td class="td"></td>
+                                            <td class="td"></td>
+                                            <td class="td"></td>
+                                            <td class="td"></td>
+                                            <td class="td"></td>
+                                            <td class="td"></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row" class="table-row-header">11:00 AM </th>
+                                            <td class="td"></td>
+                                            <td class="td"></td>
+                                            <td class="td"></td>
+                                            <td class="td"></td>
+                                            <td class="td"></td>
+                                            <td class="td"></td>
+                                            <td class="td"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
+            <div class="row row-two">
+                <!-- user's availability -->
+                <div class="col">
+                    <div class="row">
 
-        </div>
-
-        <!-- row #3 - contains: meeting / poll title by creator, and summary -->
-        <div class="row row-three">
-
-        </div>
-        <!-- end of container -->
-    </div>
-
-    <!-- Footer -->
-    <footer id="footer" class="page-footer">
-        <!-- About Us, Support MeetU, Buy us a coffee! -->
-        <div class="container">
-            <div class="row justify-content-between">
-                <div class="col-3 d-inline-flex flex-column footer-links">
-                    <a class="link text-secondary" href="./about.html">About Us!</a>
-                    <a class="link text-secondary" href="#!">Support MeetU</a>
-                    <a class="link text-secondary" href="#!">Buy us a coffee!</a>
+                    </div>
                 </div>
-                <!-- Google Ad -->
-                <div class="col-6 footer-advertisement">
-                    <amp-ad width="100vw" height="320" type="adsense" data-ad-client="ca-pub-3976570715489572"
-                        data-ad-slot="7677164447" data-auto-format="rspv" data-full-width="">
-                        <div overflow=""></div>
-                    </amp-ad>
+
+
+            </div>
+
+            <!-- row #3 - contains: meeting / poll title by creator, and summary -->
+            <div class="row row-three">
+
+            </div>
+            <!-- end of container -->
+        </div>
+
+        <!-- Footer -->
+        <footer id="footer" class="page-footer">
+            <!-- About Us, Support MeetU, Buy us a coffee! -->
+            <div class="container">
+                <div class="row justify-content-between">
+                    <div class="col-3 d-inline-flex flex-column footer-links">
+                        <a class="link text-secondary" href="./about.html">About Us!</a>
+                        <a class="link text-secondary" href="#!">Support MeetU</a>
+                        <a class="link text-secondary" href="#!">Buy us a coffee!</a>
+                    </div>
+                    <!-- Google Ad -->
+                    <div class="col-6 footer-advertisement">
+                        <amp-ad width="100vw" height="320" type="adsense" data-ad-client="ca-pub-3976570715489572"
+                            data-ad-slot="7677164447" data-auto-format="rspv" data-full-width="">
+                            <div overflow=""></div>
+                        </amp-ad>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-1 d-inline-flex text-secondary footer-copyright">
+                        © MeetU
+                    </div>
                 </div>
             </div>
-            <div class="row justify-content-center">
-                <div class="col-1 d-inline-flex text-secondary footer-copyright">
-                    © MeetU
-                </div>
-            </div>
-        </div>
-    </footer>
+        </footer>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
-    </script>
-    <!-- Popperjs -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" crossorigin="anonymous">
-    </script>
-    <!-- Font awesome -->
-    <script src="https://kit.fontawesome.com/481dc938ff.js" crossorigin="anonymous"></script>
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+        </script>
+        <!-- Popperjs -->
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" crossorigin="anonymous">
+        </script>
+        <!-- Font awesome -->
+        <script src="https://kit.fontawesome.com/481dc938ff.js" crossorigin="anonymous"></script>
 </body>
 
 </html>
