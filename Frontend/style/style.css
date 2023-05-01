@@ -389,9 +389,17 @@ html[data-bs-theme="dark"] .link:link {
     border-radius: 50px;
 }
 
+.copy-url-button:hover {
+    background-color: grey;
+}
+
 .send-email-button {
     background-color: #29c5f6;
     border-radius: 50px;
+}
+
+.send-email-button:hover {
+    background-color: grey;
 }
 
 .user-availability {
@@ -410,4 +418,15 @@ html[data-bs-theme="dark"] .link:link {
 
 .td {
     border: 0.07em solid black;
+}
+
+.td:hover {
+    background-color: #29c5f6;
+}
+
+.num-available-bar {
+    background-color: #29c5f6;
+    border-radius: 10px;
+    height: 1em;
+    border: 1px black solid;
 }
