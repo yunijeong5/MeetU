@@ -15,6 +15,10 @@ const __dirname = dirname(dirname(__filename));
 // Create the Express app
 const app = express();
 const port = process.env.PORT || 5501;
+
+// Set up the view engine
+app.set('view engine', 'ejs');
+
 // Add body parser middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -126,8 +130,8 @@ app.get(
   (req, res) => {
     // Verify this is the right user.
     if (req.params.userID === req.user) {
-      res.sendFile('Frontend/dashboard.html', { root: __dirname })
-
+      const username = req.user;
+      res.render('../Frontend/dashboard', { username });
     } else {
       res.redirect('/private/');
     }

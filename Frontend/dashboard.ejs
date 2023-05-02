@@ -26,7 +26,7 @@
         <link rel="stylesheet" href="/style/style.css" />
 
         <!-- JS script -->
-        <script src="dashboard.js" defer></script>
+        <script src="/dashboard.js" defer></script>
 
         <title>MeetU Mockup: Create New Event</title>
     </head>
@@ -55,6 +55,9 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <!--  nav component: -->
+                
+                <a class="profile">Welcome <%= username %>!</a>
+
                 <ul
                     class="navbar-nav ms-auto me-3 d-lg-flex align-items-center"
                 >
@@ -69,16 +72,10 @@
                     </li>
                     <li class="nav-item h-100">
                         <a id="theme-div" class="nav-link" href="#">
-                            <img class="theme-icon" src="sun-svgrepo-com.svg" />
+                            <img class="theme-icon" src="/sun-svgrepo-com.svg" />
                         </a>
                     </li>
-
-                    <!-- <div class="profileReplace"> -->
-                    <!-- <script src="authLogin.js" defer></script>
-          <b><span id="name"></span></b>
-          <img id="pic" class="profile" href="./style/style.css" src="" alt="pfp"> -->
-                    <!-- </div> -->
-
+                
                     <li class="nav-item nav-sign-in text-center h-100">
                         <a class="nav-link text-white" href="/loginCred/login.html">
                             Sign In
