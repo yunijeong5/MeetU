@@ -52,7 +52,15 @@
         </div>
     </nav>
     <!-- Page Content -->
-    <!-- <script type="module" src="client.js"></script> -->
+    <!-- Error.js script doesn't work for some reason, had to add JS script here-->
+    <!-- <script src="error.js" defer></script> -->
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const error = urlParams.get('error');
+        if (error) {
+          alert(error);
+        }
+    </script>
     <div class="cred mt-5">
         <!-- <script src="./regLogin.js" defer></script> -->
         <form id="signup-form" action="/login" method="post">

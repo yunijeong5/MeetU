@@ -6,6 +6,7 @@ import auth from './auth.js';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import bodyParser from 'body-parser';
+import path from 'path';
 
 // We will use __dirname later on to send files back to the client.
 const __filename = fileURLToPath(import.meta.url);
@@ -32,7 +33,8 @@ app.use(express.json());
 // Allow URLencoded data
 app.use(express.urlencoded({ extended: true }));
 // Allow static file serving
-app.use(express.static('Frontend'));
+app.use(express.static(path.join(__dirname, 'Frontend')));
+app.use('/style', express.static(path.join(__dirname, 'Frontend', 'style')));
 
 // Configure our authentication strategy
 auth.configure(app);
@@ -58,14 +60,20 @@ app.get('/login', (req, res) =>
 );
 
 // Handle post data from the login.html form.
-app.post(
-  '/login',
-  auth.authenticate('local', {
-    // use username/password authentication
-    successRedirect: '/private', // when we login, go to /private
-    failureRedirect: '/login', // otherwise, back to login
-  })
-);
+app.post('/login', (req, res, next) => {
+  auth.authenticate('local', (err, user) => {
+    if (err) // error, pass it next middleware.
+      return next(err);
+    if (!user) // no user, then redirect
+      return res.redirect('/login?error=Invalid username or password');
+    req.login(user, (err) => {
+      if (err)
+        return next(err);
+      // Redirect to the private page.
+      return res.redirect('/private');
+    });
+  })(req, res, next);
+});
 
 // Handle logging out (takes us back to the login page).
 app.get('/logout', (req, res) => {
@@ -78,21 +86,26 @@ app.get('/logout', (req, res) => {
 // Use req.body to access data (as in, req.body['username']).
 // Use res.redirect to change URLs.
 app.post('/register', (req, res) => {
-  const { username, password } = req.body;
-  if (!username || !password) {
-    res.status(400).send('Username and password are required');
+  const { username, password, retypePass} = req.body;
+  if (!username || !password || !retypePass) {
+    res.redirect('/register?error=Username and password is required');
+    return;
+  }
+  if (password !== retypePass) {
+    res.redirect('/register?error=Passwords do not match');
     return;
   }
   if (users.addUser(username, password)) {
     res.redirect('/login');
   } else {
-    res.status(409).send('Username already exists');
+    // res.sendFile('Frontend/loginCred/register.html', { root: __dirname, message: 'Error adding user' });
+    res.redirect('/register?error=Username already exists');
   }
 });
 
 // Register URL
 app.get('/register', (req, res) =>
-  res.sendFile('../Frontend/loginCred/register.html', { root: __dirname })
+  res.sendFile('Frontend/loginCred/register.html', { root: __dirname })
 );
 
 // Private data
@@ -106,16 +119,15 @@ app.get(
 );
 
 // A dummy page for the user.
+
 app.get(
   '/private/:userID/',
   checkLoggedIn, // We also protect this route: authenticated...
   (req, res) => {
     // Verify this is the right user.
     if (req.params.userID === req.user) {
-      res.writeHead(200, { 'Content-Type': 'text/html' });
-      res.write('<H1>HELLO ' + req.params.userID + '</H1>');
-      res.write('<br/><a href="/logout">click here to logout</a>');
-      res.end();
+      res.sendFile('Frontend/dashboard.html', { root: __dirname })
+
     } else {
       res.redirect('/private/');
     }
