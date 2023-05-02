@@ -100,7 +100,14 @@ app.post('/register', (req, res) => {
     return;
   }
   if (users.addUser(username, password)) {
-    res.redirect('/login');
+    // redirect to a private dashboard
+    req.login(username, (err) => {
+      if (err) {
+        res.redirect('/login');
+      } else {
+        res.redirect('/private/' + username);
+      }
+    });
   } else {
     // res.sendFile('Frontend/loginCred/register.html', { root: __dirname, message: 'Error adding user' });
     res.redirect('/register?error=Username already exists');
