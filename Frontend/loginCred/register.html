@@ -52,18 +52,16 @@
         </div>
     </nav>
     <!-- Page Content -->
-    <!-- <script type="module" src="client.js"></script> -->
     <div class="cred mt-5">
-        <script src="./regLogin.js" defer></script>
-        <form id="signup-form">
-            <div id="pop-Login">
+        <!-- <script src="./regLogin.js" defer></script> -->
+            <form id="pop-Login" action="/register" method="post">
                 <h2>Register on MeetU!</h2>
                 <p>Please enter your credentials:</p>
-                <input type="text" id="email" placeholder="Email" class="underline-input" /><br />
-                <input type="password" id="password" placeholder="Password" class="underline-input" /><br />
-                <input type="password" id="retypePassword" placeholder="Re-type Password"
-                    class="underline-input" /><br />
-                <button id="submit" type="submit">Submit</button>
+                <input type="text" name="username" placeholder="Email" class="underline-input" /><br />
+                <input type="password" name="password" placeholder="Password" class="underline-input" /><br />
+                <!-- <input type="password" id="retypePassword" placeholder="Re-type Password"
+                    class="underline-input" /><br /> -->
+                <input id="submit" type="submit" value="Submit"></input>
                 <div class="separatorLine">
                     <span class="orText">OR</span>
                 </div>     

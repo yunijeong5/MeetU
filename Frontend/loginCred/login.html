@@ -54,29 +54,25 @@
     <!-- Page Content -->
     <!-- <script type="module" src="client.js"></script> -->
     <div class="cred mt-5">
-        <script src="./regLogin.js" defer></script>
-        <form id="signup-form">
-            <div id="pop-Login">
-                <h2>Login on MeetU!</h2>
-                <p>Please enter your credentials:</p>
-                <input type="text" id="email" placeholder="Email" class="underline-input" /><br />
-                <input type="password" id="password" placeholder="Password" class="underline-input" /><br />
-                <input type="password" id="retypePassword" placeholder="Re-type Password"
-                    class="underline-input" /><br />
-                <button id="submit" type="submit">Submit</button>
-                <div class="separatorLine">
-                    <span class="orText">OR</span>
-                </div>     
-                <!--Google Auth Login-->
-                <script src="./googleLogin.js" defer></script>
-                <script src="https://accounts.google.com/gsi/client" async defer></script>
-                <body>
-                    <div class="g_id_signin" id="g_id_onload" data-context="signin" data-ux_mode="redirect"
-                        data-itp_support="true" data-type="standard" data-shape="pill" data-theme="outline"
-                        data-text="signin_with" data-size="large" data-logo_alignment="left" href="../style/logStyle.css"
-                        onclick="trySampleRequest();"></div>
-                </body>
-            </div>
+        <!-- <script src="./regLogin.js" defer></script> -->
+        <form id="signup-form" action="/login" method="post">
+            <h2>Login on MeetU!</h2>
+            <p>Please enter your credentials:</p>
+            <input type="text" id="username" placeholder="Email" class="underline-input" name="username"/><br />
+            <input type="password" id="password" placeholder="Password" class="underline-input" name="password"/><br />
+            <input type="submit" id="submit"></input>
+            <div class="separatorLine">
+                <span class="orText">OR</span>
+            </div>     
+            <!--Google Auth Login-->
+            <script src="./googleLogin.js" defer></script>
+            <script src="https://accounts.google.com/gsi/client" async defer></script>
+            <body>
+                <div class="g_id_signin" id="g_id_onload" data-context="signin" data-ux_mode="redirect"
+                    data-itp_support="true" data-type="standard" data-shape="pill" data-theme="outline"
+                    data-text="signin_with" data-size="large" data-logo_alignment="left" href="../style/logStyle.css"
+                    onclick="trySampleRequest();"></div>
+            </body>
         </form>
         <div class="regLink">
             <p>Don't have an account? <a href="register.html">Register <span class="hyperlink">here!</span></a></p>
