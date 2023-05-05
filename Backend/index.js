@@ -82,7 +82,7 @@ app.post('/login', (req, res, next) => {
 // Handle logging out (takes us back to the login page).
 app.get('/logout', (req, res) => {
   req.logout(); // Logs us out!
-  res.redirect('/login'); // back to login
+  res.redirect('/loginCred/login.html'); // back to login
 });
 
 // Like login, but add a new user and password IFF one doesn't exist already.
@@ -109,7 +109,6 @@ app.post('/register', (req, res) => {
       }
     });
   } else {
-    // res.sendFile('Frontend/loginCred/register.html', { root: __dirname, message: 'Error adding user' });
     res.redirect('/register?error=Username already exists');
   }
 });
