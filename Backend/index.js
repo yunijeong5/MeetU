@@ -81,8 +81,11 @@ app.post('/login', (req, res, next) => {
 
 // Handle logging out (takes us back to the login page).
 app.get('/logout', (req, res) => {
-  req.logout(); // Logs us out!
-  res.redirect('/loginCred/login.html'); // back to login
+  req.logout((err) => {
+    if (err)
+      return next(err);
+    res.redirect('/loginCred/login.html');
+  });
 });
 
 // Like login, but add a new user and password IFF one doesn't exist already.
