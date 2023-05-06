@@ -148,7 +148,8 @@ app.get(
 );
 
 app.get('*', (req, res) => {
-  res.send('Error');
+  //res.send('Error');
+  res.redirect('/error.html')
 });
 
 app.listen(port, () => {
