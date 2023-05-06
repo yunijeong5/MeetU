@@ -16,11 +16,11 @@ app.use('/signup', postRouter);
 app.use(postRouter);
 
 // Use static middleware to serve our client files. This allows the server to attach our index.html file, as well as it's associated css and js files when making a GET request to "/"
-app.use(express.static("../Frontend/loginCred"));
+app.use(express.static("../Client/loginCred"));
 
 // Use static middleware to serve our post html page and associated script when making a GET request to "/post"
 
-app.use('/dashboard', express.static(path.join(__dirname, "../Frontend/loginCred/verified")));
+app.use('/dashboard', express.static(path.join(__dirname, "../Client/loginCred/verified")));
 
 
 app.listen(port, () => {

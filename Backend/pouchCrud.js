@@ -54,7 +54,7 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 // serve static frontend files
-app.use("/", express.static("../Frontend"));
+app.use("/", express.static("../Client"));
 
 // send data and stuff
 app.post("/create", async (request, response) => {

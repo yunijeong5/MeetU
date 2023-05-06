@@ -37,8 +37,8 @@ app.use(express.json());
 // Allow URLencoded data
 app.use(express.urlencoded({ extended: true }));
 // Allow static file serving
-app.use(express.static(path.join(__dirname, 'Frontend')));
-app.use('/style', express.static(path.join(__dirname, 'Frontend', 'style')));
+app.use(express.static(path.join(__dirname, 'Client')));
+app.use('/style', express.static(path.join(__dirname, 'Client', 'style')));
 
 // Configure our authentication strategy
 auth.configure(app);
@@ -60,7 +60,7 @@ app.get('/', checkLoggedIn, (req, res) => {
 
 // Handle the URL /login (just output the login.html file).
 app.get('/login', (req, res) =>
-  res.sendFile('Frontend/loginCred/login.html', { root: __dirname })
+  res.sendFile('Client/loginCred/login.html', { root: __dirname })
 );
 
 // Handle post data from the login.html form.
@@ -118,7 +118,7 @@ app.post('/register', (req, res) => {
 
 // Register URL
 app.get('/register', (req, res) =>
-  res.sendFile('Frontend/loginCred/register.html', { root: __dirname })
+  res.sendFile('Client/loginCred/register.html', { root: __dirname })
 );
 
 // Private data
@@ -140,7 +140,7 @@ app.get(
     // Verify this is the right user.
     if (req.params.userID === req.user) {
       const username = req.user;
-      res.render('../Frontend/dashboard', { username });
+      res.render('../Client/dashboard', { username });
     } else {
       res.redirect('/private/');
     }
