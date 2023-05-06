@@ -315,3 +315,13 @@ html[data-bs-theme="dark"] .link:link {
     text-decoration: none;
     transition: all 200ms;
 }
+
+/* ************************************** */
+/*    ERROR     */
+/* ************************************** */
+.error {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 50px 0;
+    text-align: center;
+}
