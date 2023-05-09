@@ -148,7 +148,7 @@ h2 {
 
 #create-event-btn:hover {
     color: white;
-    background-color: #0d6efd;
+    background-color: rgb(13, 110, 253);
 }
 
 .day-btn {
@@ -200,12 +200,58 @@ h2 {
 /* ************************************** */
 /*    HOME and ABOUT     */
 /* ************************************** */
-.hero {
-    background-image: url("../assets/img/umass-sunset.png");
-    /* background-image: url("https://mdbootstrap.com/img/Photos/Others/images/76.jpg"); */
-    height: 100vh;
+.white-text {
+    color: white;
+}
+
+.light-gray-text {
+    color: #e9ecef;
+}
+
+.intro {
+    max-width: 40rem;
+    word-wrap: break-word;
+}
+
+.header-img {
+    background: #0d6efd;
+    background: -webkit-linear-gradient(
+            rgba(29, 38, 113, 0.6),
+            rgba(0, 0, 0, 0.8)
+        ),
+        url("../assets/img/umass-sunset.png");
+    background: linear-gradient(rgba(29, 38, 113, 0.6), rgba(0, 0, 0, 0.6)),
+        url("../assets/img/umass-sunset.png"); /* The least supported option. */
+    width: 100vw;
+    height: 35rem;
     background-size: cover;
     background-repeat: no-repeat;
+    object-fit: cover;
+}
+
+a {
+    text-decoration: none; /* Remove underline */
+    color: black;
+}
+
+a:hover {
+    text-decoration: none; /* Add underline on hover */
+}
+
+.first-btn {
+    display: block;
+    width: auto;
+    font-size: 1.5rem;
+    font-weight: 600;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.first-btn:hover {
+    background-color: white;
+    color: #007bff;
 }
 
 /* ************************************** */
