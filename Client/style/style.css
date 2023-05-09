@@ -85,7 +85,6 @@ h2 {
     font-size: 1rem;
     font-weight: 600;
     white-space: nowrap;
-
 }
 
 .nav-sign-in {
@@ -185,8 +184,7 @@ h2 {
     justify-content: center;
     align-items: center;
     transition: all 0.1s ease;
-  }
-  
+}
 
 .add-meeting-btn:hover {
     height: 13rem;
@@ -202,89 +200,14 @@ h2 {
 /* ************************************** */
 /*    HOME and ABOUT     */
 /* ************************************** */
-.homepage {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 50px 0;
+.hero {
+    background-image: url("../assets/img/umass-sunset.png");
+    /* background-image: url("https://mdbootstrap.com/img/Photos/Others/images/76.jpg"); */
+    height: 100vh;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
-.content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 50px;
-}
-
-.text {
-    max-width: 500px;
-}
-
-.text h1,
-.text h2 {
-    font-size: 36px;
-    margin-bottom: 20px;
-}
-
-.text p {
-    font-size: 20px;
-    line-height: 1.5;
-    margin-bottom: 20px;
-}
-
-.image {
-    max-width: 500px;
-    margin-left: 50px;
-}
-
-.image img {
-    max-width: 100%;
-}
-
-a {
-    text-decoration: none; /* Remove underline */
-    color: black;
-}
-
-a:hover {
-    text-decoration: none; /* Add underline on hover */
-}
-
-.button {
-    display: block;
-    width: 200px;
-    margin: 20px auto 0;
-    padding: 10px 20px;
-    font-size: 20px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 100px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.button:hover {
-    background-color: black;
-}
-/* Uh oh mobile */
-@media screen and (max-width: 700px) {
-    .content {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .text {
-        margin-top: 50px;
-        max-width: 100%;
-    }
-
-    .image {
-        /* margin-left: 0;
-      margin-top: 50px;
-      max-width: 100%; */
-        display: none;
-    }
-}
 /* ************************************** */
 /*    FOOTER     */
 /* ************************************** */

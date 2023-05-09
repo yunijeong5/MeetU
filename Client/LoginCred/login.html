@@ -59,20 +59,31 @@
     </script>
     <div class="cred mt-5">
         <!-- <script src="./regLogin.js" defer></script> -->
-        <form id="signup-form" action="/login" method="post">
+        <form id="signup-form" action="/login" method="post" class="text-center">
             <h2>Login on MeetU!</h2>
             <p>Please enter your credentials:</p>
-            <input type="text" id="username" placeholder="Email" class="underline-input" name="username"/><br />
-            <input type="password" id="password" placeholder="Password" class="underline-input" name="password"/><br />
-            <input type="submit" id="submit"></input>
-            <div class="separatorLine">
-                <span class="orText">OR</span>
-            </div>     
+            <input type="text" id="username" placeholder="Email" class="p-1 px-2 mb-2 id-input" name="username"/><br />
+            <input type="password" id="password" placeholder="Password" class="p-1 px-2 mb-4 id-input" name="password"/><br />
+            <input type="submit" id="submit" class="mx-auto"></input>
+            <div class="row h-100">
+                <div class="col-3 separatorLine">
+                    
+                </div>
+                <div class="col text-center my-auto orText">
+                    OR                    
+                </div>
+                <div class="col-3 separatorLine">
+                    
+                </div>
+            </div>
+            <!-- <div class="separatorLine">
+                <span class="text-center">OR</span>
+            </div>      -->
             <!--Google Auth Login-->
             <script src="./googleLogin.js" defer></script>
             <script src="https://accounts.google.com/gsi/client" async defer></script>
             <body>
-                <div class="g_id_signin" id="g_id_onload" data-context="signin" data-ux_mode="redirect"
+                <div class="g_id_signin mx-auto" id="g_id_onload" data-context="signin" data-ux_mode="redirect"
                     data-itp_support="true" data-type="standard" data-shape="pill" data-theme="outline"
                     data-text="signin_with" data-size="large" data-logo_alignment="left" href="../style/logStyle.css"
                     onclick="trySampleRequest();"></div>
