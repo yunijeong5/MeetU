@@ -10,18 +10,20 @@ const app = express();
 app.use(logger("dev"));
 
 // Support JSON on requests
-app.use('/signup', postRouter);
+app.use("/signup", postRouter);
 
-// Use the routes created for posts, stored neatly in it's own file 
+// Use the routes created for posts, stored neatly in it's own file
 app.use(postRouter);
 
 // Use static middleware to serve our client files. This allows the server to attach our index.html file, as well as it's associated css and js files when making a GET request to "/"
-app.use(express.static("../Client/loginCred"));
+app.use(express.static("../Client/LoginCred"));
 
 // Use static middleware to serve our post html page and associated script when making a GET request to "/post"
 
-app.use('/dashboard', express.static(path.join(__dirname, "../Client/loginCred/verified")));
-
+app.use(
+    "/dashboard",
+    express.static(path.join(__dirname, "../Client/LoginCred/verified"))
+);
 
 app.listen(port, () => {
     console.log(`Listening on port ${port}`);

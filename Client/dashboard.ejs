@@ -56,17 +56,14 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <!--  nav component: -->
-                
+
                 <a class="profile">Welcome <%= username %>!</a>
 
                 <ul
                     class="navbar-nav ms-auto me-3 d-lg-flex align-items-center"
                 >
                     <li class="nav-item active">
-                        <a
-                            id="nav-dashboard"
-                            class="nav-link"
-                            href="dashboard"
+                        <a id="nav-dashboard" class="nav-link" href="dashboard"
                             >Dashboard
                             <span class="sr-only">(current)</span>
                         </a>
@@ -80,17 +77,20 @@
                     </li>
                     <!-- change the features once logged in -->
                     <% if (typeof username !== 'undefined') { %>
-                        <li class="nav-item nav-sign-in text-center h-100">
-                            <a class="nav-link text-white" href="/logout">
-                                Sign Out
-                            </a>
-                        </li>
+                    <li class="nav-item nav-sign-in text-center h-100">
+                        <a class="nav-link text-white" href="/logout">
+                            Sign Out
+                        </a>
+                    </li>
                     <% } else { %>
-                        <li class="nav-item nav-sign-in text-center h-100">
-                            <a class="nav-link text-white" href="/loginCred/login.html">
-                                Sign In
-                            </a>
-                        </li>
+                    <li class="nav-item nav-sign-in text-center h-100">
+                        <a
+                            class="nav-link text-white"
+                            href="/LoginCred/login.html"
+                        >
+                            Sign In
+                        </a>
+                    </li>
                     <% } %>
                 </ul>
             </div>
@@ -130,11 +130,12 @@
 
                 <!-- Have button pop out when hover, redirect to /createEvent endpoint -->
                 <a href="/createEvent.html">
-                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 m-2 p-3 add-meeting-btn">
+                    <div
+                        class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 m-2 p-3 add-meeting-btn"
+                    >
                         <span class="meeting-title">➕ Add Event from URL</span>
                     </div>
                 </a>
-
             </div>
             <!-- </div> -->
         </div>
