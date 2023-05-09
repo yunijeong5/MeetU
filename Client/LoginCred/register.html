@@ -58,24 +58,32 @@
         }
     </script>
     <div class="cred mt-5">
-            <form id="pop-Login" action="/register" method="post">
+            <form id="pop-Login" action="/register" method="post" class="text-center">
                 <h2>Register on MeetU!</h2>
                 <p>Please enter your credentials:</p>
-                <input type="text" name="username" placeholder="Email" class="underline-input" /><br />
-                <input type="password" name="password" placeholder="Password" class="underline-input" /><br />
-                <input type="password" name="retypePass" placeholder="Re-type Password" class="underline-input" /><br />
-                <input id="submit" type="submit" value="Submit"></input>
+                <input type="text" name="username" placeholder="Email" class="p-1 px-2 mb-2 id-input" /><br />
+                <input type="password" name="password" placeholder="Password" class="p-1 px-2 mb-2 id-input" /><br />
+                <input type="password" name="retypePass" placeholder="Re-type Password" class="p-1 px-2 mb-4 id-input" /><br />
+                <input id="submit" type="submit" value="Submit" class="mx-auto"></input>
 
-                <div class="separatorLine">
-                    <span class="orText">OR</span>
-                </div>     
+                <div class="row h-100 my-4">
+                    <div class="col-3 separatorLine">
+                        
+                    </div>
+                    <div class="col text-center my-auto orText">
+                        OR                    
+                    </div>
+                    <div class="col-3 separatorLine">
+                        
+                    </div>
+                </div>  
                 <!--Google Auth Login-->
                 <script src="./googleLogin.js" defer></script>
                 <script src="https://accounts.google.com/gsi/client" async defer></script>
                 <body>
-                    <div class="g_id_signin" id="g_id_onload" data-context="signin" data-ux_mode="redirect"
+                    <div class="g_id_signin mx-auto" id="g_id_onload" data-context="signin" data-ux_mode="redirect"
                         data-itp_support="true" data-type="standard" data-shape="pill" data-theme="outline"
-                        data-text="signin_with" data-size="large" data-logo_alignment="left" href="../style/logStyle.css"
+                        data-text="signup_with" data-size="large" data-logo_alignment="left" href="../style/logStyle.css"
                         onclick="trySampleRequest();"></div>
                 </body>
             </div>
