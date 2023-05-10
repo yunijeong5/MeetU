@@ -27,7 +27,7 @@
 
         <!-- JS script -->
         <script src="dashboard.js" defer></script>
-        <script src="colorTheme.js" defer></script>
+        <script src="/js/colorTheme.js" defer></script>
 
         <title>MeetU Mockup: Create New Event</title>
     </head>
@@ -69,12 +69,15 @@
                         </a>
                     </li>
 
-                    <!-- TODO: fix this icon issue -->
                     <li class="nav-item h-100">
                         <a id="theme-div" class="nav-link" href="#">
-                            <img class="theme-icon" src="sun-svgrepo-com.svg" />
+                            <img 
+                                class="theme-icon" 
+                                src="/assets/misc/sun-svgrepo-com.svg"
+                             />
                         </a>
                     </li>
+                   
                     <!-- change the features once logged in -->
                     <% if (typeof username !== 'undefined') { %>
                     <li class="nav-item nav-sign-in text-center h-100">
