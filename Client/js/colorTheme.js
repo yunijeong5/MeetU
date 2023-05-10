@@ -14,7 +14,7 @@ function switchTheme() {
     const theme = htmlDiv.getAttribute("data-bs-theme");
     if (theme == "light") {
         htmlDiv.setAttribute("data-bs-theme", "dark");
-        themeButton.src = "./moon-svgrepo-com.svg";
+        themeButton.src = "../assets/misc/moon-svgrepo-com.svg";
         calendar.classList.remove("light");
         calendar.classList.add("dark");
         pollBox.style.backgroundColor = "#343a40";
@@ -25,7 +25,7 @@ function switchTheme() {
         footer.style.borderTop = "1px solid #343a40";
     } else {
         htmlDiv.setAttribute("data-bs-theme", "light");
-        themeButton.src = "./sun-svgrepo-com.svg";
+        themeButton.src = "../assets/misc/sun-svgrepo-com.svg";
         calendar.classList.remove("dark");
         calendar.classList.add("light");
         pollBox.style.backgroundColor = "#e9ecef";

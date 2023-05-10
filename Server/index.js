@@ -14,7 +14,7 @@ const __dirname = dirname(dirname(__filename));
 
 // Create the Express app
 const app = express();
-const port = process.env.PORT || 5501;
+const port = process.env.PORT || 4444;
 
 // Set up the view engine
 app.set("view engine", "ejs");
