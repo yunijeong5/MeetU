@@ -210,10 +210,14 @@ async function createNewEvent(e) {
     const eventJSON = JSON.stringify(event);
 
     // send to backend
-    const res = await crud.createNewEvent(eventJSON);
 
     // if successful res, redirect to select time page
     // window.location.replace
+
+    window.location.replace("select-time.html");
+
+    const res = await crud.createNewEvent(eventJSON);
+
 }
 
 // TODO: figure out why button doesn't work when event type is submit

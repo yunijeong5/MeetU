@@ -9,6 +9,13 @@ export async function createNewEvent(jsonString) {
         },
         body: jsonString,
     });
+
+    if (response.status === 404) {
+        console.log("Bad fetch request");
+        return null;
+    }
+
     const data = await response.json();
+
     return data;
 }
