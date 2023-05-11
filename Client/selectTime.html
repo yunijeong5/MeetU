@@ -21,13 +21,6 @@
     <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3976570715489572"
         crossorigin="anonymous"></script> -->
     <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
-
-    <!-- JS script -->
-    <script>
-        // document.getElementById("meeting-title").innerHTML = localStorage.getItem("serializedRes");
-        // document.getElementById("").innerHTML = localStorage.getItem("");
-        // document.getElementById("")
-    </script>
     <title>MeetU: Select Time and Poll</title>
 </head>
 
@@ -61,36 +54,35 @@
             <div class="col">
 
                 <!-- Select Time and Location -->
-                <div class="row">
+                <!-- <div class="row">
                     <div class="col">
-                        <h1 class="p-1 text-center">Select Time and Location</h1>
+                        <h1 class="m-2 text-center">Select Time and Location</h1>
                     </div>
-                </div>
-
+                </div> -->
                 <!-- Meeting title set during creation of event -->
                 <div class="row">
-                    <div class="col">
-                        <h1 class="p-1 text-center" id="meeting-title"></h1>
+                    <div class="col-12">
+                        <h1 class="mb-5 text-center" id="meeting-title"></h1>
                     </div>
                 </div>
 
                 <!-- Meeting description set during creation of event -->
-                <div class="row justify-content-center">
-                    <div class="col-6">
-                        <p class="p-3 text-center"></p>
+                <div class="row justify-content-start">
+                    <div class="col-12">
+                        <h5 class="mt-5 text" id="meeting-desc"></h5>
                     </div>
                 </div>
 
                 <!-- main section -->
                 <!-- Share Event (copy url to event and send email button)-->
-                <div class="row justify-content-start main">
-                    <div class="col-2">
+                <div class="row justify-content-start main m-5">
+                    <div class="col-3">
                         <h2 class="share-event-header">Share Event</h2>
                     </div>
-                    <div class="col-2">
+                    <div class="col-3">
                         <button type="button" class="btn copy-url-button">Copy URL</button>
                     </div>
-                    <div class="col-2">
+                    <div class="col-3">
                         <button type="button" class="btn send-email-button">Send Email</button>
                     </div>
                 </div>
@@ -382,6 +374,15 @@
         </script>
         <!-- Font awesome -->
         <script src="https://kit.fontawesome.com/481dc938ff.js" crossorigin="anonymous"></script>
+        <!-- JS script -->
+        <script>
+            // document.getElementById("meeting-title").innerHTML = JSON.parse(localStorage.getItem("serializedRes"))["title"];
+
+            // console.log(JSON.parse(localStorage.getItem("serializedRes")));
+            document.getElementById("meeting-title").innerHTML = JSON.parse(localStorage.getItem("serializedRes"))["title"];
+            document.getElementById("meeting-desc").innerHTML = '\"' + JSON.parse(localStorage.getItem("serializedRes"))["description"] + '\"';
+            // document.getElementById("meeting-title").innerHTML = JSON.parse(localStorage.getItem("serializedRes"))["title"];
+        </script>
 </body>
 
 </html>
