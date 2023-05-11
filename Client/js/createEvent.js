@@ -214,9 +214,10 @@ async function createNewEvent(e) {
     // if successful res, redirect to select time page
     // window.location.replace
 
-    window.location.replace("selectTime.html");
     const res = await crud.createNewEvent(eventJSON);
+    console.log(res);
     localStorage.setItem("serializedRes", JSON.stringify(res));
+    window.location.replace("selectTime.html");
     
     return false;
 }

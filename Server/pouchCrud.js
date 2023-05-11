@@ -62,6 +62,7 @@ app.post("/create", async (request, response) => {
     const eventInfo = request.body;
     console.log(eventInfo);
     createEvent(eventInfo);
+    response.send(eventInfo);
 });
 
 // error page
