@@ -75,14 +75,14 @@
 
                 <!-- main section -->
                 <!-- Share Event (copy url to event and send email button)-->
-                <div class="row justify-content-start main m-5">
-                    <div class="col-3">
+                <div class="row justify-content-start main mt-5 pt-5">
+                    <div class="col-2">
                         <h2 class="share-event-header">Share Event</h2>
                     </div>
-                    <div class="col-3">
-                        <button type="button" class="btn copy-url-button">Copy URL</button>
+                    <div class="col-2">
+                        <button type="button" class="btn copy-url-button position-relative">Copy URL</button>
                     </div>
-                    <div class="col-3">
+                    <div class="col-2">
                         <button type="button" class="btn send-email-button">Send Email</button>
                     </div>
                 </div>
@@ -376,12 +376,9 @@
         <script src="https://kit.fontawesome.com/481dc938ff.js" crossorigin="anonymous"></script>
         <!-- JS script -->
         <script>
-            // document.getElementById("meeting-title").innerHTML = JSON.parse(localStorage.getItem("serializedRes"))["title"];
-
-            // console.log(JSON.parse(localStorage.getItem("serializedRes")));
             document.getElementById("meeting-title").innerHTML = JSON.parse(localStorage.getItem("serializedRes"))["title"];
             document.getElementById("meeting-desc").innerHTML = '\"' + JSON.parse(localStorage.getItem("serializedRes"))["description"] + '\"';
-            // document.getElementById("meeting-title").innerHTML = JSON.parse(localStorage.getItem("serializedRes"))["title"];
+            // document.getElementById("");
         </script>
 </body>
 

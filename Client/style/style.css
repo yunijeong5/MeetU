@@ -310,3 +310,46 @@ html[data-bs-theme="dark"] .link:link {
     padding: 50px 0;
     text-align: center;
 }
+
+
+
+
+
+
+
+
+
+
+/* ************************************** */
+/*    SELECT TIME AND POLL     */
+/* ************************************** */
+
+/* Share header, copy url button, send email button */
+
+.share-event-header {
+    font-weight: 600;    
+}
+
+.copy-url-button {
+    border-color: none;
+    background-color: #f1f1f1;
+    border-radius: 50px;
+    margin-top: -5%;
+    white-space: nowrap;
+}
+
+.copy-url-button:hover {
+    background-color: #cdcdcd;
+}
+
+.send-email-button {
+    border-color: none;
+    background-color: #29C5F6;
+    border-radius: 50px;
+    margin-top: -5%;
+    white-space: nowrap;
+}
+
+.send-email-button:hover {
+    background-color: #1facd7;
+}
