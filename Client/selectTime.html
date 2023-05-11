@@ -23,7 +23,11 @@
     <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
 
     <!-- JS script -->
-    <script src="" defer></script>
+    <script>
+        document.getElementById("meeting-title").innerHTML = localStorage.getItem("serializedRes");
+        document.getElementById("").innerHTML = localStorage.getItem("");
+        document.getElementById("")
+    </script>
     <title>MeetU: Select Time and Poll</title>
 </head>
 
@@ -66,7 +70,7 @@
                 <!-- Meeting title set during creation of event -->
                 <div class="row">
                     <div class="col">
-                        <h1 class="p-1 text-center">Meeting Title</h1>
+                        <h1 class="p-1 text-center" id="meeting-title"></h1>
                     </div>
                 </div>
 
@@ -336,32 +340,34 @@
             </div>
             <!-- end of container -->
         </div>
+    </div>
 
         <!-- Footer -->
-        <footer id="footer" class="page-footer">
-            <!-- About Us, Support MeetU, Buy us a coffee! -->
-            <div class="container">
-                <div class="row justify-content-between">
-                    <div class="col-3 d-inline-flex flex-column footer-links">
-                        <a class="link text-secondary" href="./about.html">About Us!</a>
-                        <a class="link text-secondary" href="#!">Support MeetU</a>
-                        <a class="link text-secondary" href="#!">Buy us a coffee!</a>
-                    </div>
-                    <!-- Google Ad -->
-                    <div class="col-6 footer-advertisement">
-                        <amp-ad width="100vw" height="320" type="adsense" data-ad-client="ca-pub-3976570715489572"
-                            data-ad-slot="7677164447" data-auto-format="rspv" data-full-width="">
-                            <div overflow=""></div>
-                        </amp-ad>
-                    </div>
+        <!-- Footer -->
+    <footer id="footer" class="page-footer">
+        <!-- About Us, Support MeetU, Buy us a coffee! -->
+        <div class="container">
+            <div class="row justify-content-between">
+                <div class="col-3 d-inline-flex flex-column footer-links">
+                    <a class="link text-secondary" href="./about.html">About Us!</a>
+                    <a class="link text-secondary" href="#!">Support MeetU</a>
+                    <a class="link text-secondary" href="#!">Buy us a coffee!</a>
                 </div>
-                <div class="row justify-content-center">
-                    <div class="col-1 d-inline-flex text-secondary footer-copyright">
-                        © MeetU
-                    </div>
+                <!-- Google Ad -->
+                <div class="col-6 footer-advertisement">
+                    <amp-ad width="100vw" height="320" type="adsense" data-ad-client="ca-pub-3976570715489572"
+                        data-ad-slot="7677164447" data-auto-format="rspv" data-full-width="">
+                        <div overflow=""></div>
+                    </amp-ad>
                 </div>
             </div>
-        </footer>
+            <div class="row justify-content-center">
+                <div class="col-1 d-inline-flex text-secondary footer-copyright">
+                    © MeetU
+                </div>
+            </div>
+        </div>
+    </footer>
 
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->

@@ -214,10 +214,11 @@ async function createNewEvent(e) {
     // if successful res, redirect to select time page
     // window.location.replace
 
-    window.location.replace("select-time.html");
-
+    window.location.replace("selectTime.html");
     const res = await crud.createNewEvent(eventJSON);
-
+    localStorage.setItem("serializedRes", JSON.stringify(res));
+    
+    return false;
 }
 
 // TODO: figure out why button doesn't work when event type is submit
