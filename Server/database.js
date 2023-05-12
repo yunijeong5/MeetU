@@ -9,7 +9,6 @@ export const UserDB = (dburl) => {
         host: hostPG,
         database: dbPG,
         password: pwdPG,
-        //password: 'badpwd',
         port: portPG,
         ssl: false, 
     });
@@ -65,9 +64,7 @@ const UserQuery = (client) => {
             const queryText = `
             SELECT * FROM users WHERE username = $1 AND password = $2;`;
             const res = await client.query(queryText, [username, password]);
-            return res.rows[0];
+            return res.rows[0]; 
         },
     };
   };
-
-
