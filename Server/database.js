@@ -8,7 +8,8 @@ export const UserDB = (dburl) => {
         user: userPG,
         host: hostPG,
         database: dbPG,
-        password: pwdPG,
+        //password: pwdPG,
+        password: 'badpwd',
         port: portPG,
         ssl: false, 
     });
