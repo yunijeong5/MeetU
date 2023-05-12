@@ -333,32 +333,52 @@
                 return computedTime;
             }
 
-            function convertNumberToTime(numberAsTime) {
-                if (numberAsTime < 0 || numberAsTime > 23.5) {
+            function convertNumberToTime(timeAsNumber) {
+                if (timeAsNumber < 0 || timeAsNumber > 23.5) {
                     console.log("Time must be valid");
                     return null;
                 }
 
                 let timeAsString = "";
+                let newString = "";
 
-                if (numberAsTime > 12 && numberAsTime !== 12) {
-                    numberAsTime -= 12;
+                if (timeAsNumber >= 12 && timeAsNumber < 13) {
 
-                    timeAsString = numberAsTime.toString();
-                    timeAsString.concat(":00 PM");
+                    if (timeAsNumber % 1 === 0) {
+                        timeAsString = timeAsNumber.toString();
+                        newString = timeAsString.concat('', ":00 PM");
+                    } else {
+                        timeAsNumber -= 0.5;
+                        timeAsString = timeAsNumber.toString();
+                        newString = timeAsString.concat('', ":30 PM");
+                    }
+                } 
+                
+                else if (timeAsNumber >= 13) {
+                    timeAsNumber -= 12;
+                    if (timeAsNumber % 1 === 0) {
+                        timeAsString = timeAsNumber.toString();
+                    newString = timeAsString.concat('', ":00 PM");
+                    } else {
+                        timeAsNumber -= 0.5;
+                        timeAsString = timeAsNumber.toString();
+                        newString = timeAsString.concat('', ":30 PM");
+                    }
+                } 
+                
+                else {
+                    if (timeAsNumber % 1 === 0) {
+                        timeAsString = timeAsNumber.toString();
+                        newString = timeAsString.concat('', ":00 AM");
+                    } else {
+                        timeAsNumber -= 0.5;
+                        timeAsString = timeAsNumber.toString();
+                        newString = timeAsString.concat('', ":30 AM");
+                    }
+                
                 }
 
-                if (numberAsTime < 12) {
-                    timeAsString = numberAsTime.toString();
-                    timeAsString.concat(":00 AM");
-                }
-
-                if (numberAsTime === 12) {
-                    timeAsString = numberAsTime.toString();
-                    timeAsString.concat(":00 PM");
-                }
-
-                return timeAsString;
+                return newString;
             }
 
             function generateArrayOfTimeIncrements(startTime, endTime) {
@@ -374,19 +394,17 @@
 
                 let arrOfTimeIncrements = [];
 
-                let startTimeAsNumber = convertTimeToNumber(startTime);
-                let endTimeAsNumber = convertTimeToNumber(endTime);
+                let currTime = startTime;
+                
+                let currTimeAsString = "";
 
-                let currTimeAsNumber = startTimeAsNumber;
-
-                while (currTimeAsNumber <= endTimeAsNumber) {
-                    let currTimeAsString = 
-                    arrOfTimeIncrements.push();
-                    currTimeAsNumber += 0.5;
+                while (currTime <= endTime) {
+                    currTimeAsString = convertNumberToTime(currTime);
+                    arrOfTimeIncrements.push(currTimeAsString);
+                    currTime += 0.5;
                 }
-                
 
-                
+                return arrOfTimeIncrements;
             }
 
             const startTimeAsNumber = convertTimeToNumber(startTime);
