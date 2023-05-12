@@ -540,8 +540,7 @@
             const startTimeAsNumber = convertTimeToNumber(startTime);
             const endTimeAsNumber = convertTimeToNumber(endTime);
 
-            const differenceBetweenStartAndEndTimes =
-                endTimeAsNumber - startTimeAsNumber;
+            const differenceBetweenStartAndEndTimes = endTimeAsNumber - startTimeAsNumber;
             const numOfRows = differenceBetweenStartAndEndTimes * 4;
 
             for (let i = 0; i < numOfRows; ++i) {
@@ -551,8 +550,11 @@
                     let newCell = newRow.insertCell(j);
                     newCell.classList.add("td");
                 }
+                
+                let th = document.createElement("th");
+                newRow.prepend(th);
+                
             }
-            // commit
         </script>
     </body>
 </html>
