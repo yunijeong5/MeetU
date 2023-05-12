@@ -335,7 +335,7 @@ html[data-bs-theme="dark"] .link:link {
     background-color: #f1f1f1;
     border-radius: 50px;
     margin-top: -4%;
-    margin-left: -10%;
+    /* margin-left: -10%; */
     width: 8.125em;
     white-space: nowrap;
 }
@@ -350,7 +350,7 @@ html[data-bs-theme="dark"] .link:link {
     border-radius: 50px;
     margin-top: -4%;
     width: 8.125em;
-    margin-left: -40%;
+    margin-left: -25%;
     white-space: nowrap;
 }
 

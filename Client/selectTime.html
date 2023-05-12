@@ -96,86 +96,17 @@
                                         <thead>
                                             <tr>
                                                 <th scope="col" class="table-row-header"></th>
-                                                <th scope="col">SUN</th>
-                                                <th scope="col">MON</th>
-                                                <th scope="col">TUE</th>
-                                                <th scope="col">WED</th>
-                                                <th scope="col">THU</th>
-                                                <th scope="col">FRI</th>
-                                                <th scope="col">SAT</th>
+                                                <th scope="col"> SUN </th>
+                                                <th scope="col"> MON </th>
+                                                <th scope="col"> TUE </th>
+                                                <th scope="col"> WED </th>
+                                                <th scope="col"> THU </th>
+                                                <th scope="col"> FRI </th>
+                                                <th scope="col"> SAT </th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th scope="row" class="table-row-header">8:00 AM </th>
-                                                <td class="td"></td>
-                                                <td class="td"></td>
-                                                <td class="td"></td>
-                                                <td class="td"></td>
-                                                <td class="td"></td>
-                                                <td class="td"></td>
-                                                <td class="td"></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row" class="table-row-header">8:30 AM </th>
-                                                <td class="td"></td>
-                                                <td class="td"></td>
-                                                <td class="td"></td>
-                                                <td class="td"></td>
-                                                <td class="td"></td>
-                                                <td class="td"></td>
-                                                <td class="td"></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row" class="table-row-header">9:00 AM </th>
-                                                <td class="td"></td>
-                                                <td class="td"></td>
-                                                <td class="td"></td>
-                                                <td class="td"></td>
-                                                <td class="td"></td>
-                                                <td class="td"></td>
-                                                <td class="td"></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row" class="table-row-header">9:30 AM </th>
-                                                <td class="td"></td>
-                                                <td class="td"></td>
-                                                <td class="td"></td>
-                                                <td class="td"></td>
-                                                <td class="td"></td>
-                                                <td class="td"></td>
-                                                <td class="td"></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row" class="table-row-header">10:00 AM </th>
-                                                <td class="td"></td>
-                                                <td class="td"></td>
-                                                <td class="td"></td>
-                                                <td class="td"></td>
-                                                <td class="td"></td>
-                                                <td class="td"></td>
-                                                <td class="td"></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row" class="table-row-header">10:30 AM </th>
-                                                <td class="td"></td>
-                                                <td class="td"></td>
-                                                <td class="td"></td>
-                                                <td class="td"></td>
-                                                <td class="td"></td>
-                                                <td class="td"></td>
-                                                <td class="td"></td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row" class="table-row-header">11:00 AM </th>
-                                                <td class="td"></td>
-                                                <td class="td"></td>
-                                                <td class="td"></td>
-                                                <td class="td"></td>
-                                                <td class="td"></td>
-                                                <td class="td"></td>
-                                                <td class="td"></td>
-                                            </tr>
+                                        <tbody id="time-table-body">
+
                                         </tbody>
                                     </table>
 
@@ -202,7 +133,7 @@
                             </div>
                             <div class="row user-time-table">
                                 <div class="col-10 offset-md-1">
-                                    <table class="table user-table">
+                                    <table class="table" id="time-table">
                                         <thead>
                                             <tr>
                                                 <th scope="col" class="table-row-header"></th>
@@ -369,6 +300,110 @@
         <script>
             document.getElementById("meeting-title").innerHTML = JSON.parse(localStorage.getItem("serializedRes"))["title"];
             document.getElementById("meeting-desc").innerHTML = '\"' + JSON.parse(localStorage.getItem("serializedRes"))["description"] + '\"';
+            let timeTableBody = document.getElementById("time-table-body");
+
+            // generate rows
+            const startTime = JSON.parse(localStorage.getItem("serializedRes"))["time"][0];
+            const endTime = JSON.parse(localStorage.getItem("serializedRes"))["time"][1];
+
+            function convertTimeToNumber(timeString) {
+                const indexOfIncrement = timeString.indexOf(":");
+                const firstLetterOfIncrement = indexOfIncrement + 1;
+                const secondLetterOfIncrement = indexOfIncrement + 3;
+                
+                const increment = Number(timeString.slice(firstLetterOfIncrement, secondLetterOfIncrement));
+                const beforeAfterMidDay = timeString.slice(-2).toUpperCase();
+
+                let hour = Number(timeString.slice(0, indexOfIncrement));
+
+                if (beforeAfterMidDay === "PM" && hour !== 12) {
+                    hour += 12;
+                }
+
+                let computedTime;
+                
+                if (increment === 0) {
+                    computedTime = hour;
+                }
+
+                if (increment === 30) {
+                    computedTime = hour + 0.5;
+                }
+
+                return computedTime;
+            }
+
+            function convertNumberToTime(numberAsTime) {
+                if (numberAsTime < 0 || numberAsTime > 23.5) {
+                    console.log("Time must be valid");
+                    return null;
+                }
+
+                let timeAsString = "";
+
+                if (numberAsTime > 12 && numberAsTime !== 12) {
+                    numberAsTime -= 12;
+
+                    timeAsString = numberAsTime.toString();
+                    timeAsString.concat(":00 PM");
+                }
+
+                if (numberAsTime < 12) {
+                    timeAsString = numberAsTime.toString();
+                    timeAsString.concat(":00 AM");
+                }
+
+                if (numberAsTime === 12) {
+                    timeAsString = numberAsTime.toString();
+                    timeAsString.concat(":00 PM");
+                }
+
+                return timeAsString;
+            }
+
+            function generateArrayOfTimeIncrements(startTime, endTime) {
+                if (startTime === endTime) {
+                    console.log("Time must be greater than zero.");
+                    return null;
+                }
+
+                if (startTime > endTime) {
+                    console.log("Choose an end time that is greater than the start time");
+                    return null;
+                }
+
+                let arrOfTimeIncrements = [];
+
+                let startTimeAsNumber = convertTimeToNumber(startTime);
+                let endTimeAsNumber = convertTimeToNumber(endTime);
+
+                let currTimeAsNumber = startTimeAsNumber;
+
+                while (currTimeAsNumber <= endTimeAsNumber) {
+                    let currTimeAsString = 
+                    arrOfTimeIncrements.push();
+                    currTimeAsNumber += 0.5;
+                }
+                
+
+                
+            }
+
+            const startTimeAsNumber = convertTimeToNumber(startTime);
+            const endTimeAsNumber = convertTimeToNumber(endTime);
+
+            const differenceBetweenStartAndEndTimes = endTimeAsNumber - startTimeAsNumber;
+            const numOfRows = differenceBetweenStartAndEndTimes * 4;
+
+            for (let i = 0; i < numOfRows; ++i) {
+                let newRow = timeTableBody.insertRow(i);
+
+                for (let j = 0; j < 7; ++j) {
+                    let newCell = newRow.insertCell(j);
+                    newCell.classList.add("td");
+                }
+            }
+
         </script>
     </body>
 
