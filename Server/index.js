@@ -7,20 +7,15 @@ import { fileURLToPath } from "url";
 import { dirname } from "path";
 import bodyParser from "body-parser";
 import path from "path";
+import { UserDB } from './database.js';
+
 
 // We will use __dirname later on to send files back to the client.
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(dirname(__filename));
 
 // Create the Express app
-const app = express();
-const port = process.env.PORT || 4444;
-
-// Set up the view engine
-app.set("view engine", "ejs");
-
-// Add body parser middleware
-app.use(bodyParser.urlencoded({ extended: true }));
+// const app = express();
 
 // Session configuration
 const sessionConfig = {
@@ -30,18 +25,7 @@ const sessionConfig = {
     saveUninitialized: false,
 };
 
-// Setup the session middleware
-app.use(expressSession(sessionConfig));
-// Allow JSON inputs
-app.use(express.json());
-// Allow URLencoded data
-app.use(express.urlencoded({ extended: true }));
-// Allow static file serving
-app.use(express.static(path.join(__dirname, "Client")));
-app.use("/style", express.static(path.join(__dirname, "Client", "style")));
 
-// Configure our authentication strategy
-auth.configure(app);
 
 // Our own middleware to check if the user is authenticated
 function checkLoggedIn(req, res, next) {
@@ -54,102 +38,129 @@ function checkLoggedIn(req, res, next) {
     }
 }
 
-app.get("/", checkLoggedIn, (req, res) => {
-    res.send("hello world");
-});
 
-// Handle the URL /login (just output the login.html file).
-app.get("/login", (req, res) =>
-    res.sendFile("Client/LoginCred/login.html", { root: __dirname })
-);
+const UserRoutes = (app, db) => {
 
-// Handle post data from the login.html form.
-app.post("/login", (req, res, next) => {
-    auth.authenticate("local", (err, user) => {
-        if (err)
-            // error, pass it next middleware.
-            return next(err);
-        if (!user)
-            // no user, then redirect
-            return res.redirect("/login?error=Invalid username or password");
-        req.login(user, (err) => {
-            if (err) return next(err);
-            // Redirect to the private page.
-            return res.redirect("/private");
-        });
-    })(req, res, next);
-});
+    // Set up the view engine
+    app.set("view engine", "ejs");
+    // Add body parser middleware
+    app.use(bodyParser.urlencoded({ extended: true }));
+    // Setup the session middleware
+    app.use(expressSession(sessionConfig));
+    // Allow JSON inputs
+    app.use(express.json());
+    // Allow URLencoded data
+    app.use(express.urlencoded({ extended: true }));
+    // Allow static file serving
+    app.use(express.static(path.join(__dirname, "Client")));
+    app.use("/style", express.static(path.join(__dirname, "Client", "style")));
 
-// Handle logging out (takes us back to the login page).
-app.get("/logout", (req, res) => {
-    req.logout();
-    res.redirect("/login");
-});
+    // Configure our authentication strategy
+    auth.configure(app);
 
-// Like login, but add a new user and password IFF one doesn't exist already.
-// If we successfully add a new user, go to /login, else, back to /register.
-// Use req.body to access data (as in, req.body['username']).
-// Use res.redirect to change URLs.
-app.post("/register", (req, res) => {
-    const { username, password, retypePass } = req.body;
-    if (!username || !password || !retypePass) {
-        res.redirect("/register?error=Username and password is required");
-        return;
-    }
-    if (password !== retypePass) {
-        res.redirect("/register?error=Passwords do not match");
-        return;
-    }
-    if (users.addUser(username, password)) {
-        // redirect to a private dashboard
-        req.login(username, (err) => {
-            if (err) {
-                res.redirect("/login");
-            } else {
-                res.redirect("/private/" + username);
-            }
-        });
-    } else {
-        res.redirect("/register?error=Username already exists");
-    }
-});
 
-// Register URL
-app.get("/register", (req, res) =>
-    res.sendFile("Client/LoginCred/register.html", { root: __dirname })
-);
+    // Handle the URL /login (just output the login.html file).
+    app.get("/login", (req, res) =>
+        res.sendFile("Client/LoginCred/login.html", { root: __dirname })
+    );
 
-// Private data
-app.get(
-    "/private",
-    checkLoggedIn, // If we are logged in (notice the comma!)...
-    (req, res) => {
-        // Go to the user's page.
-        res.redirect("/private/" + req.user);
-    }
-);
+    // Handle post data from the login.html form.
+    app.post("/login", (req, res, next) => {
+        auth.authenticate("local", (err, user) => {
+            if (err)
+                // error, pass it next middleware.
+                return next(err);
+            if (!user)
+                // no user, then redirect
+                return res.redirect("/login?error=Invalid username or password");
+            req.login(user, (err) => {
+                if (err) return next(err);
+                // Redirect to the private page.
+                return res.redirect("/private");
+            });
+        })(req, res, next);
+    });
 
-// A dummy page for the user.
+    // Handle logging out (takes us back to the login page).
+    app.get("/logout", (req, res) => {
+        req.logout();
+        res.redirect("/login");
+    });
 
-app.get(
-    "/private/:userID/",
-    checkLoggedIn, // We also protect this route: authenticated...
-    (req, res) => {
-        // Verify this is the right user.
-        if (req.params.userID === req.user) {
-            const username = req.user;
-            res.render("../Client/dashboard", { username });
-        } else {
-            res.redirect("/private/");
+    // Use res.redirect to change URLs.
+    app.post('/register', async (req, res) => {
+        const { username, password, retypePass } = req.body;
+        if (!username || !password || !retypePass) {
+          res.redirect('/register?error=Username and password is required');
+          return;
         }
-    }
-);
 
-app.get("*", (req, res) => {
-    //res.send('Error');
-    res.redirect("/error.html");
-});
+        if (password !== retypePass) {
+            res.redirect('/register?error=Passwords do not match');
+            return;
+        }
 
-app.listen(port, () => {
-    console.log(`Listening on port ${port}`);
-});
+        //get credentials and put inside database:
+        try {
+          const credential = await db.createUser(username, password);
+          req.login(credential, (err) => {
+            if (err) return next(err);
+            return res.redirect('/private');
+          });
+        } 
+        catch (err) {
+          res.redirect('/register?error=User already exists');
+        }
+    });
+
+    // Register URL
+    app.get("/register", (req, res) =>
+        res.sendFile("Client/LoginCred/register.html", { root: __dirname })
+    );
+
+    // Private data
+    app.get(
+        "/private",
+        checkLoggedIn, // If we are logged in (notice the comma!)...
+        (req, res) => {
+            // Go to the user's page.
+            res.redirect("/private/" + req.user);
+        }
+    );
+
+    // A dummy page for the user.
+
+    app.get(
+        "/private/:userID/",
+        checkLoggedIn, // We also protect this route: authenticated...
+        (req, res) => {
+            // Verify this is the right user.
+            if (req.params.userID === req.user) {
+                const username = req.user;
+                res.render("../Client/dashboard", { username });
+            } else {
+                res.redirect("/private/");
+            }
+        }
+    );
+
+    app.get("*", (req, res) => {
+        //res.send('Error');
+        res.redirect("/error.html");
+    });
+
+    return app;
+};
+
+const run = async () =>{
+    const db = UserDB(process.env.DATABASE_URL).connect();
+    const app = UserRoutes(express(), db);
+    const port = process.env.PORT || 4444;
+    app.listen(port, () => {
+        console.log(`Server started on port ${port}`);
+    });
+};
+
+run();
+
+
