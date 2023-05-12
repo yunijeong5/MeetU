@@ -219,7 +219,7 @@ async function createNewEvent(e) {
     localStorage.setItem("serializedRes", JSON.stringify(res));
     window.location.replace("selectTime.html");
 
-    return false;
+    return true;
 }
 
 meetingForm.addEventListener("submit", createNewEvent);
