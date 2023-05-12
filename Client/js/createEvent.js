@@ -218,11 +218,8 @@ async function createNewEvent(e) {
     console.log(res);
     localStorage.setItem("serializedRes", JSON.stringify(res));
     window.location.replace("selectTime.html");
-    
+
     return false;
 }
 
-// TODO: figure out why button doesn't work when event type is submit
-// Eventually we'd like it to be submit, to stop entering invalid events.
-// submitButton.addEventListener("submit", createNewEvent);
 meetingForm.addEventListener("submit", createNewEvent);

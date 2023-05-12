@@ -1,3 +1,35 @@
+// load saved theme
+const storedTheme = localStorage.getItem("theme");
+const icon = document.getElementById("theme-icon");
+console.log("SAVED THEME: ", storedTheme);
+
+const getPreferredTheme = () => {
+    if (storedTheme) {
+        return storedTheme;
+    }
+
+    return window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light";
+};
+
+const setTheme = function (theme) {
+    if (
+        theme === "auto" &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches
+    ) {
+        document.documentElement.setAttribute("data-bs-theme", "dark");
+    } else {
+        document.documentElement.setAttribute("data-bs-theme", theme);
+    }
+
+    getPreferredTheme() === "dark"
+        ? (icon.src = "../assets/misc/moon-svgrepo-com.svg")
+        : (icon.src = "../assets/misc/sun-svgrepo-com.svg");
+};
+
+setTheme(getPreferredTheme());
+
 // Switch theme button functionality
 const htmlDiv = document.querySelector("html");
 const themeButton = document.getElementsByClassName("theme-icon")[0];
@@ -15,25 +47,31 @@ function switchTheme() {
     if (theme == "light") {
         htmlDiv.setAttribute("data-bs-theme", "dark");
         themeButton.src = "../assets/misc/moon-svgrepo-com.svg";
-        calendar.classList.remove("light");
-        calendar.classList.add("dark");
-        pollBox.style.backgroundColor = "#343a40";
-        // addPollButton.style.backgroundColor = "#343a40";
-        datePickerBox.style.backgroundColor = "#343a40";
-        dayPickerBox.style.backgroundColor = "#343a40";
+        if (calendar !== undefined) {
+            calendar.classList.remove("light");
+            calendar.classList.add("dark");
+            pollBox.style.backgroundColor = "#343a40";
+            datePickerBox.style.backgroundColor = "#343a40";
+            dayPickerBox.style.backgroundColor = "#343a40";
+        }
         navBar.style.borderBottom = "1px solid #343a40";
         footer.style.borderTop = "1px solid #343a40";
+        localStorage.setItem("theme", "dark");
+        console.log("saving theme: dark");
     } else {
         htmlDiv.setAttribute("data-bs-theme", "light");
         themeButton.src = "../assets/misc/sun-svgrepo-com.svg";
-        calendar.classList.remove("dark");
-        calendar.classList.add("light");
-        pollBox.style.backgroundColor = "#e9ecef";
-        // addPollButton.style.backgroundColor = "white";
-        datePickerBox.style.backgroundColor = "#e9ecef";
-        dayPickerBox.style.backgroundColor = "#e9ecef";
+        if (calendar !== undefined) {
+            calendar.classList.remove("dark");
+            calendar.classList.add("light");
+            pollBox.style.backgroundColor = "#e9ecef";
+            datePickerBox.style.backgroundColor = "#e9ecef";
+            dayPickerBox.style.backgroundColor = "#e9ecef";
+        }
         navBar.style.borderBottom = "1px solid #e9ecef";
         footer.style.borderTop = "1px solid #e9ecef";
+        localStorage.setItem("theme", "light");
+        console.log("saving theme: light");
     }
 }
 
