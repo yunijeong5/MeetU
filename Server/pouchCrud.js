@@ -57,7 +57,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use("/", express.static("../Client"));
 
 // send data and stuff
-app.post("/create", async (request, response) => {
+app.post("/createEvent", async (request, response) => {
     console.log("app.post /create called\n");
     const eventInfo = request.body;
     console.log(eventInfo);

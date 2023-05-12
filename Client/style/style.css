@@ -334,7 +334,9 @@ html[data-bs-theme="dark"] .link:link {
     border-color: none;
     background-color: #f1f1f1;
     border-radius: 50px;
-    margin-top: -5%;
+    margin-top: -4%;
+    margin-left: -10%;
+    width: 8.125em;
     white-space: nowrap;
 }
 
@@ -346,7 +348,9 @@ html[data-bs-theme="dark"] .link:link {
     border-color: none;
     background-color: #29C5F6;
     border-radius: 50px;
-    margin-top: -5%;
+    margin-top: -4%;
+    width: 8.125em;
+    margin-left: -40%;
     white-space: nowrap;
 }
 
