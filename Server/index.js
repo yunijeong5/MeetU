@@ -145,7 +145,6 @@ const UserRoutes = (app, db) => {
 
     app.post("/createEvent", async (req, res) => {
         const eventJson = req.body;
-        console.log(eventJson);
         const eventID = await db.addEvent(eventJson);
         res.json({ status: "success", eventID });
     });

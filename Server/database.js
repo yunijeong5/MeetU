@@ -1,15 +1,16 @@
 import 'dotenv/config';
 import pg from 'pg';
 const { Client } = pg;
+const { userPG, hostPG, dbPG, pwdPG, portPG } = process.env;
 
 export const UserDB = (dburl) => {
     const client = new Client({
-        user: 'postgres',
-        host: 'localhost',
-        database: 'postgres',
-        password: 'badpwd',
-        port: 5432,
-        ssl: false, // Disable SSL
+        user: userPG,
+        host: hostPG,
+        database: dbPG,
+        password: pwdPG,
+        port: portPG,
+        ssl: false, 
     });
 
     return {
