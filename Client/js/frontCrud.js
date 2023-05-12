@@ -2,7 +2,7 @@
 export async function createNewEvent(jsonString) {
     console.log("frontCrud Called");
     console.log("json from form: ", jsonString);
-    const response = await fetch("/create", {
+    const response = await fetch("/createEvent", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",

@@ -58,7 +58,6 @@ const UserRoutes = (app, db) => {
     // Configure our authentication strategy
     auth.configure(app);
 
-
     // Handle the URL /login (just output the login.html file).
     app.get("/login", (req, res) =>
         res.sendFile("Client/LoginCred/login.html", { root: __dirname })
@@ -144,6 +143,13 @@ const UserRoutes = (app, db) => {
         }
     );
 
+    app.post("/createEvent", async (req, res) => {
+        const eventJson = req.body;
+        const eventID = await db.addEvent(eventJson);
+        res.json({ status: "success" });
+    });
+    
+
     app.get("*", (req, res) => {
         //res.send('Error');
         res.redirect("/error.html");
@@ -153,7 +159,7 @@ const UserRoutes = (app, db) => {
 };
 
 const run = async () =>{
-    const db = UserDB(process.env.DATABASE_URL).connect();
+    const db = await UserDB(process.env.DATABASE_URL).connect();
     const app = UserRoutes(express(), db);
     const port = process.env.PORT || 4444;
     app.listen(port, () => {
