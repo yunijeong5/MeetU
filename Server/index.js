@@ -147,17 +147,19 @@ const UserRoutes = (app, db) => {
         const eventJson = req.body;
         console.log("here" + eventJson);
         //localStorage.setItem(eventJson);
-        console.log(localStorage);
+        //console.log(localStorage);
         const eventID = await db.addEvent(eventJson);
         res.json({ status: "success", eventID });
     });
 
-    app.get("/events/:id", async (req, res) => {
+    // TODO: Finish read event (this one is wrong btw)
+    app.get("/readEvent/:id", async (req, res) => {
         const eventId = req.params.id;
         const event = await db.readEvent(eventId);
         console.log(event);
         res.json({ event });
     });
+
     
     app.get("*", (req, res) => {
         //res.send('Error');
