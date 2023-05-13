@@ -147,7 +147,7 @@ const UserRoutes = (app, db) => {
         const eventJson = req.body;
         console.log("here" + eventJson);
         //localStorage.setItem(eventJson);
-        console.log(localStorage);
+        //console.log(localStorage);
         const eventID = await db.addEvent(eventJson);
         res.json({ status: "success", eventID });
     });

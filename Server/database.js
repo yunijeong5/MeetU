@@ -1,5 +1,6 @@
 import 'dotenv/config';
 import pg from 'pg';
+import {v4 as uuidv4 } from 'uuid';
 const { Client } = pg;
 const { userPG, hostPG, dbPG, pwdPG, portPG } = process.env;
 
@@ -29,11 +30,14 @@ const UserQuery = (client) => {
             const queryTxt = `
                 CREATE TABLE IF NOT EXISTS events (
                     id SERIAL PRIMARY KEY,
-                    event_json JSONB NOT NULL
+                    event_json JSONB NOT NULL, 
+                    mid VARCHAR(50) NOT NULL
                 )
             `;
             await client.query(queryTxt);
-            const { rows } = await client.query(`INSERT INTO events (event_json) VALUES ($1) RETURNING id`, [eventJson]);
+            const mid = uuidv4();
+            //const { rows } = await client.query(`INSERT INTO events (event_json) VALUES ($1) RETURNING id`, [eventJson], mid);
+            const { rows } = await client.query(`INSERT INTO events (event_json, mid) VALUES ($1, $2) RETURNING id`, [eventJson, mid]);
             return rows[0].id;
         },
 
@@ -64,7 +68,7 @@ const UserQuery = (client) => {
             const queryText = `
             SELECT * FROM users WHERE username = $1 AND password = $2;`;
             const res = await client.query(queryText, [username, password]);
-            return res.rows[0]; 
+            return res.rows[0];
         },
     };
   };
