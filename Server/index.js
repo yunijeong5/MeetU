@@ -78,15 +78,17 @@ const UserRoutes = (app, db) => {
 
     // route to private username of the createEvent page
     app.get("/private/:userID/createEvent", async (req, res) => {
+        const eventJson = req.body;
         const user = await db.getUser(req.params.userID);
         if (!user) return res.redirect("/login");
-        res.render("../Client/createEvent", { user });
+        const event = await db.addEvent(eventJson);
+        res.render("../Client/createEvent", { event });
     });
 
     // route to private username of the selectTime page
     app.get("/private/:userID/selectTime", async (req, res) => {
         const user = await db.getUser(req.params.userID);
-        if (!user) return res.redirectselectTime("/login");
+        if (!user) return res.redirect("/login");
         res.render("../Client/selectTime", { user });
     });
 
