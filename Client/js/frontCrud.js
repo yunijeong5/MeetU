@@ -1,6 +1,6 @@
 // send jsonString to server
 export async function createNewEvent(jsonString) {
-    console.log("frontCrud Called");
+    console.log("frontCrud Called; createnewevent");
     console.log("json from form: ", jsonString);
     const response = await fetch("/createEvent", {
         method: "POST",
@@ -17,4 +17,9 @@ export async function createNewEvent(jsonString) {
 
     const data = await response.json();
     return data;
+}
+
+export async function readEvent(){
+    console.log("frontCrud called; readEvent");
+
 }
