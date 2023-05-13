@@ -26,7 +26,7 @@
         <link rel="stylesheet" href="/style/style.css" />
 
         <!-- JS script -->
-        <script src="dashboard.js" defer></script>
+        <!-- <script src="dashboard.js"type="module" defer></script> -->
         <script src="/js/colorTheme.js" defer></script>
 
         <title>MeetU Mockup: Create New Event</title>
@@ -128,7 +128,9 @@
                 </div> -->
 
                 <!-- Have button pop out when hover, redirect to /createEvent endpoint -->
-                <a href="/createEvent.html">
+                <!-- <a href="/private/<%= user.username %>/createEvent.html"> -->
+                <!-- <a href="/createEvent.html"> -->
+                <a href="/private/<%= user.username %>/createEvent">
                     <div
                         class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 m-2 p-3 add-meeting-btn"
                     >

@@ -56,12 +56,12 @@ const UserRoutes = (app, db) => {
             const user = await db.getUser(username);
             if (user.password === password) {
                 req.session.username = username;
-                return res.redirect("/private/" + req.session.username);
-            } 
+                return res.redirect("/private/" + req.session.username + "/dashboard");
+            }
             else {
                 return res.redirect("/login?error=Invalid login");
             }
-        } 
+        }
         catch (err) {
             return res.redirect("/login?error=Invalid login");
         }
@@ -73,19 +73,32 @@ const UserRoutes = (app, db) => {
         res.redirect("/login");
     });
 
-    app.get("/private/:userID", async (req, res) => {
+    app.get("/private/:userID/dashboard", async (req, res) => {
         const user = await db.getUser(req.params.userID);
-        if (!user)
-            return res.redirect("/login");
+        if (!user) return res.redirect("/login");
         res.render("../Client/dashboard", { user });
+    });
+
+    // route to private username of the createEvent page
+    app.get("/private/:userID/createEvent", async (req, res) => {
+        const user = await db.getUser(req.params.userID);
+        if (!user) return res.redirect("/login");
+        res.render("../Client/createEvent", { user });
+    });
+
+    // route to private username of the selectTime page
+    app.get("/private/:userID/selectTime", async (req, res) => {
+        const user = await db.getUser(req.params.userID);
+        if (!user) return res.redirectselectTime("/login");
+        res.render("../Client/selectTime", { user });
     });
 
     // Use res.redirect to change URLs.
     app.post('/register', async (req, res) => {
         const { username, password, retypePass } = req.body;
         if (!username || !password || !retypePass) {
-          res.redirect('/register?error=Username and password is required');
-          return;
+            res.redirect('/register?error=Username and password is required');
+            return;
         }
 
         if (password !== retypePass) {
@@ -95,7 +108,7 @@ const UserRoutes = (app, db) => {
 
         // checks if the user exists in database
         const user = await db.getUser(username);
-        if(user)
+        if (user)
             return res.redirect("/login?error=User exists already");
         // creates new user and store in pg database
         const createUser = await db.createUser(username, password);
@@ -108,24 +121,20 @@ const UserRoutes = (app, db) => {
         res.sendFile("Client/LoginCred/register.html", { root: __dirname })
     );
 
-    app.get("/private/:userID", async (req, res) => {
-        const user = await db.getUser(req.params.userID);
-        if (!user)
-            return res.redirect("/login");
-        res.render("../Client/dashboard", { user });
-    });
-    
+
+
 
     return app;
 };
 
-const run = async () =>{
+const run = async () => {
     const db = await UserDB(process.env.DATABASE_URL).connect();
     const app = UserRoutes(express(), db);
     const port = process.env.PORT || 4444;
     app.listen(port, () => {
         console.log(`Server started on port ${port}`);
     });
+
 };
 
 run();
