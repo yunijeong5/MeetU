@@ -19,7 +19,11 @@ export async function createNewEvent(jsonString) {
     return data;
 }
 
-export async function readEvent(){
-    console.log("frontCrud called; readEvent");
 
+export async function readEvent(id) {
+    const response = await fetch(`/readEvent/read?id=${id}`, {
+        method: 'GET',
+    });
+    const data = await response.json();
+    return data;
 }

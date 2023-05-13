@@ -52,6 +52,7 @@ const UserQuery = (client) => {
             );`;
             await client.query(queryText);
         },
+        
         createUser: async (username, password) => {
             const queryText = `
             INSERT INTO users (username, password) VALUES ($1, $2) RETURNING *;
