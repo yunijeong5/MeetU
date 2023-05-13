@@ -130,12 +130,14 @@
                 <!-- Have button pop out when hover, redirect to /createEvent endpoint -->
                 <!-- <a href="/private/<%= user.username %>/createEvent.html"> -->
                 <!-- <a href="/createEvent.html"> -->
-                <a href="/private/<%= user.username %>/createEvent">
-                    <div
-                        class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 m-2 p-3 add-meeting-btn"
+                <a
+                    class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 m-2 p-3 add-meeting-btn"
+                    href="/private/<%= user.username %>/createEvent"
+                    style="cursor: pointer; display: block"
+                >
+                    <span class="meeting-title" style="display: block"
+                        >➕ Create New Event</span
                     >
-                        <span class="meeting-title">➕ Create New Event</span>
-                    </div>
                 </a>
             </div>
             <!-- </div> -->
