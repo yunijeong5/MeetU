@@ -109,11 +109,11 @@ const UserRoutes = (app, db) => {
         // checks if the user exists in database
         const user = await db.getUser(username);
         if (user)
-            return res.redirect("/login?error=User exists already");
+            return res.redirect("/register?error=User exists already");
         // creates new user and store in pg database
         const createUser = await db.createUser(username, password);
         req.session.username = createUser.username;
-        return res.redirect("/private/" + createUser.username);
+        return res.redirect("/private/" + createUser.username + "/dashboard");
     });
 
     // Register URL
