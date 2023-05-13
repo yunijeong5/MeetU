@@ -59,11 +59,11 @@ const UserQuery = (client) => {
             const queryText = `
             INSERT INTO users (username, password) VALUES ($1, $2) RETURNING *;
             `;
-                const res = await client.query(queryText, [username, password]);
-                return res.rows[0];
+            const res = await client.query(queryText, [username, password]);
+            return res.rows[0];
         },
 
-        readUserPwd: async (username, password) => {
+        getUser: async (username) => {
             const initText = `
             CREATE TABLE IF NOT EXISTS users (
                 id SERIAL PRIMARY KEY,
@@ -71,10 +71,10 @@ const UserQuery = (client) => {
                 password VARCHAR(255) NOT NULL
             );`;
             await client.query(initText);
-            const queryText = `
-            SELECT * FROM users WHERE username = $1 AND password = $2;`;
-            const res = await client.query(queryText, [username, password]);
-            return res.rows[0];
+            const queryText = `SELECT * FROM users WHERE username = $1;`;
+            const res = await client.query(queryText, [username]);
+            // checks if the username is not found
+            return res.rows.length > 0 ? res.rows[0] : null;
         },
     };
   };
