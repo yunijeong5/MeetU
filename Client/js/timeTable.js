@@ -118,17 +118,20 @@ document.getElementById("meeting-desc").innerHTML = '"' + JSON.parse(localStorag
 
 // Steps to generate the table
 // Get the body of the table
+let timeTableHeaders = document.getElementById("time-table-headers");
 let timeTableBody = document.getElementById("time-table-body");
 
 // Get the start time provided by the user from the Create Event user interface
 const startTime = JSON.parse(localStorage.getItem("serializedRes"))["time"][0];
 const endTime = JSON.parse(localStorage.getItem("serializedRes"))["time"][1];
+const dates = JSON.parse(localStorage.getItem("serializedRes"))["dates"];
+const weekDays = getWeekDays(dates);
 
 // Generating an array of half-hour time increments from the start time to the end time, both provided
 // by the user from the Create Event user interface
 // Example: generateArrayOfTimeIncrements("10:00AM", "2:00PM")
 // -> ["10:00 AM", "10:30 AM", "11:00 AM", "11:30 AM", "12:00 PM", "12:30 PM", "1:00 PM", "1:30 PM", "2:00 PM"];
-const times = generateArrayOfTimeIncrements(startTime, endTime)
+const times = generateArrayOfTimeIncrements(startTime, endTime, dates);
 
 // Converting the start and end times provided by the user in the Create Event user interface to
 // decimal numbers to be used
@@ -142,7 +145,26 @@ const endTimeAsNumber = convertTimeToNumber(endTime);
 
 // Getting the difference between the start and end times to generate the number of rows
 // Each hour should have four rows to account for 15 minute increments.
-const differenceBetweenStartAndEndTimes = Math.abs(endTimeAsNumber - startTimeAsNumber);
+let differenceBetweenStartAndEndTimes = 0;
+
+if (endTimeAsNumber > startTimeAsNumber) {
+    differenceBetweenStartAndEndTimes = Math.abs(endTimeAsNumber - startTimeAsNumber);
+}
+
+if (endTimeAsNumber <= startTimeAsNumber) {
+    differenceBetweenStartAndEndTimes = Math.abs(24 - startTimeAsNumber) + Math.abs(endTimeAsNumber);
+}
+
+const numOfHeaders = weekDays.length;
+
+for (let i = 0; i < numOfHeaders; ++i) {
+    let th = document.createElement("th");
+    newRow.append(th);
+    th.setAttribute("scope", "col");
+    th.classList.add(`col-${i}`);
+    th.innerHTML = ` ${weekdays[i]} `;
+}
+
 const numOfRows = differenceBetweenStartAndEndTimes * 4;
 
 // defining a count variable to be used to write the innerHTML of each table row's table header
@@ -157,9 +179,10 @@ for (let i = 0; i < numOfRows; ++i) {
 
     // For each row, cells are inserted which represent the dates and times 
     // chosen by the user in the Create Event user interface
-    for (let j = 0; j < 7; ++j) {
+    for (let j = 0; j < weekDays.length; ++j) {
         let newCell = newRow.insertCell(j);
         newCell.classList.add("td");
+        // newCell.setAttribute("id", ``)
     }
     
     let th = document.createElement("th");
