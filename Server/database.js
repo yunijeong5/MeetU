@@ -48,7 +48,8 @@ const UserQuery = (client) => {
         getUser: async (username) => {
             const queryText = `SELECT * FROM users WHERE username = $1;`;
             const res = await client.query(queryText, [username]);
-            return res.rows[0];
+            // checks if the username is not found
+            return res.rows.length > 0 ? res.rows[0] : null;
         },
     };
   };

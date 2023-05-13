@@ -73,6 +73,13 @@ const UserRoutes = (app, db) => {
         res.redirect("/login");
     });
 
+    app.get("/private/:userID", async (req, res) => {
+        const user = await db.getUser(req.params.userID);
+        if (!user)
+            return res.redirect("/login");
+        res.render("../Client/dashboard", { user });
+    });
+
     // Use res.redirect to change URLs.
     app.post('/register', async (req, res) => {
         const { username, password, retypePass } = req.body;
@@ -86,26 +93,20 @@ const UserRoutes = (app, db) => {
             return;
         }
 
-        //get credentials and put inside database:
-        try {
-          const credential = await db.createUser(username, password);
-          req.login(credential, (err) => {
-            if (err) return next(err);
-            return res.redirect("/private/" + req.session.username);
-        });
-        } 
-        catch (err) {
-          res.redirect('/register?error=User already exists');
-        }
+        // checks if the user exists in database
+        const user = await db.getUser(username);
+        if(user)
+            return res.redirect("/login?error=User exists already");
+        // creates new user and store in pg database
+        const createUser = await db.createUser(username, password);
+        req.session.username = createUser.username;
+        return res.redirect("/private/" + createUser.username);
     });
 
     // Register URL
     app.get("/register", (req, res) =>
         res.sendFile("Client/LoginCred/register.html", { root: __dirname })
     );
-
-
-   //  res.render("../Client/dashboard.html", {user});
 
     app.get("/private/:userID", async (req, res) => {
         const user = await db.getUser(req.params.userID);
