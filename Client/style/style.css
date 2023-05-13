@@ -148,7 +148,7 @@ h2 {
 
 #create-event-btn:hover {
     color: white;
-    background-color: rgb(13, 110, 253);
+    background-color: #0d6efd;
 }
 
 .day-btn {
@@ -243,7 +243,7 @@ a:hover {
     width: auto;
     font-size: 1.5rem;
     font-weight: 600;
-    background-color: #007bff;
+    background-color: #0d6efd;
     color: #fff;
     cursor: pointer;
     transition: background-color 0.2s;
@@ -251,16 +251,59 @@ a:hover {
 
 .first-btn:hover {
     background-color: white;
-    color: #007bff;
+    color: #0d6efd;
 }
 
 /* ************************************** */
-/*    HOME and ABOUT     */
+/*    SELECT TIME AND POLL      */
 /* ************************************** */
 
 .poll-option {
     background-color: white;
     border-radius: 10px;
+}
+
+.copy-url {
+    color: #29c5f6;
+    cursor: pointer;
+    transition: color 0.1s;
+}
+
+.copy-url:hover {
+    color: #0d6efd;
+    text-decoration: underline;
+}
+
+.share-event-header {
+    font-weight: 600;
+}
+
+.copy-url-button {
+    border-color: none;
+    background-color: #f1f1f1;
+    border-radius: 50px;
+    margin-top: -4%;
+    /* margin-left: -10%; */
+    width: 8.125em;
+    white-space: nowrap;
+}
+
+.copy-url-button:hover {
+    background-color: #cdcdcd;
+}
+
+.send-email-button {
+    border-color: none;
+    background-color: #29c5f6;
+    border-radius: 50px;
+    margin-top: -4%;
+    width: 8.125em;
+    margin-left: -25%;
+    white-space: nowrap;
+}
+
+.send-email-button:hover {
+    background-color: #1facd7;
 }
 
 /* ************************************** */
@@ -318,42 +361,4 @@ html[data-bs-theme="dark"] .link:link {
     margin: 0 auto;
     padding: 50px 0;
     text-align: center;
-}
-
-/* ************************************** */
-/*    SELECT TIME AND POLL     */
-/* ************************************** */
-
-/* Share header, copy url button, send email button */
-
-.share-event-header {
-    font-weight: 600;
-}
-
-.copy-url-button {
-    border-color: none;
-    background-color: #f1f1f1;
-    border-radius: 50px;
-    margin-top: -4%;
-    /* margin-left: -10%; */
-    width: 8.125em;
-    white-space: nowrap;
-}
-
-.copy-url-button:hover {
-    background-color: #cdcdcd;
-}
-
-.send-email-button {
-    border-color: none;
-    background-color: #29c5f6;
-    border-radius: 50px;
-    margin-top: -4%;
-    width: 8.125em;
-    margin-left: -25%;
-    white-space: nowrap;
-}
-
-.send-email-button:hover {
-    background-color: #1facd7;
 }
