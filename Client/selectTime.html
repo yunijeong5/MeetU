@@ -156,10 +156,7 @@
                                     <table class="table user-table">
                                         <thead>
                                             <tr>
-                                                <th
-                                                    scope="col"
-                                                    class="table-row-header"
-                                                ></th>
+                                                <th scope="col"></th>
                                                 <th scope="col">SUN</th>
                                                 <th scope="col">MON</th>
                                                 <th scope="col">TUE</th>
@@ -174,7 +171,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-6 group-availability p-3">
+                        <!-- <div class="col-6 group-availability p-3">
                             <div class="row group-availability-header">
                                 <div class="col-5 offset-md-2">
                                     <h2>Group's Availability</h2>
@@ -184,26 +181,23 @@
                                 <div
                                     class="col-10 offset-md-2 num-available-bar"
                                 ></div>
-                            </div>
-                            <div
+                            </div> -->
+                            <!-- <div
                                 class="row d-inline-flex flex-row num-available justify-content-between"
                             >
-                                <div class="col-3">
+                                <!-- <div class="col-3">
                                     <p>0/1 people available</p>
                                 </div>
                                 <div class="col-3">
                                     <p>1/1 people available</p>
                                 </div>
-                            </div>
-                            <div class="row user-time-table">
+                            </div> -->
+                            <!-- <div class="row user-time-table">
                                 <div class="col-10 offset-md-1">
                                     <table class="table" id="time-table">
                                         <thead>
                                             <tr>
-                                                <th
-                                                    scope="col"
-                                                    class="table-row-header"
-                                                ></th>
+                                                <th scope="col"></th>
                                                 <th scope="col">SUN</th>
                                                 <th scope="col">MON</th>
                                                 <th scope="col">TUE</th>
@@ -322,8 +316,8 @@
                                         </tbody>
                                     </table>
                                 </div>
-                            </div>
-                        </div>
+                            </div> -->
+                        <!-- </div> -->
                     </div>
 
                     <!-- Poll summaries and stuff-->
@@ -384,7 +378,7 @@
                 </div>
                 <div class="row justify-content-center">
                     <div
-                        class="col-2 mb-3 d-inline-flex text-secondary footer-copyright"
+                        class="col-3 mb-3 d-inline-flex text-secondary footer-copyright"
                     >
                         © MeetU
                     </div>
@@ -539,11 +533,15 @@
                 return arrOfTimeIncrements;
             }
 
+            const times = generateArrayOfTimeIncrements(startTime, endTime)
+
             const startTimeAsNumber = convertTimeToNumber(startTime);
             const endTimeAsNumber = convertTimeToNumber(endTime);
 
             const differenceBetweenStartAndEndTimes = endTimeAsNumber - startTimeAsNumber;
             const numOfRows = differenceBetweenStartAndEndTimes * 4;
+
+            let count = 0;
 
             for (let i = 0; i < numOfRows; ++i) {
                 let newRow = timeTableBody.insertRow(i);
@@ -555,7 +553,14 @@
                 
                 let th = document.createElement("th");
                 newRow.prepend(th);
-                
+                th.setAttribute("scope", "row");
+                th.classList.add(`row-${i}`);
+
+                // populate table with times
+                if (i % 2 === 0) {
+                    th.innerHTML = times[count];
+                    count += 1;
+                }
             }
         </script>
     </body>
