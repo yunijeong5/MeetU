@@ -1,3 +1,5 @@
+export { calculateDiffBtwnTwoDates, getWeekDays }
+
 function calculateDiffBtwnTwoDates(date1, date2) {
     
     function convertDateToString(date) {
@@ -66,20 +68,6 @@ function calculateDiffBtwnTwoDates(date1, date2) {
     let dayDiff = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
 
     return dayDiff;
-}
-
-
-// example of time array "time":["0:00 AM","5:00 AM"],
-function handleTableCases(startTime, endTime, chosenDates) {
-    let diffDays = findDiffInDatesArray(chosenDates);
-    let consecutive = diffDays.every(difference => difference < 2);
-    
-    let weekDayNames = getWeekDays(chosenDates); 
-
-    // Case #1
-    if (endTime > startTime) {
-
-    }
 }
 
 function getWeekDays(chosenDates) {

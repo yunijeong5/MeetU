@@ -1,3 +1,5 @@
+import { calculateDiffBtwnTwoDates, getWeekDays } from './weekdays';
+
 // convertTimeToNumber(timeString)
 function convertTimeToNumber(timeString) {
     const indexOfIncrement = timeString.indexOf(":");
@@ -160,5 +162,18 @@ for (let i = 0; i < numOfRows; ++i) {
     if (i % 2 === 0) {
         th.innerHTML = times[count];
         count += 1;
+    }
+}
+
+// example of time array "time":["0:00 AM","5:00 AM"],
+function handleTableCases(startTime, endTime, chosenDates) {
+    let diffDays = findDiffInDatesArray(chosenDates);
+    let consecutive = diffDays.every(difference => difference < 2);
+    
+    let weekDayNames = getWeekDays(chosenDates); 
+
+    // Case #1
+    if (endTime > startTime) {
+
     }
 }
