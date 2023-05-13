@@ -1,4 +1,4 @@
-export { calculateDiffBtwnTwoDates, getWeekDays }
+export { calculateDiffBtwnTwoDates, findDiffInDatesArray, getWeekDays }
 
 function calculateDiffBtwnTwoDates(date1, date2) {
     
@@ -70,34 +70,34 @@ function calculateDiffBtwnTwoDates(date1, date2) {
     return dayDiff;
 }
 
-function getWeekDays(chosenDates) {
-
-    function findDiffInDatesArray(dates) {
-        // Generating the differences between each date.
-        if (dates.length < 1) {
-            return [];
-        }
-    
-        if (dates.length < 2) {
-            return [0];
-        }
-    
-        let i = 0;
-        let j = 1;
-    
-        let arrayOfDifferencesInDays = [];
-        let difference = 0;
-    
-        while (j < dates.length) {
-            difference = calculateDiffBtwnTwoDates(dates[j], dates[i]);
-            arrayOfDifferencesInDays.push(difference);
-    
-            ++i;
-            ++j;
-        }
-    
-        return arrayOfDifferencesInDays;
+function findDiffInDatesArray(dates) {
+    // Generating the differences between each date.
+    if (dates.length < 1) {
+        return [];
     }
+
+    if (dates.length < 2) {
+        return [0];
+    }
+
+    let i = 0;
+    let j = 1;
+
+    let arrayOfDifferencesInDays = [];
+    let difference = 0;
+
+    while (j < dates.length) {
+        difference = calculateDiffBtwnTwoDates(dates[j], dates[i]);
+        arrayOfDifferencesInDays.push(difference);
+
+        ++i;
+        ++j;
+    }
+
+    return arrayOfDifferencesInDays;
+}
+
+function getWeekDays(chosenDates) {
     
     function convertNumToWeekDay(num) {
         if (num < 0 || num > 7) {

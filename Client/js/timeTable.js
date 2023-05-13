@@ -72,34 +72,43 @@ function convertNumberToTime(timeAsNumber) {
 }
 
 // generateArrayOfTimeIncrements
-function generateArrayOfTimeIncrements(startTimeString, endTimeString) { 
-    // (num, num)
-    // if (startTime === endTime) {
-    //     console.log("Time must be greater than zero.");
-    //     return null;
-    // }
-
-    // if (startTime > endTime) {
-    //     console.log("Choose an end time that is greater than the start time");
-    //     return null;
-    // }
+function generateArrayOfTimeIncrements(startTimeString, endTimeString, dates) { 
+    let diffInDays = findDiffInDatesArray(dates);
+    let weekDays = getWeekDays(dates);
 
     let startTimeNumber = convertTimeToNumber(startTimeString);
     let endTimeNumber = convertTimeToNumber(endTimeString);
 
     let arrOfTimeIncrements = [];
 
-    let currTimeNumber = startTimeNumber;
+    let currTimeNumber;
 
     let currTimeAsString = "";
 
-    while (currTimeNumber <= endTimeNumber) {
-        currTimeAsString = convertNumberToTime(currTimeNumber);
-        arrOfTimeIncrements.push(currTimeAsString);
-        currTimeNumber += 0.5;
+    // Test Case #1
+    let daysAndTimes = {};
+    
+    if (startTimeNumber < endTimeNumber) {
+        currTimeNumber = startTimeNumber;
+
+        while (currTimeNumber <= endTimeNumber) {
+            currTimeAsString = convertNumberToTime(currTimeNumber);
+            arrOfTimeIncrements.push(currTimeAsString);
+            currTimeNumber += 0.5;
+        }
+
+        for (let i = 0; i < weekDays.length; ++i) {
+            daysAndTimes[weekDays[i]] = [...arrOfTimeIncrements]; 
+        }
     }
 
-    return arrOfTimeIncrements;
+    // Test Case #2
+    if (startTimeNumber >= endTimeNumber) {
+        let beginning = startNumber;
+        
+    }
+
+    return daysAndTimes;
 }
 
 // Populate Title and Description Fields with information provided by user from the Create Event user interface.
