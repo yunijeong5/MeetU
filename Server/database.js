@@ -42,8 +42,8 @@ const UserQuery = (client) => {
             const queryText = `
             INSERT INTO users (username, password) VALUES ($1, $2) RETURNING *;
             `;
-                const res = await client.query(queryText, [username, password]);
-                return res.rows[0];
+            const res = await client.query(queryText, [username, password]);
+            return res.rows[0];
         },
 
         getUser: async (username) => {
