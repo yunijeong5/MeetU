@@ -255,6 +255,15 @@ a:hover {
 }
 
 /* ************************************** */
+/*    HOME and ABOUT     */
+/* ************************************** */
+
+.poll-option {
+    background-color: white;
+    border-radius: 10px;
+}
+
+/* ************************************** */
 /*    FOOTER     */
 /* ************************************** */
 /* #footer {
@@ -311,15 +320,6 @@ html[data-bs-theme="dark"] .link:link {
     text-align: center;
 }
 
-
-
-
-
-
-
-
-
-
 /* ************************************** */
 /*    SELECT TIME AND POLL     */
 /* ************************************** */
@@ -327,7 +327,7 @@ html[data-bs-theme="dark"] .link:link {
 /* Share header, copy url button, send email button */
 
 .share-event-header {
-    font-weight: 600;    
+    font-weight: 600;
 }
 
 .copy-url-button {
@@ -346,7 +346,7 @@ html[data-bs-theme="dark"] .link:link {
 
 .send-email-button {
     border-color: none;
-    background-color: #29C5F6;
+    background-color: #29c5f6;
     border-radius: 50px;
     margin-top: -4%;
     width: 8.125em;
