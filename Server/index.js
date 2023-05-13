@@ -6,9 +6,8 @@ import { fileURLToPath } from "url";
 import { dirname } from "path";
 import bodyParser from "body-parser";
 import path from "path";
-import { UserDB } from './database.js';
-import passport from 'passport';
-
+import { UserDB } from "./database.js";
+import passport from "passport";
 
 // We will use __dirname later on to send files back to the client.
 const __filename = fileURLToPath(import.meta.url);
@@ -25,9 +24,7 @@ const sessionConfig = {
     saveUninitialized: false,
 };
 
-
 const UserRoutes = (app, db) => {
-
     // Set up the view engine
     app.set("view engine", "ejs");
     // Add body parser middleware
@@ -56,13 +53,13 @@ const UserRoutes = (app, db) => {
             const user = await db.getUser(username);
             if (user.password === password) {
                 req.session.username = username;
-                return res.redirect("/private/" + req.session.username + "/dashboard");
-            }
-            else {
+                return res.redirect(
+                    "/private/" + req.session.username + "/dashboard"
+                );
+            } else {
                 return res.redirect("/login?error=Invalid login");
             }
-        }
-        catch (err) {
+        } catch (err) {
             return res.redirect("/login?error=Invalid login");
         }
     });
@@ -94,22 +91,21 @@ const UserRoutes = (app, db) => {
     });
 
     // Use res.redirect to change URLs.
-    app.post('/register', async (req, res) => {
+    app.post("/register", async (req, res) => {
         const { username, password, retypePass } = req.body;
         if (!username || !password || !retypePass) {
-            res.redirect('/register?error=Username and password is required');
+            res.redirect("/register?error=Username and password is required");
             return;
         }
 
         if (password !== retypePass) {
-            res.redirect('/register?error=Passwords do not match');
+            res.redirect("/register?error=Passwords do not match");
             return;
         }
 
         // checks if the user exists in database
         const user = await db.getUser(username);
-        if (user)
-            return res.redirect("/register?error=User exists already");
+        if (user) return res.redirect("/register?error=User exists already");
         // creates new user and store in pg database
         const createUser = await db.createUser(username, password);
         req.session.username = createUser.username;
@@ -121,9 +117,6 @@ const UserRoutes = (app, db) => {
         res.sendFile("Client/LoginCred/register.html", { root: __dirname })
     );
 
-
-
-
     return app;
 };
 
@@ -134,9 +127,6 @@ const run = async () => {
     app.listen(port, () => {
         console.log(`Server started on port ${port}`);
     });
-
 };
 
 run();
-
-
