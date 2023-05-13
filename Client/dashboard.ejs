@@ -56,8 +56,7 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <!--  nav component: -->
-
-                <a class="profile">Welcome <%= username %>!</a>
+                <a class="profile">Welcome <%= user.username %>!</a>
 
                 <ul
                     class="navbar-nav ms-auto me-3 d-lg-flex align-items-center"
@@ -76,7 +75,7 @@
                     </li>
 
                     <!-- change the features once logged in -->
-                    <% if (typeof username !== 'undefined') { %>
+                    <% if (typeof user.username !== 'undefined') { %>
                     <li class="nav-item nav-sign-in text-center h-100">
                         <a class="nav-link text-white" href="/logout">
                             Sign Out

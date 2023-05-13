@@ -10,39 +10,18 @@ const { Strategy } = passportLocal;
 // authenticate a user using a username and password.
 
 const strategy = new Strategy(async (username, password, done) => {
-  const db = await UserDB(process.env.DATABASE_URL).connect();
 
-  try {
-    const user = await db.readUserPwd(username, password);
-    if (!user) { // user doesn't exist
-      return done(null, false, { message: 'Wrong username or password' });
-    } //exists
-    return done(null, user);
-  } 
-  catch (err) {
-    return done(err);
-  }
+  // try {
+  //   const user = await db.readUserPwd(username, password);
+  //   if (!user) { // user doesn't exist
+  //     return done(null, false, { message: 'Wrong username or password' });
+  //   } //exists
+  //   return done(null, user);
+  // } 
+  // catch (err) {
+  //   return done(err);
+  // }
 });
-
-
-// const strategy = new Strategy(async (username, password, done) => {
-
-
-//   if (!users.findUser(username)) {
-//     // no such user
-//     return done(null, false, { message: 'Wrong username' });
-//   }
-//   if (!users.validatePassword(username, password)) {
-//     // invalid password
-//     // should disable logins after N messages
-//     // delay return to rate-limit brute-force attacks
-//     await new Promise((r) => setTimeout(r, 2000)); // two second delay
-//     return done(null, false, { message: 'Wrong password' });
-//   }
-//   // success!
-//   // should create a user object here, associated with a unique identifier
-//   return done(null, username);
-// });
 
 // Configure passport to use the LocalStrategy object.
 // The LocalStrategy object is used to authenticate a user using a username and
