@@ -1,60 +1,63 @@
-function convertDateToString(date) {
-    let month = date[0];
-    let day = date[1];
-    let year = date[2];
-
-    let monthAsString = "0";
-
-    switch (month) {
-        case "January":
-            monthAsString = "1";
-            break;
-        case "February":
-            monthAsString = "2";
-            break;
-        case "March":
-            monthAsString = "3";
-            break;
-        case "April":
-            monthAsString = "4";
-            break;
-        case "May":
-            monthAsString = "5";
-            break;
-        case "June":
-            monthAsString = "6";
-            break;
-        case "July":
-            monthAsString = "7";
-            break;
-        case "August":
-            monthAsString = "8";
-            break;
-        case "September":
-            monthAsString = "9";
-            break;
-        case "October":
-            monthAsString = "10";
-            break;
-        case "November":
-            monthAsString = "11";
-            break;
-        case "December":
-            monthAsString = "12";
-            break;
-        default:
-            console.log(`Sorry - ${month} is not a month!`);
-    }
-
-    let dayAsString = day.toString();
-    let yearAsString = year.toString();
-
-    let dateAsString = `${monthAsString}/${dayAsString}/${yearAsString}`;
-
-    return dateAsString;
-}
+export { calculateDiffBtwnTwoDates, getWeekDays }
 
 function calculateDiffBtwnTwoDates(date1, date2) {
+    
+    function convertDateToString(date) {
+        let month = date[0];
+        let day = date[1];
+        let year = date[2];
+    
+        let monthAsString = "0";
+    
+        switch (month) {
+            case "January":
+                monthAsString = "1";
+                break;
+            case "February":
+                monthAsString = "2";
+                break;
+            case "March":
+                monthAsString = "3";
+                break;
+            case "April":
+                monthAsString = "4";
+                break;
+            case "May":
+                monthAsString = "5";
+                break;
+            case "June":
+                monthAsString = "6";
+                break;
+            case "July":
+                monthAsString = "7";
+                break;
+            case "August":
+                monthAsString = "8";
+                break;
+            case "September":
+                monthAsString = "9";
+                break;
+            case "October":
+                monthAsString = "10";
+                break;
+            case "November":
+                monthAsString = "11";
+                break;
+            case "December":
+                monthAsString = "12";
+                break;
+            default:
+                console.log(`Sorry - ${month} is not a month!`);
+        }
+    
+        let dayAsString = day.toString();
+        let yearAsString = year.toString();
+    
+        let dateAsString = `${monthAsString}/${dayAsString}/${yearAsString}`;
+    
+        return dateAsString;
+    }
+    
     let date1AsString = convertDateToString(date1);
     let date2AsString = convertDateToString(date2);
 
@@ -67,48 +70,34 @@ function calculateDiffBtwnTwoDates(date1, date2) {
     return dayDiff;
 }
 
-function findDiffInDatesArray(dates) {
-    // Generating the differences between each date.
-    if (dates.length < 1) {
-        return [];
-    }
-
-    if (dates.length < 2) {
-        return [0];
-    }
-
-    let i = 0;
-    let j = 1;
-
-    let arrayOfDifferencesInDays = [];
-    let difference = 0;
-
-    while (j < dates.length) {
-        difference = calculateDiffBtwnTwoDates(dates[j], dates[i]);
-        arrayOfDifferencesInDays.push(difference);
-
-        ++i;
-        ++j;
-    }
-
-    return arrayOfDifferencesInDays;
-}
-
-
-// example of time array "time":["0:00 AM","5:00 AM"],
-function handleTableCases(startTime, endTime, chosenDates) {
-    let diffDays = findDiffInDatesArray(chosenDates);
-    let consecutive = diffDays.every(difference => difference < 2);
-    
-    let weekDayNames = getWeekDays(chosenDates); 
-
-    // Case #1
-    if (endTime > startTime) {
-        
-    }
-}
-
 function getWeekDays(chosenDates) {
+
+    function findDiffInDatesArray(dates) {
+        // Generating the differences between each date.
+        if (dates.length < 1) {
+            return [];
+        }
+    
+        if (dates.length < 2) {
+            return [0];
+        }
+    
+        let i = 0;
+        let j = 1;
+    
+        let arrayOfDifferencesInDays = [];
+        let difference = 0;
+    
+        while (j < dates.length) {
+            difference = calculateDiffBtwnTwoDates(dates[j], dates[i]);
+            arrayOfDifferencesInDays.push(difference);
+    
+            ++i;
+            ++j;
+        }
+    
+        return arrayOfDifferencesInDays;
+    }
     
     function convertNumToWeekDay(num) {
         if (num < 0 || num > 7) {
@@ -162,7 +151,3 @@ function getWeekDays(chosenDates) {
 
     return weekDayNames;
 }
-
-let testCaseOne = [ ["May", 9, 2023], ["May", 10, 2023], ["May", 11, 2023], ["May", 12, 2023] ];
-let returnVal = getWeekDays(testCaseOne);
-console.log(returnVal);
