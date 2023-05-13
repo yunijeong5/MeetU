@@ -64,6 +64,13 @@ const UserRoutes = (app, db) => {
         }
     });
 
+    app.post("/createEvent", async (req, res) => {
+        const eventJson = req.body;
+        const eventID = await db.addEvent(eventJson);
+        res.json({ status: "success", eventID });
+    });
+
+
     // Handle logging out (takes us back to the login page).
     app.get("/logout", (req, res) => {
         req.logout();
@@ -78,11 +85,11 @@ const UserRoutes = (app, db) => {
 
     // route to private username of the createEvent page
     app.get("/private/:userID/createEvent", async (req, res) => {
-        const eventJson = req.body;
         const user = await db.getUser(req.params.userID);
         if (!user) return res.redirect("/login");
-        const event = await db.addEvent(eventJson);
-        res.render("../Client/createEvent", { event });
+        res.render("../Client/createEvent", { user });
+        const eventJson = req.body;
+
     });
 
     // route to private username of the selectTime page
