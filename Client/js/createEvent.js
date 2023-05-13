@@ -217,7 +217,7 @@ async function createNewEvent(e) {
     const res = await crud.createNewEvent(eventJSON);
     console.log(res);
     localStorage.setItem("serializedRes", JSON.stringify(res));
-    window.location.replace("selectTime.html");
+    window.location.replace("selectTime");
 
     return true;
 }

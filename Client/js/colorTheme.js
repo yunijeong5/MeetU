@@ -24,8 +24,8 @@ const setTheme = function (theme) {
     }
 
     getPreferredTheme() === "dark"
-        ? (icon.src = "../assets/misc/moon-svgrepo-com.svg")
-        : (icon.src = "../assets/misc/sun-svgrepo-com.svg");
+        ? (icon.src = "/assets/misc/moon-svgrepo-com.svg")
+        : (icon.src = "/assets/misc/sun-svgrepo-com.svg");
 };
 
 setTheme(getPreferredTheme());
@@ -46,7 +46,7 @@ function switchTheme() {
     const theme = htmlDiv.getAttribute("data-bs-theme");
     if (theme == "light") {
         htmlDiv.setAttribute("data-bs-theme", "dark");
-        themeButton.src = "../assets/misc/moon-svgrepo-com.svg";
+        themeButton.src = "/assets/misc/moon-svgrepo-com.svg";
         if (calendar !== undefined) {
             calendar.classList.remove("light");
             calendar.classList.add("dark");
@@ -60,7 +60,7 @@ function switchTheme() {
         console.log("saving theme: dark");
     } else {
         htmlDiv.setAttribute("data-bs-theme", "light");
-        themeButton.src = "../assets/misc/sun-svgrepo-com.svg";
+        themeButton.src = "/assets/misc/sun-svgrepo-com.svg";
         if (calendar !== undefined) {
             calendar.classList.remove("dark");
             calendar.classList.add("light");
