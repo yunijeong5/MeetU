@@ -39,6 +39,13 @@ const UserQuery = (client) => {
         },
         
         createUser: async (username, password) => {
+            const initText = `
+            CREATE TABLE IF NOT EXISTS users (
+                id SERIAL PRIMARY KEY,
+                username VARCHAR(30) UNIQUE NOT NULL,
+                password VARCHAR(255) NOT NULL
+            );`;
+            await client.query(initText);
             const queryText = `
             INSERT INTO users (username, password) VALUES ($1, $2) RETURNING *;
             `;
@@ -47,6 +54,13 @@ const UserQuery = (client) => {
         },
 
         getUser: async (username) => {
+            const initText = `
+            CREATE TABLE IF NOT EXISTS users (
+                id SERIAL PRIMARY KEY,
+                username VARCHAR(30) UNIQUE NOT NULL,
+                password VARCHAR(255) NOT NULL
+            );`;
+            await client.query(initText);
             const queryText = `SELECT * FROM users WHERE username = $1;`;
             const res = await client.query(queryText, [username]);
             // checks if the username is not found
