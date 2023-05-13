@@ -11,7 +11,7 @@ export const UserDB = (dburl) => {
         database: dbPG,
         password: pwdPG,
         port: portPG,
-        ssl: false, 
+        ssl: false,
     });
 
     return {
@@ -24,19 +24,29 @@ export const UserDB = (dburl) => {
         },
     };
 };
-
 const UserQuery = (client) => {
     return {
-
-        init: async () => {
-            const queryText = `
-            CREATE TABLE IF NOT EXISTS users (
-                id SERIAL PRIMARY KEY,
-                username VARCHAR(30) UNIQUE NOT NULL,
-                password VARCHAR(255) NOT NULL
-            );`;
-            await client.query(queryText);
+        addEvent: async (eventJson) => {
+            const queryTxt = `
+                CREATE TABLE IF NOT EXISTS events (
+                    id SERIAL PRIMARY KEY,
+                    event_json JSONB NOT NULL, 
+                    mid VARCHAR(50) NOT NULL
+                )
+            `;
+            await client.query(queryTxt);
+            const mid = uuidv4();
+            //const { rows } = await client.query(`INSERT INTO events (event_json) VALUES ($1) RETURNING id`, [eventJson], mid);
+            const { rows } = await client.query(`INSERT INTO events (event_json, mid) VALUES ($1, $2) RETURNING id`, [eventJson, mid]);
+            return rows[0].id;
         },
+
+        readEvent: async (id) => {
+            const { rows } = await client.query(`SELECT * FROM events WHERE id = $1`, [id]);
+            return rows[0];
+        },
+
+        // TODO: FIX user credentials
         
         createUser: async (username, password) => {
             const initText = `
@@ -49,11 +59,11 @@ const UserQuery = (client) => {
             const queryText = `
             INSERT INTO users (username, password) VALUES ($1, $2) RETURNING *;
             `;
-            const res = await client.query(queryText, [username, password]);
-            return res.rows[0];
+                const res = await client.query(queryText, [username, password]);
+                return res.rows[0];
         },
 
-        getUser: async (username) => {
+        readUserPwd: async (username, password) => {
             const initText = `
             CREATE TABLE IF NOT EXISTS users (
                 id SERIAL PRIMARY KEY,
@@ -61,12 +71,10 @@ const UserQuery = (client) => {
                 password VARCHAR(255) NOT NULL
             );`;
             await client.query(initText);
-            const queryText = `SELECT * FROM users WHERE username = $1;`;
-            const res = await client.query(queryText, [username]);
-            // checks if the username is not found
-            return res.rows.length > 0 ? res.rows[0] : null;
+            const queryText = `
+            SELECT * FROM users WHERE username = $1 AND password = $2;`;
+            const res = await client.query(queryText, [username, password]);
+            return res.rows[0];
         },
     };
   };
-
-  
