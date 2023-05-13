@@ -509,29 +509,31 @@
                 return newString;
             }
 
-            function generateArrayOfTimeIncrements(startTime, endTime) {
-                if (startTime === endTime) {
-                    console.log("Time must be greater than zero.");
-                    return null;
-                }
+            function generateArrayOfTimeIncrements(startTimeString, endTimeString) { 
+                // (num, num)
+                // if (startTime === endTime) {
+                //     console.log("Time must be greater than zero.");
+                //     return null;
+                // }
 
-                if (startTime > endTime) {
-                    console.log(
-                        "Choose an end time that is greater than the start time"
-                    );
-                    return null;
-                }
+                // if (startTime > endTime) {
+                //     console.log("Choose an end time that is greater than the start time");
+                //     return null;
+                // }
+
+                let startTimeNumber = convertTimeToNumber(startTimeString);
+                let endTimeNumber = convertTimeToNumber(endTimeString);
 
                 let arrOfTimeIncrements = [];
 
-                let currTime = startTime;
-
+                let currTimeNumber = startTimeNumber;
+    
                 let currTimeAsString = "";
 
-                while (currTime <= endTime) {
-                    currTimeAsString = convertNumberToTime(currTime);
+                while (currTimeNumber <= endTimeNumber) {
+                    currTimeAsString = convertNumberToTime(currTimeNumber);
                     arrOfTimeIncrements.push(currTimeAsString);
-                    currTime += 0.5;
+                    currTimeNumber += 0.5;
                 }
 
                 return arrOfTimeIncrements;
