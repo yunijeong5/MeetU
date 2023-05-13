@@ -22,3 +22,6 @@ function switchTheme() {
 }
 
 themeButton.addEventListener("click", switchTheme);
+const welcomeMessage = document.getElementById("lmfao");
+const username = welcomeMessage.textContent.replace("Welcome ", "").replace("!", "");
+console.log(username);
