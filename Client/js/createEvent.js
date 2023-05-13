@@ -215,11 +215,7 @@ async function createNewEvent(e) {
     // window.location.replace
 
     const res = await crud.createNewEvent(eventJSON);
-    console.log(res);
-    localStorage.setItem("serializedRes", JSON.stringify(res));
     window.location.replace("selectTime");
-
-    return true;
 }
 
 meetingForm.addEventListener("submit", createNewEvent);

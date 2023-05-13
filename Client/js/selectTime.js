@@ -23,6 +23,16 @@ const makeOptionVotes = (poll, userVotes) => {
     return optionVotes;
 };
 
+async function loadMeetingJSON() {
+    // fetch meeting data from db
+    return {};
+}
+
+async function loadUserMeetingJSON() {
+    // fetch user meeting data from db, associated with this event
+    return {};
+}
+
 function renderPoll() {
     // get poll data from backend
     // const mockMeeting['poll'] = {json}
@@ -114,3 +124,17 @@ copyURL.addEventListener("click", () => {
 });
 
 // Summary
+async function renderSummary() {
+    // const meeting = await loadMeetingJSON();
+    // const userMeeting = await loadUserMeetingJSON();
+
+    // mock data
+    const userVotes = {
+        Nhi: ["option 1", "option 2"],
+        Yuni: ["option 3"],
+        James: ["option 1"],
+        Kush: ["option 2"],
+    };
+
+    // choose best option
+}
