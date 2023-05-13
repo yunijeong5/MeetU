@@ -362,3 +362,17 @@ html[data-bs-theme="dark"] .link:link {
     padding: 50px 0;
     text-align: center;
 }
+
+.button {
+    display: block;
+    width: 200px;
+    margin: 20px auto 0;
+    padding: 10px 20px;
+    font-size: 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
