@@ -36,22 +36,12 @@ const UserQuery = (client) => {
             const mid = uuidv4();
             //const { rows } = await client.query(`INSERT INTO events (event_json) VALUES ($1) RETURNING id`, [eventJson], mid);
             const { rows } = await client.query(`INSERT INTO events (event_json, mid) VALUES ($1, $2) RETURNING id`, [eventJson, mid]);
-            return rows[0].id;
+            return rows[0].mid;
         },
 
         readEvent: async (id) => {
             const { rows } = await client.query(`SELECT * FROM events WHERE id = $1`, [id]);
             return rows[0];
-        },
-        userToMeeting: async (uid, mid) =>{
-            const queryText = 'CREATE TABLE IF NOT EXISTS usertomeeting(' +
-                'id SERIAL PRIMARY KEY,' +
-                'uid VARCHAR(50) NOT NULL,' +
-                'mid VARCHAR(50) NOT NULL);';
-            await client.query(queryText);
-            const init = 'INSERT INTO usertomeeting (uid, mid) VALUES [$1, $2] RETURNING *;';
-            const res = await client.query(init, [uid, mid]);
-            return res.rows[0];
         },
         createUser: async (username, password) => {
             const uid = uuidv4();
@@ -84,5 +74,10 @@ const UserQuery = (client) => {
             // checks if the username is not found
             return res.rows.length > 0 ? res.rows[0] : null;
         },
+        getMID: async (event_json) => {
+            const queryText = 'SELECT * from events WHERE event_json = $1;';
+            const res = await client.query(queryText, [event_json]);
+            return res.rows.length > 0 ? res.rows[0] : null;
+        }
     };
   };

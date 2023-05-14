@@ -42,7 +42,7 @@ const UserRoutes = (app, db) => {
     app.use("/style", express.static(path.join(__dirname, "Client", "style")));
 
     app.get("/", async (req, res) => {
-        isUserLogin = req.session && req.session.username
+        isUserLogin = req.session && req.session.username;
         res.render("../Client/index", { isUserLogin });
     });
 
@@ -96,6 +96,8 @@ const UserRoutes = (app, db) => {
     app.post("/createEvent", async (req, res) => {
         const eventJson = req.body;
         const eventID = await db.addEvent(eventJson);
+        console.log(eventID);
+        //const userToMeeting = await db.userToMeeting(uid, eventID);
         res.json({ status: "success", eventID });
     });
 
@@ -109,7 +111,6 @@ const UserRoutes = (app, db) => {
     app.get("/private/createEvent", async (req, res) => {
         const dbUser = await db.getUser(req.session.username);
         const user = dbUser.username;
-        const uid = dbUser.uid;
         console.log(uid);
         res.render("../Client/createEvent", { user });
     });
