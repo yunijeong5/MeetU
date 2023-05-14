@@ -47,15 +47,17 @@ const UserQuery = (client) => {
         },
         
         createUser: async (username, password) => {
+            const uid = uuidv4();
             const initText = `
             CREATE TABLE IF NOT EXISTS users (
                 id SERIAL PRIMARY KEY,
+                uid VARCHAR(50) UNIQUE NOT NULL,
                 username VARCHAR(30) UNIQUE NOT NULL,
                 password VARCHAR(255) NOT NULL
             );`;
             await client.query(initText);
             const queryText = `
-            INSERT INTO users (username, password) VALUES ($1, $2) RETURNING *;
+            INSERT INTO users (uid, username, password) VALUES (uid, $1, $2) RETURNING *;
             `;
             const res = await client.query(queryText, [username, password]);
             return res.rows[0];
@@ -65,6 +67,7 @@ const UserQuery = (client) => {
             const initText = `
             CREATE TABLE IF NOT EXISTS users (
                 id SERIAL PRIMARY KEY,
+                uid VARCHAR(50) UNIQUE NOT NULL,
                 username VARCHAR(30) UNIQUE NOT NULL,
                 password VARCHAR(255) NOT NULL
             );`;
@@ -73,17 +76,6 @@ const UserQuery = (client) => {
             const res = await client.query(queryText, [username]);
             // checks if the username is not found
             return res.rows.length > 0 ? res.rows[0] : null;
-        },
-        
-        // TODO: get the mid and uid from database to any page on index.js (like selectTime and selectTimePoll)
-        getMID: async (user) => {
-            const { table } = await client.query(`SELECT mid FROM events WHERE id = $1`, [user]);
-            return table[0]?.mid;
-        },
-        
-        getUID: async (user) => {
-            const { table } = await client.query(`SELECT id FROM events WHERE mid = $1`, [user]);
-            return table[0]?.id;
         },
 
     };
