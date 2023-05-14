@@ -49,6 +49,10 @@ h2 {
     font-size: 0.9rem;
 }
 
+.text-black {
+    color: black;
+}
+
 /* ************************************** */
 /*    PROFILE      */
 /* ************************************** */
@@ -300,6 +304,10 @@ tbody tr td:first-child {
     min-width: 4rem;
     max-width: 4rem;
     word-break: break-all;
+}
+
+td {
+    border: #dee2e6 1px solid;
 }
 
 /* ************************************** */

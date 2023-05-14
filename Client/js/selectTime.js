@@ -50,7 +50,6 @@ const makeOptionVotes = (poll, userVotes) => {
 function renderPoll() {
     // get poll data from backend
     // const mockMeeting['poll'] = {json}
-    console.log("renderPoll entered");
     const poll = {
         title: "Hi!",
         options: ["option 1", "option 2", "option 3", "option 4"],
@@ -63,7 +62,7 @@ function renderPoll() {
     // make above into the format below.
     const userVotes = {
         Nhi: ["option 1", "option 2"],
-        Yuni: ["option 3"],
+        Yuni: ["option 3", "option 2"],
         James: ["option 1"],
         Kush: ["option 2"],
     };
@@ -98,7 +97,8 @@ function renderPoll() {
             "poll-option",
             "p-2",
             "my-2",
-            "cursor-pointer"
+            "cursor-pointer",
+            "text-black"
         );
         const numVotes = optionVotes[option].length;
         pollOption.style.background = colorScale[numVotes];
@@ -163,7 +163,7 @@ async function renderSummary() {
     // mock data
     const userVotes = [
         ["option 1", "option 2"],
-        ["option 3"],
+        ["option 3", "option 2"],
         ["option 1"],
         ["option 2"],
     ];
@@ -189,7 +189,6 @@ async function renderSummary() {
     bestOptions.forEach((option) => {
         const op = document.createElement("div");
         op.classList.add("m-1", "best-bubble", "pill-corner");
-
         op.textContent = option;
         bestPollsText.appendChild(op);
     });

@@ -1,7 +1,6 @@
 // load saved theme
 const storedTheme = localStorage.getItem("theme");
 const icon = document.getElementById("theme-icon");
-console.log("SAVED THEME: ", storedTheme);
 
 const getPreferredTheme = () => {
     if (storedTheme) {
@@ -42,7 +41,6 @@ const navBar = document.getElementsByClassName("navbar")[0];
 const footer = document.getElementById("footer");
 
 function switchTheme() {
-    console.log("theme button clicked");
     const theme = htmlDiv.getAttribute("data-bs-theme");
     if (theme == "light") {
         htmlDiv.setAttribute("data-bs-theme", "dark");
@@ -57,7 +55,6 @@ function switchTheme() {
         navBar.style.borderBottom = "1px solid #343a40";
         footer.style.borderTop = "1px solid #343a40";
         localStorage.setItem("theme", "dark");
-        console.log("saving theme: dark");
     } else {
         htmlDiv.setAttribute("data-bs-theme", "light");
         themeButton.src = "/assets/misc/sun-svgrepo-com.svg";
@@ -71,7 +68,6 @@ function switchTheme() {
         navBar.style.borderBottom = "1px solid #e9ecef";
         footer.style.borderTop = "1px solid #e9ecef";
         localStorage.setItem("theme", "light");
-        console.log("saving theme: light");
     }
 }
 

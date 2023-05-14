@@ -127,13 +127,13 @@ let startingTime = "8:00 PM";
 let endingTime = "11:00 PM";
 
 let dates = [
-    ["May", 8, 2023],
-    ["May", 10, 2023],
     ["May", 11, 2023],
     ["May", 12, 2023],
     ["May", 13, 2023],
     ["May", 14, 2023],
     ["May", 15, 2023],
+    ["May", 16, 2023],
+    ["May", 17, 2023],
 ];
 
 // Steps to generate the table
@@ -174,11 +174,10 @@ function renderTable(userTable) {
         th.classList.add("table-header");
         th.classList.add("text-center");
         th.setAttribute("scope", "col");
-        th.textContent = selectedDays[i];
+        th.textContent = selectedDays[i].slice(0, 3).toUpperCase();
 
         const dateString = document.createElement("div");
-        dateString.textContent = dateStrings[i];
-        console.log(dateString);
+        dateString.textContent = dateStrings[i].slice(0, -5);
         th.appendChild(dateString);
     }
 
@@ -202,12 +201,14 @@ function renderTable(userTable) {
 
     let numRows = differenceBetweenStartAndEndTimes * 4;
     let count = 0;
+    const tableType = userTable.id.slice(0, 1);
 
     for (let i = 0; i < numRows + 1; ++i) {
         let newRow = timeTableBody.insertRow();
 
         for (let j = 0; j < selectedDays.length; ++j) {
             let newCell = newRow.insertCell(j);
+            newCell.id = `${tableType}.${i}x${j}`;
             newCell.classList.add("td");
         }
 
