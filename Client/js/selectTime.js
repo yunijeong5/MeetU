@@ -108,6 +108,7 @@ function renderPoll() {
                 // {mid: meetingID, uid: username/userID, value: JSON.stringify({selectedTimes: [...], selectedOptions: [..updated..]})}
             }
             renderPoll(); // to recolor options
+            renderSummary(); // update summary bests
         });
         pollBlock.appendChild(pollOption);
     });
@@ -124,17 +125,55 @@ copyURL.addEventListener("click", () => {
 });
 
 // Summary
+const participants = document.getElementById("participants");
+const bestPollsText = document.getElementById("best-polls");
 async function renderSummary() {
+    // participants
+    // mock data
+    const users = ["Yuni", "Nhi", "James", "Kush"];
+    users.forEach((option) => {
+        const div = document.createElement("div");
+        div.classList.add("m-1", "best-bubble", "pill-corner");
+        div.textContent = option;
+        participants.appendChild(div);
+    });
+
     // const meeting = await loadMeetingJSON();
     // const userMeeting = await loadUserMeetingJSON();
 
     // mock data
-    const userVotes = {
-        Nhi: ["option 1", "option 2"],
-        Yuni: ["option 3"],
-        James: ["option 1"],
-        Kush: ["option 2"],
-    };
+    const userVotes = [
+        ["option 1", "option 2"],
+        ["option 3"],
+        ["option 1"],
+        ["option 2"],
+    ];
 
     // choose best option
+    const optionsFreq = {};
+    for (const arr of userVotes) {
+        arr.forEach((choice) => {
+            if (choice in optionsFreq) {
+                optionsFreq[choice] += 1;
+            } else {
+                optionsFreq[choice] = 1;
+            }
+        });
+    }
+    const maxFreq = Math.max(...Object.values(optionsFreq));
+    let bestOptions = [];
+    for (const [option, freq] of Object.entries(optionsFreq)) {
+        if (freq === maxFreq) {
+            bestOptions.push(option);
+        }
+    }
+    bestOptions.forEach((option) => {
+        const op = document.createElement("div");
+        op.classList.add("m-1", "best-bubble", "pill-corner");
+
+        op.textContent = option;
+        bestPollsText.appendChild(op);
+    });
 }
+
+renderSummary();

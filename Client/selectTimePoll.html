@@ -24,10 +24,9 @@
         <!-- Custom CSS -->
         <link rel="stylesheet" href="./style/style.css" />
         <!-- JS script -->
-        <script src="js/calendar.js" type="module"></script>
-        <script src="js/createEvent.js" type="module" defer></script>
-        <script src="js/colorTheme.js" defer></script>
-        <script src="js/selectTime.js" defer></script>
+        <script src="./js/createEvent.js" type="module" defer></script>
+        <script src="./js/colorTheme.js" defer></script>
+        <script src="./js/selectTime.js" defer></script>
 
         <title>MeetU</title>
     </head>
@@ -139,21 +138,21 @@
                     <div class="row mx-3 mt-3">
                         <div class="col p-1 px-2 round-corner bg-gray">
                             <div class="row m-2 fw-bold">Participants</div>
-                            <div class="row m-2 mb-3" id="participants">
+                            <div class="row m-2 mb-3 justify-content-start" id="participants">
                                
                             </div>
                             <div class="row m-2 fw-bold">
                                 Best Meeting Time(s)
                             </div>
-                            <div class="row m-2 mb-3" id="best-times">
+                            <div class="row m-2 mb-3 justify-content-start" id="best-times">
                                 
                             </div>
                             <div class="row m-2 fw-bold">Best Poll Time(s)</div>
-                            <div class="row m-2 mb-3" id="best-polls">
+                            <div class="row m-2 mb-3 justify-content-start" id="best-polls">
                                 
                             </div>
                             <div class="row m-2 fw-bold">Share Event</div>
-                            <div class="copy-url row m-2" title="Click to copy URL"
+                            <div class="row m-2 ps-1" id="copy-url" title="Click to copy URL"
                             >Copy URL</di
                         >
                         </div>
@@ -179,7 +178,7 @@
                             >Buy us a coffee!</a
                         >
                     </div>
-                    <!-- Google Ad -->
+                    <!-- Google Ad
                     <div class="col-6 footer-advertisement">
                         <amp-ad
                             width="100vw"
@@ -192,7 +191,7 @@
                         >
                             <div overflow=""></div>
                         </amp-ad>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="row justify-content-center">
                     <div
@@ -246,6 +245,6 @@
             crossorigin="anonymous"
         ></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/2.1.0/chroma.min.js"></script>
-        <script src="script.js"></script>
+        
     </body>
 </html>

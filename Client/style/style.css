@@ -263,13 +263,13 @@ a:hover {
     border-radius: 10px;
 }
 
-.copy-url {
+#copy-url {
     color: #29c5f6;
     cursor: pointer;
     transition: color 0.1s;
 }
 
-.copy-url:hover {
+#copy-url:hover {
     color: #0d6efd;
     text-decoration: underline;
 }
@@ -304,6 +304,13 @@ a:hover {
 
 .send-email-button:hover {
     background-color: #1facd7;
+}
+
+.best-bubble {
+    background-color: #29c5f6;
+    color: white;
+    width: fit-content;
+    text-align: center;
 }
 
 /* ************************************** */
