@@ -1,5 +1,9 @@
 import { loadMeetingJSON, loadUserMeetingJSON } from "./loadFromDB.js";
 
+//TODO: remove later... just for testing fetched data
+const result = await loadMeetingJSON();
+console.log(result);
+
 // title and description
 const titleElem = document.getElementById("event-title");
 const descElem = document.getElementById("event-description");

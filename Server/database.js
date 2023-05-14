@@ -37,7 +37,7 @@ const UserQuery = (client) => {
             await client.query(queryTxt);
             const mid = uuidv4();
             const { rows } = await client.query(`INSERT INTO events (event_json, mid, uid) VALUES ($1, $2, $3) RETURNING id`, [eventJson, mid, uid]);
-            return rows[0].mid;
+            return rows[0];
         },
 
         readEvent: async (id) => {
@@ -60,7 +60,6 @@ const UserQuery = (client) => {
             const res = await client.query(queryText, [username, password, uid]);
             return res.rows[0];
         },
-
         getUser: async (username) => {
             const initText = `
             CREATE TABLE IF NOT EXISTS users (

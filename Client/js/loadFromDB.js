@@ -1,12 +1,16 @@
 
 export async function loadMeetingJSON() {
     // fetch meeting data from db
-    // const response = await fetch(`/readEvent?id=${id}`, {
-    const response = await fetch(`/private/selectTime`, {
-        method: 'GET',
-    });
-    const data = await response.json();
-    return {};
+    try{
+        const res = await fetch(`/private/selectTime`, {
+            method: 'GET',
+        });
+        const data = await res.json();
+        return { data };
+    } 
+    catch (err) {
+        return { error: err.message };
+    }
 }
 
 export async function loadUserMeetingJSON() {
