@@ -39,8 +39,21 @@ const UserRoutes = (app, db) => {
     app.use(express.static(path.join(__dirname, "Client")));
     app.use("/style", express.static(path.join(__dirname, "Client", "style")));
 
-    // Configure our authentication strategy
-    // auth.configure(app);
+
+    // gets the meeting ID and user ID as link to redirect
+    app.get("/private/:userID/dashboard", async (req, res) => {
+        const user = await db.getUser(req.params.userID);
+        if (!user) return res.redirect("/login");
+        res.render("../Client/dashboard", { user });
+    });
+
+
+    //TODO: create sharking links 
+    app.get("/:mid/", (req, res) =>{
+        // const mid = await db.getMID(req.params.mid);
+        // const uid = await db.getUID(req.params.uid);
+        // res.sendFile("/login", { root: __dirname })
+    });
 
     // Handle the URL /login (just output the login.html file).
     app.get("/login", (req, res) =>
@@ -87,9 +100,7 @@ const UserRoutes = (app, db) => {
     app.get("/private/:userID/createEvent", async (req, res) => {
         const user = await db.getUser(req.params.userID);
         if (!user) return res.redirect("/login");
-        res.render("../Client/createEvent", { user });
-        const eventJson = req.body;
-
+        res.render("../Client/createEvent", { user });        
     });
 
     // route to private username of the selectTime page
