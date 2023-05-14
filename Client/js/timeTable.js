@@ -178,6 +178,7 @@ function renderTable(userTable) {
 
         const dateString = document.createElement("div");
         dateString.textContent = dateStrings[i];
+        console.log(dateString);
         th.appendChild(dateString);
     }
 
