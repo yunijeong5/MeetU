@@ -5,6 +5,8 @@ import {
     getDateStrings,
 } from "./weekdays.js";
 
+import { loadMeetingJSON, loadUserMeetingJSON } from "./loadFromDB.js";
+
 // convertTimeToNumber(timeString)
 function convertTimeToNumber(timeString) {
     const indexOfIncrement = timeString.indexOf(":");
@@ -211,10 +213,25 @@ function renderTable(userTable) {
             newCell.classList.add("td");
 
             if (tableType === "u") {
-                newCell.addEventListener("mousedown", function () {
+                newCell.addEventListener("mousedown", async function () {
                     this.classList.toggle("highlight");
                     // TODO: send updated data to backend
-                    // send {selectedTimes: ['1x10',....], selectedOptions: ['o1'....], user: username}
+                    // send {selectedTimes: ['1x10',....], selectedOptions: ['o1'....], user: username, mid: meetingID}
+                    const res = await fetch("/sendUserMeeting", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            user: username,
+                            mid: meetingID,
+                            selectedTimes: selectedTimes, // TODO:
+                            selectedOptions: selectedOptions, // TODO:
+                        }),
+                    });
+
+                    // TODO: rerender groups table
+                    // fetch all users' input for this meeting.
                 });
             }
         }
@@ -235,5 +252,3 @@ function renderTable(userTable) {
 
 renderTable(userTable);
 renderTable(groupTable);
-
-// TODO: Link user table and group table.
