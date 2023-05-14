@@ -27,13 +27,11 @@ export const UserDB = (dburl) => {
 const UserQuery = (client) => {
     return {
         addEvent: async (eventJson) => {
-            const queryTxt = `
-                CREATE TABLE IF NOT EXISTS events (
-                    id SERIAL PRIMARY KEY,
-                    event_json JSONB NOT NULL, 
-                    mid VARCHAR(50) NOT NULL
-                );
-            `;
+            const queryTxt = 'CREATE TABLE IF NOT EXISTS events ( ' +
+                'id SERIAL PRIMARY KEY, ' +
+                'event_json JSONB NOT NULL, ' +
+                'mid VARCHAR(50) NOT NULL ' +
+                ');';
             await client.query(queryTxt);
             const mid = uuidv4();
             //const { rows } = await client.query(`INSERT INTO events (event_json) VALUES ($1) RETURNING id`, [eventJson], mid);
@@ -46,12 +44,10 @@ const UserQuery = (client) => {
             return rows[0];
         },
         userToMeeting: async (uid, mid) =>{
-            const queryText = '
-                CREATE TABLE IF NOT EXISTS usertomeeting(
-                    id SERIAL PRIMARY KEY,
-                    uid VARCHAR(50) NOT NULL,
-                    mid VARCHAR(50) NOT NULL
-            );';
+            const queryText = 'CREATE TABLE IF NOT EXISTS usertomeeting(' +
+                'id SERIAL PRIMARY KEY,' +
+                'uid VARCHAR(50) NOT NULL,' +
+                'mid VARCHAR(50) NOT NULL);';
             await client.query(queryText);
             const init = 'INSERT INTO usertomeeting (uid, mid) VALUES [$1, $2] RETURNING *;';
             const res = await client.query(init, [uid, mid]);
@@ -87,15 +83,6 @@ const UserQuery = (client) => {
             const res = await client.query(queryText, [username]);
             // checks if the username is not found
             return res.rows.length > 0 ? res.rows[0] : null;
-        },
-        getMID: async (user) => {
-            const { table } = await client.query(`SELECT mid FROM events WHERE id = $1`, [user]);
-            return table[0]?.mid;
-        },
-
-        getUID: async (user) => {
-            const { table } = await client.query(`SELECT uid FROM events WHERE mid = $1`, [user]);
-            return table[0]?.id;
         },
     };
   };

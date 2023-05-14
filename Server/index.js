@@ -109,6 +109,8 @@ const UserRoutes = (app, db) => {
     app.get("/private/createEvent", async (req, res) => {
         const dbUser = await db.getUser(req.session.username);
         const user = dbUser.username;
+        const uid = db.getUID(user);
+        console.log(uid);
         res.render("../Client/createEvent", { user });
     });
 
@@ -116,6 +118,7 @@ const UserRoutes = (app, db) => {
     app.get("/private/selectTime", async (req, res) => {
         const dbUser = await db.getUser(req.session.username);
         const user = dbUser.username;
+        const uid = dbUser.uid;
         res.render("../Client/selectTime", { user });
     });
 
