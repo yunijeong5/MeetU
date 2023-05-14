@@ -3,6 +3,9 @@ import {
     getWeekDays,
     findDiffInDatesArray,
     getDateStrings,
+    getNextDay,
+    convertMonthIntToName,
+    convertNameOfMonthToInt
 } from "./weekdays.js";
 
 // convertTimeToNumber(timeString)
@@ -79,8 +82,9 @@ function convertNumberToTime(timeAsNumber) {
 }
 
 // generateArrayOfTimeIncrements
+// generateArrayOfTimeIncrements
 function generateArrayOfTimeIncrements(startTimeString, endTimeString, dates) {
-    let diffInDays = findDiffInDatesArray(dates);
+    let differenceInNumberOfDays = findDiffInDatesArray(dates);
     let weekDays = getWeekDays(dates);
 
     let startTimeNumber = convertTimeToNumber(startTimeString);
@@ -91,6 +95,8 @@ function generateArrayOfTimeIncrements(startTimeString, endTimeString, dates) {
     let currTimeNumber;
 
     let currTimeAsString = "";
+
+    let differenceInDaysTracker = 0;
 
     // Test Case #1
     let daysAndTimes = {};
@@ -111,7 +117,64 @@ function generateArrayOfTimeIncrements(startTimeString, endTimeString, dates) {
 
     // Test Case #2
     if (startTimeNumber >= endTimeNumber) {
-        let beginning = startNumber;
+        let currTimeNumber = startTimeNumber;
+        let midnight = 24;
+        let currDay = 0;
+        let nextWeekDay = "";
+
+        while (currTimeNumber <= midnight) {
+            if (currTimeNumber === midnight) {
+                currTimeNumber = 0;
+                
+                currTimeAsString = convertNumberToTime(currTimeNumber);
+                arrOfTimeIncrements.push(currTimeAsString);
+                
+                break;
+            }
+
+            currTimeAsString = convertNumberToTime(currTimeNumber);
+            arrOfTimeIncrements.push(currTimeAsString);
+            currTimeNumber += 0.5;
+        }
+
+        daysAndTimes[weekDays[currDay]] = [...arrOfTimeIncrements];
+        arrOfTimeIncrements = [];
+
+        if (differenceInNumberOfDays[differenceInDaysTracker] > 1 
+            || differenceInNumberOfDays[differenceInDaysTracker] === 0 
+            || differenceInNumberOfDays.length < 1) {
+            // get next day
+            nextWeekDay = getNextDay(weekDays[currDay]);
+
+            let storedDateMonth = dates[0][0];
+            let storedDateMonthAsInt = convertNameOfMonthToInt(storedDateMonth);
+            let storedDateDay = dates[0][1];
+            let storedDateYear = dates[0][2];
+
+            let constructedDate = new Date(storedDateYear, storedDateMonthAsInt, storedDateDay);
+            let newConstructedDate = new Date(constructedDate.setDate(constructedDate.getDate() + 1));
+            console.log(newConstructedDate);
+
+            let nextDateMonth = newConstructedDate.getUTCMonth();
+            let nextDateMonthAsString = convertMonthIntToName(nextDateMonth);
+            
+            let nextDateDay = newConstructedDate.getUTCDate();
+            let nextDateYear = newConstructedDate.getUTCFullYear();
+
+            let storedNextDate = [nextDateMonthAsString, nextDateDay, nextDateYear];
+            
+            dates.push(storedNextDate);
+        }
+
+        // ++currDay;
+
+        while (currTimeNumber <= endTimeNumber) {
+            currTimeAsString = convertNumberToTime(currTimeNumber);
+            arrOfTimeIncrements.push(currTimeAsString);
+            currTimeNumber += 0.5;
+        }
+        
+        daysAndTimes[nextWeekDay] = [...arrOfTimeIncrements];
     }
 
     return daysAndTimes;
@@ -123,18 +186,28 @@ function generateArrayOfTimeIncrements(startTimeString, endTimeString, dates) {
 
 let userTable = document.getElementById("user-table");
 let groupTable = document.getElementById("group-table");
-let startingTime = "8:00 PM";
-let endingTime = "11:00 PM";
+let startingTime = "10:00 PM";
+let endingTime = "2:00 AM";
 
 let dates = [
     ["May", 11, 2023],
-    ["May", 12, 2023],
-    ["May", 13, 2023],
-    ["May", 14, 2023],
-    ["May", 15, 2023],
-    ["May", 16, 2023],
-    ["May", 17, 2023],
+    // ["May", 12, 2023],
+    // ["May", 13, 2023],
+    // ["May", 14, 2023],
+    // ["May", 15, 2023],
+    // ["May", 16, 2023],
+    // ["May", 17, 2023],
 ];
+
+// let dates2 = [
+//     ["May", 11, 2023],
+//     ["May", 12, 2023],
+//     ["May", 13, 2023],
+//     ["May", 14, 2023],
+//     ["May", 15, 2023],
+//     ["May", 16, 2023],
+//     ["May", 17, 2023],
+// ];
 
 // Steps to generate the table
 // Get the body of the table
@@ -145,10 +218,10 @@ function renderTable(userTable) {
         endingTime,
         dates
     );
-    console.log("dayswithtime", daysWithTimes);
+
     let selectedDays = Object.keys(daysWithTimes);
     let selectedTimes = Object.values(daysWithTimes); // is an array of arrays of timeframes [ [ 6:00, 6:30, 7:00 ], []]
-    console.log("HERE", selectedTimes);
+
     let timeTableHead = userTable.createTHead();
     let headRow = timeTableHead.insertRow();
 
@@ -159,7 +232,30 @@ function renderTable(userTable) {
     // const endTime = JSON.parse(localStorage.getItem("serializedRes"))["time"][1];
     // const dates = JSON.parse(localStorage.getItem("serializedRes"))["dates"];
 
+    const startTimeAsNumber = convertTimeToNumber(startingTime);
+    const endTimeAsNumber = convertTimeToNumber(endingTime);
+
+    let differenceBetweenStartAndEndTimes = 0;
+
+    // Case #1
+    if (endTimeAsNumber > startTimeAsNumber) {
+        differenceBetweenStartAndEndTimes = Math.abs(
+            endTimeAsNumber - startTimeAsNumber
+        );
+    }
+
+    // Beginning of Case #2
+    if (endTimeAsNumber <= startTimeAsNumber) {
+        differenceBetweenStartAndEndTimes =
+            Math.abs(24 - startTimeAsNumber) + Math.abs(endTimeAsNumber);
+    }
+
+    let numRows = differenceBetweenStartAndEndTimes * 4;
+
     const dateStrings = getDateStrings(dates);
+
+
+
 
     for (let i = 0; i < selectedDays.length; ++i) {
         if (i === 0) {
@@ -181,26 +277,9 @@ function renderTable(userTable) {
         th.appendChild(dateString);
     }
 
-    const startTimeAsNumber = convertTimeToNumber(startingTime);
-    const endTimeAsNumber = convertTimeToNumber(endingTime);
-
-    let differenceBetweenStartAndEndTimes = 0;
-
-    // Case #1
-    if (endTimeAsNumber > startTimeAsNumber) {
-        differenceBetweenStartAndEndTimes = Math.abs(
-            endTimeAsNumber - startTimeAsNumber
-        );
-    }
-
-    // Beginning of Case #2
-    if (endTimeAsNumber <= startTimeAsNumber) {
-        differenceBetweenStartAndEndTimes =
-            Math.abs(24 - startTimeAsNumber) + Math.abs(endTimeAsNumber);
-    }
-
-    let numRows = differenceBetweenStartAndEndTimes * 4;
     let count = 0;
+    let day = 0;
+
     const tableType = userTable.id.slice(0, 1);
 
     for (let i = 0; i < numRows + 1; ++i) {
@@ -220,8 +299,13 @@ function renderTable(userTable) {
         th.classList.add(`row-${i}`);
 
         if (i % 2 === 0) {
-            th.innerHTML = selectedTimes[0][count]; // change
+            th.innerHTML = selectedTimes[day][count]; // change put more times on the side?
             ++count;
+        }
+
+        if (count === selectedTimes[day].length) {
+            ++day;
+            count = 1;
         }
     }
 }
