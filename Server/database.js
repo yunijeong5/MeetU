@@ -32,7 +32,7 @@ const UserQuery = (client) => {
                     id SERIAL PRIMARY KEY,
                     event_json JSONB NOT NULL, 
                     mid VARCHAR(50) NOT NULL
-                )
+                );
             `;
             await client.query(queryTxt);
             const mid = uuidv4();
@@ -45,7 +45,18 @@ const UserQuery = (client) => {
             const { rows } = await client.query(`SELECT * FROM events WHERE id = $1`, [id]);
             return rows[0];
         },
-        
+        userToMeeting: async (uid, mid) =>{
+            const queryText = '
+                CREATE TABLE IF NOT EXISTS usertomeeting(
+                    id SERIAL PRIMARY KEY,
+                    uid VARCHAR(50) NOT NULL,
+                    mid VARCHAR(50) NOT NULL
+            );';
+            await client.query(queryText);
+            const init = 'INSERT INTO usertomeeting (uid, mid) VALUES [$1, $2] RETURNING *;';
+            const res = await client.query(init, [uid, mid]);
+            return res.rows[0];
+        },
         createUser: async (username, password) => {
             const uid = uuidv4();
             const initText = `
