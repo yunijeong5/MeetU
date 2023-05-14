@@ -77,6 +77,14 @@ const UserQuery = (client) => {
             // checks if the username is not found
             return res.rows.length > 0 ? res.rows[0] : null;
         },
+        getMID: async (user) => {
+            const { table } = await client.query(`SELECT mid FROM events WHERE id = $1`, [user]);
+            return table[0]?.mid;
+        },
 
+        getUID: async (user) => {
+            const { table } = await client.query(`SELECT uid FROM events WHERE mid = $1`, [user]);
+            return table[0]?.id;
+        },
     };
   };
