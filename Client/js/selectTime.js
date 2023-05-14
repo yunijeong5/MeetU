@@ -195,3 +195,7 @@ async function renderSummary() {
 }
 
 renderSummary();
+
+// add event listener to table cells
+const userTable = document.getElementById("user-table");
+const groupTable = document.getElementById("group-table");

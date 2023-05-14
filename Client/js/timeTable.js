@@ -123,6 +123,7 @@ function generateArrayOfTimeIncrements(startTimeString, endTimeString, dates) {
 
 let userTable = document.getElementById("user-table");
 let groupTable = document.getElementById("group-table");
+
 let startingTime = "8:00 PM";
 let endingTime = "11:00 PM";
 
@@ -145,10 +146,8 @@ function renderTable(userTable) {
         endingTime,
         dates
     );
-    console.log("dayswithtime", daysWithTimes);
     let selectedDays = Object.keys(daysWithTimes);
     let selectedTimes = Object.values(daysWithTimes); // is an array of arrays of timeframes [ [ 6:00, 6:30, 7:00 ], []]
-    console.log("HERE", selectedTimes);
     let timeTableHead = userTable.createTHead();
     let headRow = timeTableHead.insertRow();
 
@@ -210,6 +209,14 @@ function renderTable(userTable) {
             let newCell = newRow.insertCell(j);
             newCell.id = `${tableType}.${i}x${j}`;
             newCell.classList.add("td");
+
+            if (tableType === "u") {
+                newCell.addEventListener("mousedown", function () {
+                    this.classList.toggle("highlight");
+                    // TODO: send updated data to backend
+                    // send {selectedTimes: ['1x10',....], selectedOptions: ['o1'....], user: username}
+                });
+            }
         }
 
         // let th = document.createElement("th");
@@ -228,3 +235,5 @@ function renderTable(userTable) {
 
 renderTable(userTable);
 renderTable(groupTable);
+
+// TODO: Link user table and group table.
