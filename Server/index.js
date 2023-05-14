@@ -118,12 +118,7 @@ const UserRoutes = (app, db) => {
     // route to private username of the selectTime page
     app.get("/private/selectTime", async (req, res) => {
         const dbUser = await db.getUser(req.session.username);
-        const dbUser = await db.getUser(req.session.username);
         const user = dbUser.username;
-        const uid = dbUser.uid;
-
-        const meetUser = await db.getMID(e)
-
         const uid = dbUser.uid;
 
         res.render("../Client/selectTime", { user });
