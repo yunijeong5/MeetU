@@ -25,6 +25,8 @@ const sessionConfig = {
 };
 
 const UserRoutes = (app, db) => {
+    //checks if user is logged in
+    let isUserLogin = false;
     // Set up the view engine
     app.set("view engine", "ejs");
     // Add body parser middleware
@@ -39,8 +41,9 @@ const UserRoutes = (app, db) => {
     app.use(express.static(path.join(__dirname, "Client")));
     app.use("/style", express.static(path.join(__dirname, "Client", "style")));
 
-    app.get("/", (req, res) => {
-        res.render("../Client/index");
+    app.get("/", async (req, res) => {
+        isUserLogin = req.session && req.session.username
+        res.render("../Client/index", { isUserLogin });
     });
 
     app.get("/login", async (req, res) => {
@@ -55,18 +58,16 @@ const UserRoutes = (app, db) => {
         res.render("../Client/error");
     });
 
-    // TODO: still broken 
     app.get("/logout", (req, res) => {
         req.session.destroy(() => {
             res.redirect("/");
         });
     });
 
-
     // gets the meeting ID and user ID as link to redirect
-    app.get("/private/:userID/dashboard", async (req, res) => {
-        const user = await db.getUser(req.params.userID);
-        if (!user) return res.redirect("/login");
+    app.get("/private/dashboard", async (req, res) => {
+        const dbUser = await db.getUser(req.session.username);
+        const user = dbUser.username;
         res.render("../Client/dashboard", { user });
     });
 
@@ -83,9 +84,7 @@ const UserRoutes = (app, db) => {
             const user = await db.getUser(username);
             if (user.password === password) {
                 req.session.username = username;
-                return res.redirect(
-                    "/private/" + req.session.username + "/dashboard"
-                );
+                return res.redirect("/private/dashboard");
             } else {
                 return res.redirect("/login?error=Invalid login");
             }
@@ -100,23 +99,23 @@ const UserRoutes = (app, db) => {
         res.json({ status: "success", eventID });
     });
 
-    app.get("/private/:userID/dashboard", async (req, res) => {
-        const user = await db.getUser(req.params.userID);
-        if (!user) return res.redirect("/login");
+    app.get("/private/dashboard", async (req, res) => {
+        const dbUser = await db.getUser(req.session.username);
+        const user = dbUser.username;
         res.render("../Client/dashboard", { user });
     });
 
     // route to private username of the createEvent page
-    app.get("/private/:userID/createEvent", async (req, res) => {
-        const user = await db.getUser(req.params.userID);
-        if (!user) return res.redirect("/login");
+    app.get("/private/createEvent", async (req, res) => {
+        const dbUser = await db.getUser(req.session.username);
+        const user = dbUser.username;
         res.render("../Client/createEvent", { user });
     });
 
     // route to private username of the selectTime page
-    app.get("/private/:userID/selectTime", async (req, res) => {
-        const user = await db.getUser(req.params.userID);
-        if (!user) return res.redirect("/login");
+    app.get("/private/selectTime", async (req, res) => {
+        const dbUser = await db.getUser(req.session.username);
+        const user = dbUser.username;
         res.render("../Client/selectTime", { user });
     });
 
@@ -139,7 +138,7 @@ const UserRoutes = (app, db) => {
         // creates new user and store in pg database
         const createUser = await db.createUser(username, password);
         req.session.username = createUser.username;
-        return res.redirect("/private/" + createUser.username + "/dashboard");
+        return res.redirect("/private/dashboard");
     });
 
     return app;
