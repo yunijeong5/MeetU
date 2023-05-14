@@ -51,15 +51,15 @@ const UserQuery = (client) => {
             const initText = `
             CREATE TABLE IF NOT EXISTS users (
                 id SERIAL PRIMARY KEY,
-                uid VARCHAR(50) UNIQUE NOT NULL,
                 username VARCHAR(30) UNIQUE NOT NULL,
-                password VARCHAR(255) NOT NULL
+                password VARCHAR(255) NOT NULL,
+                uid VARCHAR(50) UNIQUE NOT NULL
             );`;
             await client.query(initText);
             const queryText = `
-            INSERT INTO users (uid, username, password) VALUES (uid, $1, $2) RETURNING *;
+            INSERT INTO users (username, password, uid) VALUES ($1, $2, $3) RETURNING *;
             `;
-            const res = await client.query(queryText, [username, password]);
+            const res = await client.query(queryText, [username, password, uid]);
             return res.rows[0];
         },
 
@@ -67,9 +67,9 @@ const UserQuery = (client) => {
             const initText = `
             CREATE TABLE IF NOT EXISTS users (
                 id SERIAL PRIMARY KEY,
-                uid VARCHAR(50) UNIQUE NOT NULL,
                 username VARCHAR(30) UNIQUE NOT NULL,
-                password VARCHAR(255) NOT NULL
+                password VARCHAR(255) NOT NULL,
+                uid VARCHAR(50) UNIQUE NOT NULL
             );`;
             await client.query(initText);
             const queryText = `SELECT * FROM users WHERE username = $1;`;
