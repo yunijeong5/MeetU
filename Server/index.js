@@ -113,13 +113,15 @@ const UserRoutes = (app, db) => {
         res.render("../Client/createEvent", { user });
     });
 
+    //TODO: might replace this for read event(? for loadfromDB)
     // route to private username of the selectTime page
     app.get("/private/selectTime", async (req, res) => {
         const dbUser = await db.getUser(req.session.username);
-        const user = dbUser.username;
-        const uid = dbUser.uid;
-        res.render("../Client/selectTimePoll", { user });
+        const eventData = db.getMeeting(dbUser.uid);
+        const meetingID = eventData.mid;
+        res.render("../Client/selectTimePoll", { meetingID });
     });
+
 
     // Use res.redirect to change URLs.
     app.post("/register", async (req, res) => {

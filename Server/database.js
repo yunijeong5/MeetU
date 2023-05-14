@@ -75,6 +75,21 @@ const UserQuery = (client) => {
             // checks if the username is not found
             return res.rows.length > 0 ? res.rows[0] : null;
         },
+        getMeeting: async (uid) => {
+            const initText = `
+                CREATE TABLE IF NOT EXISTS events (
+                    id SERIAL PRIMARY KEY,
+                    event_json JSONB NOT NULL,
+                    mid VARCHAR(50) NOT NULL,
+                    uid VARCHAR(50) NOT NULL
+                );
+            `;
+            await client.query(initText);
+            const queryText = `SELECT * FROM events WHERE uid = $1;`;
+            const res = await client.query(queryText, [uid]);
+            return res.rows.length > 0 ? res.rows[0] : null;
+        },
+        //TODO: (?)
         getMID: async (event_json) => {
             const queryText = 'SELECT * from events WHERE event_json = $1;';
             const res = await client.query(queryText, [event_json]);

@@ -1,4 +1,4 @@
-function convertDateToString(date) {
+function convertDateToString(date) { // change?
     let month = date[0];
     let day = date[1];
     let year = date[2];
@@ -48,7 +48,132 @@ function convertDateToString(date) {
 
     let newDate = `${month}/${day}/${year}`;
     return newDate;
+}
 
+function convertMonthIntToName(monthAsInt) {
+    let monthAsName = "";
+
+    switch (monthAsInt) {
+        case 1:
+            monthAsName = "January";
+            break;
+        case 2:
+            monthAsName = "February";
+            break;
+        case 3:
+            monthAsName = "March";
+            break;
+        case 4:
+            monthAsName = "April";
+            break;
+        case 5:
+            monthAsName = "May";
+            break;
+        case 6:
+            monthAsName = "June";
+            break;
+        case 7:
+            monthAsName = "July";
+            break;
+        case 8:
+            monthAsName = "August";
+            break;
+        case 9:
+            monthAsName = "September";
+            break;
+        case 10:
+            monthAsName = "October";
+            break;
+        case 11:
+            monthAsName = "November";
+            break;
+        case 12:
+            monthAsName = "December";
+            break;
+        default:
+            console.log(`Sorry - ${monthAsInt} is not an integer from 1 to 12`);
+    }
+
+    return monthAsName;
+}
+
+function convertNameOfMonthToInt(nameOfMonth) {
+    let monthInt = 0;
+
+    switch (nameOfMonth) {
+        case "January":
+            monthInt = 1;
+            break;
+        case "February":
+            monthInt = 2;
+            break;
+        case "March":
+            monthInt = 3;
+            break;
+        case "April":
+            monthInt = 4;
+            break;
+        case "May":
+            monthInt = 5;
+            break;
+        case "June":
+            monthInt = 6;
+            break;
+        case "July":
+            monthInt = 7;
+            break;
+        case "August":
+            monthInt = 8;
+            break;
+        case "September":
+            monthInt = 9;
+            break;
+        case "October":
+            monthInt = 10;
+            break;
+        case "November":
+            monthInt = 11;
+            break;
+        case "December":
+            monthInt = 12;
+            break;
+        default:
+            console.log(`Sorry - ${monthAsInt} is not an integer from 1 to 12`);
+    }
+
+    return monthInt;
+}
+
+function getNextDay(dayAsString) {
+    let nextDayAsString = "";
+
+    switch (dayAsString) {
+        case "Monday":
+            nextDayAsString = "Tuesday";
+            break;
+        case "Tuesday":
+            nextDayAsString = "Wednesday";
+            break;
+        case "Wednesday":
+            nextDayAsString = "Thursday";
+            break;
+        case "Thursday":
+            nextDayAsString = "Friday";
+            break;
+        case "Friday":
+            nextDayAsString = "Saturday";
+            break;
+        case "Saturday":
+            nextDayAsString = "Sunday";
+            break;
+        case "Sunday":
+            nextDayAsString = "Monday";
+            break;
+        default:
+            console.log(`Sorry - ${dayAsString} is not a weekday`);
+    }
+
+    return nextDayAsString;
 }
 
 function calculateDiffBtwnTwoDates(date1, date2) {
@@ -130,7 +255,6 @@ function convertNumToWeekDay(num) {
     }
 
     return dayName;
-
 }
 
 function getDateStrings(chosenDates) {
@@ -161,4 +285,6 @@ function getWeekDays(chosenDates) {
 
 }
 
-export { findDiffInDatesArray, getWeekDays, calculateDiffBtwnTwoDates, convertNumToWeekDay, getDateStrings }
+export { findDiffInDatesArray, getWeekDays, calculateDiffBtwnTwoDates, 
+    convertNumToWeekDay, getDateStrings, getNextDay, 
+    convertMonthIntToName, convertNameOfMonthToInt }
