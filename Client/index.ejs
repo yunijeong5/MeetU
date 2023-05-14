@@ -21,21 +21,21 @@
             rel="stylesheet"
         />
         <!-- Custom CSS -->
-        <link rel="stylesheet" href="./style/style.css" />
+        <link rel="stylesheet" href="/style/style.css" />
         <!-- JS script -->
 
-        <script src="js/calendar.js" type="module"></script>
-        <script src="js/createEvent.js" type="module" defer></script>
-        <script src="js/colorTheme.js" defer></script>
+        <script src="/js/calendar.js" type="module"></script>
+        <script src="/js/createEvent.js" type="module" defer></script>
+        <script src="/js/colorTheme.js" defer></script>
 
-        <title>MeetU: Error</title>
+        <title>MeetU</title>
     </head>
     <body>
         <!-- Nav Bar -->
         <nav class="navbar-light navbar navbar-expand-sm">
             <a
                 class="navbar-brand navbar-link ms-3"
-                href="./index.html"
+                href="/"
                 id="logo-text"
             >
                 MeetU
@@ -62,16 +62,11 @@
                         <a
                             id="nav-dashboard"
                             class="nav-link"
-                            href="./dashboard.html"
+                            href="error.html"
                             >Dashboard</a
                         >
                     </li>
 
-                    <!-- <li class="nav-item h-100">
-            <a class="nav-link" href="#">
-              <img class="moon-icon" src="./assets/moon-svgrepo-com.svg" />
-            </a>
-          </li> -->
                     <li class="nav-item h-100">
                         <a id="theme-div" class="nav-link" href="#">
                             <img class="theme-icon" id="theme-icon" />
@@ -80,7 +75,7 @@
                     <li class="nav-item nav-sign-in text-center h-100">
                         <a
                             class="nav-link text-white"
-                            href="./LoginCred/login.html"
+                            href="/login"
                         >
                             Sign In
                         </a>
@@ -89,18 +84,74 @@
             </div>
         </nav>
         <!-- Page Content -->
-        <div class="container mt-5 mb-5">
-            <div class="error">
-                <h1>
-                    Error: It seems that you have stumbled on a restricted area.
-                </h1>
-                <br />
-                <h4>
-                    Maybe you weren't logged in.
-                    <a href="./LoginCred/login.html">
-                        <button class="button">Log In to MeetU</button>
-                    </a>
-                </h4>
+        <div class="header-img">
+            <section class="p-4">
+                <div class="row">
+                    <div class="col mt-5 pt-5">
+                        <div class="row text-center">
+                            <h6
+                                class="light-gray-text"
+                                style="font-size: 0.9rem"
+                            >
+                                SCHEDULING MADE EASY
+                            </h6>
+                            <h1 class="white-text" style="font-size: 3rem">
+                                Welcome to MeetU
+                            </h1>
+                        </div>
+                        <div
+                            class="row mt-4 mx-auto d-flex justify-content-center"
+                        >
+                            <div class="col">
+                                <p
+                                    class="light-gray-text mx-auto mb-2"
+                                    style="font-size: 1.1rem; max-width: 50rem"
+                                >
+                                    MeetU is a premier platform that helps you
+                                    handle your team meetings and projects like
+                                    a pro. Easily create and share meeting
+                                    updates, know everyone's preferences, decide
+                                    on a location to meet, and get started on
+                                    your agenda.
+                                </p>
+                            </div>
+                        </div>
+                        <div
+                            class="row text-center mx-auto d-flex justify-content-center"
+                        >
+                            <a
+                                class="first-btn pill-corner p-2 px-4 mt-5"
+                                href="/error">
+                                Create Your Event
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div class="container">
+            <div class="col">
+                <div class="row">
+                    <section class="pt-5">
+                        <h2>About MeetU</h2>
+                        <p>
+                            Created by undergraduate students at UMass Amherst,
+                            MeetU is a platform that helps simplify coordinating
+                            Project Meetings by having a one-stop solution to
+                            all management resources.
+                        </p>
+                        <p>
+                            Create and schedule meetings, know where everyone
+                            prefers to meet, share links, and do it even without
+                            a login if you're only using it one-time.
+                        </p>
+                        <p>
+                            This Web App was created for the Spring 2023 CompSci
+                            326 Class, taught by Prof. Tim Richards.
+                        </p>
+                    </section>
+                </div>
             </div>
         </div>
 
@@ -120,7 +171,7 @@
                             <a class="link" href="#!">Link 3</a>
                         </li>
                     </ul>
-                  </div>
+                  </div>          
                 </div>
             </div> -->
             <!-- Copyright -->

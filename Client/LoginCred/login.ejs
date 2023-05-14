@@ -22,7 +22,7 @@
 <body>
     <!-- Nav Bar -->
     <nav class="navbar-light navbar navbar-expand-sm">
-        <a class="navbar-brand navbar-link ms-3" href="../index.html" id="logo-text">
+        <a class="navbar-brand navbar-link ms-3" href="/" id="logo-text">
             MeetU
         </a>
 
@@ -36,18 +36,18 @@
             <ul class="navbar-nav ms-auto me-3 d-lg-flex align-items-center">
                 <li class="nav-item h-100">
                     <a id="theme-div" class="nav-link" href="#">
-                        <img class="theme-icon" src="../assets/misc/sun-svgrepo-com.svg" />
+                        <img class="theme-icon" id="theme-icon" />
                     </a>
                 </li>
                 <li class="nav-item nav-sign-in text-center h-100">
-                    <a class="nav-link text-white" href="./login.html">
+                    <a class="nav-link text-white" href="/login">
                         Sign In
                     </a>
                 </li>
             </ul>
+        </div>
     </nav>
     <!-- Page Content -->
-    
     <!-- Error.js script doesn't work for some reason, had to add JS script here-->
     <!-- <script src="error.js" defer></script> -->
     <script>
@@ -58,43 +58,44 @@
         }
     </script>
     <div class="cred mt-5">
-            <form id="pop-Login" action="/register" method="post" class="text-center">
-                <h2>Register on MeetU!</h2>
-                <p>Please enter your credentials:</p>
-                <input type="text" name="username" placeholder="Email" class="p-1 px-2 mb-2 id-input" /><br />
-                <input type="password" name="password" placeholder="Password" class="p-1 px-2 mb-2 id-input" /><br />
-                <input type="password" name="retypePass" placeholder="Re-type Password" class="p-1 px-2 mb-4 id-input" /><br />
-                <input id="submit" type="submit" value="Submit" class="mx-auto"></input>
-
-                <div class="row h-100 my-4">
-                    <div class="col-3 separatorLine">
-                        
-                    </div>
-                    <div class="col text-center my-auto orText">
-                        OR                    
-                    </div>
-                    <div class="col-3 separatorLine">
-                        
-                    </div>
-                </div>  
-                <!--Google Auth Login-->
-                <script src="./googleLogin.js" defer></script>
-                <script src="https://accounts.google.com/gsi/client" async defer></script>
-                <body>
-                    <div class="g_id_signin mx-auto" id="g_id_onload" data-context="signin" data-ux_mode="redirect"
-                        data-itp_support="true" data-type="standard" data-shape="pill" data-theme="outline"
-                        data-text="signup_with" data-size="large" data-logo_alignment="left" href="../style/logStyle.css"
-                        onclick="trySampleRequest();"></div>
-                </body>
+        <!-- <script src="./regLogin.js" defer></script> -->
+        <form id="signup-form" action="/login" method="post" class="text-center">
+            <h2>Login on MeetU!</h2>
+            <p>Please enter your credentials:</p>
+            <input type="text" id="username" placeholder="Email" class="p-1 px-2 mb-2 id-input" name="username"/><br />
+            <input type="password" id="password" placeholder="Password" class="p-1 px-2 mb-4 id-input" name="password"/><br />
+            <input type="submit" id="submit" class="mx-auto"></input>
+            <div class="row h-100 my-4">
+                <div class="col-3 separatorLine">
+                    
+                </div>
+                <div class="col text-center my-auto orText">
+                    OR                    
+                </div>
+                <div class="col-3 separatorLine">
+                    
+                </div>
             </div>
+
+            <!--Google Auth Login-->
+            <script src="https://accounts.google.com/gsi/client" async defer></script>
+            <body>
+                <div class="g_id_signin mx-auto" id="g_id_onload" data-context="signin" data-ux_mode="redirect"
+                    data-itp_support="true" data-type="standard" data-shape="pill" data-theme="outline"
+                    data-text="signin_with" data-size="large" data-logo_alignment="left" href="../style/logStyle.css"
+                    onclick="trySampleRequest();"></div>
+            </body>
         </form>
+        <div class="regLink">
+            <p>Don't have an account? <a href="/register">Register <span class="hyperlink">here!</span></a></p>
+        </div>   
     </div>
 
     <!-- Footer -->
     <footer id="footer" class="page-footer">
         <!-- Copyright -->
         <div class="footer-copyright text-center pb-3">
-            <a class="link" href="../index.html">About Us!</a>
+            <a class="link" href="/">About Us!</a>
             <span>|</span>
             <a class="link" href="#!">Support MeetU</a>
             <br />© 2023 Copyright:
