@@ -1,4 +1,4 @@
-import { calculateDiffBtwnTwoDates, getWeekDays } from './weekdays.js';
+import { calculateDiffBtwnTwoDates, getWeekDays, findDiffInDatesArray, getDateStrings } from './weekdays.js';
 
 // convertTimeToNumber(timeString)
 function convertTimeToNumber(timeString) {
@@ -112,14 +112,12 @@ function generateArrayOfTimeIncrements(startTimeString, endTimeString, dates) {
 }
 
 // Populate Title and Description Fields with information provided by user from the Create Event user interface.
-document.getElementById("meeting-title").innerHTML = JSON.parse(localStorage.getItem("serializedRes"))["title"];
-document.getElementById("meeting-desc").innerHTML = '"' + JSON.parse(localStorage.getItem("serializedRes"))["description"] + '"';
+// document.getElementById("meeting-title").innerHTML = JSON.parse(localStorage.getItem("serializedRes"))["title"];
+// document.getElementById("meeting-desc").innerHTML = '"' + JSON.parse(localStorage.getItem("serializedRes"))["description"] + '"';
 
 let userTable = document.getElementById("user-table");
-console.log(userTable);
-
-let startingTime = "6:00 PM";
-let endingTime = "10:00 PM";
+let startingTime = "8:00 PM";
+let endingTime = "11:00 PM";
 
 let dates = [ ["May", 8, 2023], ["May", 10, 2023], ["May", 11, 2023] ];
 
@@ -128,20 +126,22 @@ let dates = [ ["May", 8, 2023], ["May", 10, 2023], ["May", 11, 2023] ];
 // Get the body of the table
 // function generateTimeTable(table, startTime, endTime, dates) { // James - commented out startTime, endTime, and dates to for stubbing
 
-const daysWithTimes = generateArrayOfTimeIncrements(startTime, endTime, dates);
+const daysWithTimes = generateArrayOfTimeIncrements(startingTime, endingTime, dates);
+console.log("dayswithtime", daysWithTimes)
 let selectedDays = Object.keys(daysWithTimes);
-let selectedTimes = Object.values(daysWithTimes); // is an array of arrays of timeframes
-    
-let timeTableHead = table.createTHead();
+let selectedTimes = Object.values(daysWithTimes); // is an array of arrays of timeframes [ [ 6:00, 6:30, 7:00 ], []]
+console.log("HERE", selectedTimes);
+let timeTableHead = userTable.createTHead();
 let headRow = timeTableHead.insertRow();
 
-let timeTableBody = table.createTBody();
+let timeTableBody = userTable.createTBody();
 
     // Get the start time provided by the user from the Create Event user interface
     // const startTime = JSON.parse(localStorage.getItem("serializedRes"))["time"][0];
     // const endTime = JSON.parse(localStorage.getItem("serializedRes"))["time"][1];
     // const dates = JSON.parse(localStorage.getItem("serializedRes"))["dates"];
 
+    const dateStrings = getDateStrings(dates);
 
     for (let i = 0; i < selectedDays.length; ++i) {
 
@@ -154,11 +154,15 @@ let timeTableBody = table.createTBody();
         let th = document.createElement("th");
         headRow.append(th);
         th.setAttribute("scope", "col");
-        th.innerHTML = weekDays[i];
+        th.textContent = selectedDays[i];
+        
+        const dateString = document.createElement('div');
+        dateString.textContent = dateStrings[i];
+        th.appendChild(dateString)
     }
 
-    const startTimeAsNumber = convertTimeToNumber(startTime);
-    const endTimeAsNumber = convertTimeToNumber(endTime);
+    const startTimeAsNumber = convertTimeToNumber(startingTime);
+    const endTimeAsNumber = convertTimeToNumber(endingTime);
 
     let differenceBetweenStartAndEndTimes = 0;
 
@@ -176,7 +180,7 @@ let timeTableBody = table.createTBody();
     let numRows = differenceBetweenStartAndEndTimes * 4;
     let count = 0;
 
-    for (let i = 0; i < numRows; ++i) {
+    for (let i = 0; i < numRows+1; ++i) {
         let newRow = timeTableBody.insertRow();
 
         for (let j = 0; j < selectedDays.length; ++j) {
@@ -184,13 +188,14 @@ let timeTableBody = table.createTBody();
             newCell.classList.add("td");
         }
 
-        let th = document.createElement("th");
+        // let th = document.createElement("th");
+        let th = document.createElement("span");
         newRow.prepend(th);
         th.setAttribute("scope", "row");
         th.classList.add(`row-${i}`);
 
         if (i % 2 === 0) {
-            th.innerHTML = times[count]; // change
+            th.innerHTML = selectedTimes[0][count]; // change
             ++count;
         }
     }
