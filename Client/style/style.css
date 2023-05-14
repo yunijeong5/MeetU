@@ -14,11 +14,6 @@ body {
     padding-bottom: 100px; /* height of the footer */
 }
 
-html,
-body {
-    overflow-x: hidden;
-}
-
 h1 {
     font-weight: 700;
     font-size: 1.8rem;
@@ -164,9 +159,9 @@ h2 {
 /*    DASHBOARD     */
 /* ************************************** */
 .meeting-item {
-    height: 13rem;
-    width: 13rem;
-    background-color: #6c757d;
+    height: 12rem;
+    width: 12rem;
+    background-color: #e9ecef;
     border-radius: 10px;
 }
 

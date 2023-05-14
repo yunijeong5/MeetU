@@ -23,11 +23,11 @@
         />
 
         <!-- Custom CSS -->
-        <link rel="stylesheet" href="/style/style.css" />
+        <link rel="stylesheet" href="./style/style.css" />
 
         <!-- JS script -->
-        <script src="/js/dashboard.js" type="module" defer></script>
-        <script src="/js/colorTheme.js" defer></script>
+        <script src="./js/dashboard.js" type="module" defer></script>
+        <script src="./js/colorTheme.js" defer></script>
 
         <title>MeetU: Dashboard</title>
     </head>
@@ -37,7 +37,7 @@
         <nav class="navbar-light navbar navbar-expand-sm">
             <a
                 class="navbar-brand navbar-link ms-3"
-                href="dashboard"
+                href="./dashboardtest.html"
                 id="logo-text"
                 >MeetU</a
             >
@@ -56,7 +56,7 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <!--  nav component: -->
-                <a class="profile" id="lmfao">Welcome <%= user.username %>!</a>
+                <!-- <a class="profile" id="lmfao">Welcome <%= user.username %>!</a> -->
 
                 <ul
                     class="navbar-nav ms-auto me-3 d-lg-flex align-items-center"
@@ -64,6 +64,7 @@
                     <li class="nav-item active">
                         <a id="nav-dashboard" class="nav-link" href="dashboard"
                             >Dashboard
+                            <span class="sr-only">(current)</span>
                         </a>
                     </li>
 
@@ -73,7 +74,7 @@
                         </a>
                     </li>
 
-                    <!-- change the features once logged in -->
+                    <!-- change the features once logged in
                     <% if (typeof user.username !== 'undefined') { %>
                     <li class="nav-item nav-sign-in text-center h-100">
                         <a class="nav-link text-white" href="/logout">
@@ -89,7 +90,15 @@
                             Sign In
                         </a>
                     </li>
-                    <% } %>
+                    <% } %> -->
+                    <li class="nav-item nav-sign-in text-center h-100">
+                        <a
+                            class="nav-link text-white"
+                            href="/LoginCred/login.html"
+                        >
+                            Sign In
+                        </a>
+                    </li>
                 </ul>
             </div>
         </nav>
@@ -99,7 +108,7 @@
             <div class="row ms-1 mt-3">
                 <h1 class="row ms-1 mb-3">Meetings</h1>
             </div>
-            <div class="row ms-2">
+            <div class="row ms-2" id="dashboard">
                 <!-- TODO: comment out for later edit -->
                 <!-- <div
                     class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 m-2 p-3 meeting-item"
@@ -129,9 +138,10 @@
                 <!-- Have button pop out when hover, redirect to /createEvent endpoint -->
                 <!-- <a href="/private/<%= user.username %>/createEvent.html"> -->
                 <!-- <a href="/createEvent.html"> -->
+
                 <a
                     class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 m-2 p-3 add-meeting-btn"
-                    href="/private/<%= user.username %>/createEvent"
+                    href="#"
                     style="cursor: pointer; display: block"
                 >
                     <span class="meeting-title" style="display: block"
