@@ -55,6 +55,13 @@ const UserRoutes = (app, db) => {
         res.render("../Client/error");
     });
 
+    // TODO: still broken 
+    app.get("/logout", (req, res) => {
+        req.session.destroy(() => {
+            res.redirect("/");
+        });
+    });
+
 
     // gets the meeting ID and user ID as link to redirect
     app.get("/private/:userID/dashboard", async (req, res) => {
@@ -91,13 +98,6 @@ const UserRoutes = (app, db) => {
         const eventJson = req.body;
         const eventID = await db.addEvent(eventJson);
         res.json({ status: "success", eventID });
-    });
-
-    // TODO: still broken 
-    app.get("/logout", (req, res) => {
-        req.session.destroy((err) => {
-
-        });
     });
 
     app.get("/private/:userID/dashboard", async (req, res) => {
