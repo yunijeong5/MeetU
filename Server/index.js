@@ -39,7 +39,6 @@ const UserRoutes = (app, db) => {
     app.use(express.static(path.join(__dirname, "Client")));
     app.use("/style", express.static(path.join(__dirname, "Client", "style")));
 
-
     // gets the meeting ID and user ID as link to redirect
     app.get("/private/:userID/dashboard", async (req, res) => {
         const user = await db.getUser(req.params.userID);
@@ -47,9 +46,8 @@ const UserRoutes = (app, db) => {
         res.render("../Client/dashboard", { user });
     });
 
-
-    //TODO: create sharking links 
-    app.get("/:mid/", (req, res) =>{
+    //TODO: create sharking links
+    app.get("/:mid/", (req, res) => {
         // const mid = await db.getMID(req.params.mid);
         // const uid = await db.getUID(req.params.uid);
         // res.sendFile("/login", { root: __dirname })
@@ -83,7 +81,6 @@ const UserRoutes = (app, db) => {
         res.json({ status: "success", eventID });
     });
 
-
     // Handle logging out (takes us back to the login page).
     app.get("/logout", (req, res) => {
         req.logout();
@@ -100,7 +97,7 @@ const UserRoutes = (app, db) => {
     app.get("/private/:userID/createEvent", async (req, res) => {
         const user = await db.getUser(req.params.userID);
         if (!user) return res.redirect("/login");
-        res.render("../Client/createEvent", { user });        
+        res.render("../Client/createEvent", { user });
     });
 
     // route to private username of the selectTime page
@@ -134,7 +131,7 @@ const UserRoutes = (app, db) => {
 
     // Register URL
     app.get("/register", (req, res) =>
-        res.sendFile("Client/LoginCred/register.html", { root: __dirname })
+        res.sendFile("../Client/LoginCred/register.html", { root: __dirname })
     );
 
     return app;
