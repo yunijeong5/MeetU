@@ -119,7 +119,7 @@ const UserRoutes = (app, db) => {
         const dbUser = await db.getUser(req.session.username);
         const user = dbUser.username;
         const uid = dbUser.uid;
-        res.render("../Client/selectTime", { user });
+        res.render("../Client/selectTimePoll", { user });
     });
 
     // Use res.redirect to change URLs.

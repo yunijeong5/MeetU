@@ -130,6 +130,10 @@ let dates = [
     ["May", 8, 2023],
     ["May", 10, 2023],
     ["May", 11, 2023],
+    ["May", 12, 2023],
+    ["May", 13, 2023],
+    ["May", 14, 2023],
+    ["May", 15, 2023],
 ];
 
 // Steps to generate the table
@@ -160,12 +164,15 @@ function renderTable(userTable) {
     for (let i = 0; i < selectedDays.length; ++i) {
         if (i === 0) {
             let thHead = document.createElement("th");
+
             headRow.append(thHead);
             thHead.setAttribute("scope", "col");
         }
 
         let th = document.createElement("th");
         headRow.append(th);
+        th.classList.add("table-header");
+        th.classList.add("text-center");
         th.setAttribute("scope", "col");
         th.textContent = selectedDays[i];
 
@@ -204,8 +211,9 @@ function renderTable(userTable) {
         }
 
         // let th = document.createElement("th");
-        let th = document.createElement("span");
+        let th = document.createElement("div");
         newRow.prepend(th);
+        th.classList.add("table-time", "p-0", "m-0");
         th.setAttribute("scope", "row");
         th.classList.add(`row-${i}`);
 

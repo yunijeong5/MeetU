@@ -22,11 +22,11 @@
             rel="stylesheet"
         />
         <!-- Custom CSS -->
-        <link rel="stylesheet" href="./style/style.css" />
+        <link rel="stylesheet" href="/style/style.css" />
         <!-- JS script -->
-        <script src="./js/createEvent.js" type="module" defer></script>
-        <script src="./js/colorTheme.js" defer></script>
-        <script src="./js/selectTime.js" defer></script>
+        <script src="/js/createEvent.js" type="module" defer></script>
+        <script src="/js/colorTheme.js" defer></script>
+        <script src="/js/selectTime.js" type="module" defer></script>
 
         <title>MeetU</title>
     </head>
@@ -35,7 +35,7 @@
         <nav class="navbar-light navbar navbar-expand-sm">
             <a
                 class="navbar-brand navbar-link ms-3"
-                href="./index.html"
+                href="/index.html"
                 id="logo-text"
             >
                 MeetU
@@ -62,7 +62,7 @@
                         <a
                             id="nav-dashboard"
                             class="nav-link"
-                            href="./dashboard.html"
+                            href="/dashboard.html"
                             >Dashboard</a
                         >
                     </li>
@@ -75,7 +75,7 @@
                     <li class="nav-item nav-sign-in text-center h-100">
                         <a
                             class="nav-link text-white"
-                            href="./LoginCred/login.html"
+                            href="/LoginCred/login.html"
                         >
                             Sign In
                         </a>
@@ -90,9 +90,7 @@
                     <h1
                         class="row mt-3 mb-3 text-center d-flex justify-content-center"
                         id="event-title"
-                    >
-                        326 meeting for pr 6
-                    </h1>
+                    ></h1>
                     <h6
                         class="mx-auto mb-2"
                         id="event-description"
@@ -106,18 +104,14 @@
                 <div class="col-12 col-lg-6">
                     <div class="row m-3">
                         <h2 class="mt-3 mb-3">Your Availability</h2>
-                        <div>Insert James' code</div>
-                    </div>
-                    <div class="row user-availability-explanation">
-                        <div class="col-10 offset-md-1">
-                            <p>
-                                Click or drag on the time cell that you are
-                                available. Each cell is 15 minutes.
-                            </p>
+                        <div>
+                            Click or drag on the time cell that you are
+                            available. Each cell is 15 minutes.
                         </div>
                     </div>
+
                     <div class="row user-time-table">
-                        <div class="col">
+                        <div class="col m-3">
                             <table class="table" id="user-table"></table>
                         </div>
                     </div>
@@ -135,18 +129,14 @@
                 <div class="col-12 col-lg-6">
                     <div class="row m-3">
                         <h2 class="mt-3 mb-3">Group's Availability</h2>
-                        <div>Insert James' code</div>
-                    </div>
-                    <div class="row user-availability-explanation">
-                        <div class="col-10 offset-md-1">
-                            <p>
-                                Click or drag on the time cell that you are
-                                available. Each cell is 15 minutes.
-                            </p>
+                        <div>
+                            Click or drag on the time cell that you are
+                            available. Each cell is 15 minutes.
                         </div>
                     </div>
+
                     <div class="row user-time-table">
-                        <div class="col">
+                        <div class="col m-3">
                             <table class="table" id="group-table"></table>
                         </div>
                     </div>
@@ -155,7 +145,10 @@
                         <h2 class="mt-3 mb-0">Summary</h2>
                     </div>
                     <div class="row mx-3 mt-3">
-                        <div class="col p-1 px-2 round-corner bg-gray">
+                        <div
+                            class="col p-1 px-2 round-corner bg-gray"
+                            id="summary-block"
+                        >
                             <div class="row m-2 fw-bold">Participants</div>
                             <div
                                 class="row ms-1 m-2 mb-3 justify-content-start"
@@ -193,9 +186,7 @@
 
             <div class="row justify-content-between">
                 <div class="col-3 d-inline-flex flex-column footer-links">
-                    <a class="link text-secondary" href="./about.html"
-                        >About Us!</a
-                    >
+                    <a class="link text-secondary" href="/index">About Us!</a>
                     <a class="link text-secondary" href="#!">Support MeetU</a>
                     <a class="link text-secondary" href="#!"
                         >Buy us a coffee!</a
@@ -204,7 +195,7 @@
             </div>
             <div class="row justify-content-center">
                 <div
-                    class="col-2 mb-3 d-inline-flex text-secondary footer-copyright"
+                    class="col-3 mb-3 d-inline-flex text-secondary footer-copyright"
                 >
                     © MeetU
                 </div>
@@ -241,6 +232,6 @@
             crossorigin="anonymous"
         ></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/chroma-js/2.1.0/chroma.min.js"></script>
-        <script src="./js/timeTable.js" type="module"></script>
+        <script src="/js/timeTable.js" type="module"></script>
     </body>
 </html>

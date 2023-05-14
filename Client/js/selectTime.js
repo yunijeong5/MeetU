@@ -1,4 +1,28 @@
-// import { UserDB } from "../../Server/database.js";
+import { loadMeetingJSON, loadUserMeetingJSON } from "./loadFromDB.js";
+
+// title and description
+const titleElem = document.getElementById("event-title");
+const descElem = document.getElementById("event-description");
+function renderTitleDesc() {
+    // get meeting info
+    // moke data
+    const meeting = {
+        title: "Title Here",
+        description: `Lorem Ipsum is simply dummy text of the printing and
+    typesetting industry. Lorem Ipsum has been the
+    industrys standard dummy text ever since the 1500s,
+    when an unknown printer took a galley of type and
+    scrambled it to make a type specimen book. It has
+    survived not only five centuries, but also the leap into
+    electronic typesetting, remaining essentially unchanged.`,
+    };
+
+    titleElem.textContent = meeting["title"];
+    descElem.textContent = meeting["description"];
+}
+
+renderTitleDesc();
+
 // Poll
 // Userid, eventid, send number 1 or -1.
 const pollBlock = document.getElementById("poll-block");
@@ -23,41 +47,10 @@ const makeOptionVotes = (poll, userVotes) => {
     return optionVotes;
 };
 
-async function loadMeetingJSON() {
-    // fetch meeting data from db
-    return {};
-}
-
-async function loadUserMeetingJSON() {
-    // fetch user meeting data from db, associated with this event
-    return {};
-}
-
-const titleElem = document.getElementById("event-title");
-const descElem = document.getElementById("event-description");
-function renderTitleDesc() {
-    // get meeting info
-    // moke data
-    const meeting = {
-        title: "Title Here",
-        description: `Lorem Ipsum is simply dummy text of the printing and
-    typesetting industry. Lorem Ipsum has been the
-    industrys standard dummy text ever since the 1500s,
-    when an unknown printer took a galley of type and
-    scrambled it to make a type specimen book. It has
-    survived not only five centuries, but also the leap into
-    electronic typesetting, remaining essentially unchanged.`,
-    };
-
-    titleElem.textContent = meeting["title"];
-    descElem.textContent = meeting["description"];
-}
-
-renderTitleDesc();
-
 function renderPoll() {
     // get poll data from backend
     // const mockMeeting['poll'] = {json}
+    console.log("renderPoll entered");
     const poll = {
         title: "Hi!",
         options: ["option 1", "option 2", "option 3", "option 4"],
@@ -150,6 +143,10 @@ copyURL.addEventListener("click", () => {
 const participants = document.getElementById("participants");
 const bestPollsText = document.getElementById("best-polls");
 async function renderSummary() {
+    // clear summaryblock
+    participants.innerHTML = "";
+    bestPollsText.innerHTML = "";
+
     // participants
     // mock data
     const users = ["Yuni", "Nhi", "James", "Kush"];
