@@ -33,14 +33,9 @@
     <body>
         <!-- Nav Bar -->
         <nav class="navbar-light navbar navbar-expand-sm">
-            <a
-                class="navbar-brand navbar-link ms-3"
-                href="/"
-                id="logo-text"
-            >
+            <a class="navbar-brand navbar-link ms-3" href="/" id="logo-text">
                 MeetU
             </a>
-
             <button
                 class="navbar-toggler"
                 type="button"
@@ -59,12 +54,13 @@
                     class="navbar-nav ms-auto me-3 d-lg-flex align-items-center"
                 >
                     <li class="nav-item active">
-                        <a
-                            id="nav-dashboard"
-                            class="nav-link"
-                            href="/error"
-                            >Dashboard</a
-                        >
+
+                        <% if(isUserLogin) { %>
+                            <a id="nav-dashboard" class="nav-link" href="/private/dashboard" >Dashboard</a>
+                        <% } else { %>
+                            <a id="nav-dashboard" class="nav-link" href="/error" >Dashboard</a>
+                        <% } %>
+
                     </li>
 
                     <li class="nav-item h-100">
