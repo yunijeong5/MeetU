@@ -36,7 +36,7 @@ const UserQuery = (client) => {
             const mid = uuidv4();
             //const { rows } = await client.query(`INSERT INTO events (event_json) VALUES ($1) RETURNING id`, [eventJson], mid);
             const { rows } = await client.query(`INSERT INTO events (event_json, mid) VALUES ($1, $2) RETURNING id`, [eventJson, mid]);
-            return rows[0].id;
+            return rows[0].mid;
         },
 
         readEvent: async (id) => {
@@ -84,5 +84,10 @@ const UserQuery = (client) => {
             // checks if the username is not found
             return res.rows.length > 0 ? res.rows[0] : null;
         },
+        getMID: async (event_json) => {
+            const queryText = 'SELECT * from events WHERE event_json = $1;';
+            const res = await client.query(queryText, [event_json]);
+            return res.rows.length > 0 ? res.rows[0] : null;
+        }
     };
   };
