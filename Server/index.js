@@ -39,6 +39,30 @@ const UserRoutes = (app, db) => {
     app.use(express.static(path.join(__dirname, "Client")));
     app.use("/style", express.static(path.join(__dirname, "Client", "style")));
 
+    app.get("/", (req, res) => {
+        res.render("../Client/index");
+    });
+
+    app.get("/login", async (req, res) => {
+        res.render("../Client/LoginCred/login");
+    });
+
+    app.get("/register", async (req, res) => {
+        res.render("../Client/LoginCred/register");
+    });
+
+    app.get("/error", async (req, res) => {
+        res.render("../Client/error");
+    });
+
+    // TODO: still broken 
+    app.get("/logout", (req, res) => {
+        req.session.destroy(() => {
+            res.redirect("/");
+        });
+    });
+
+
     // gets the meeting ID and user ID as link to redirect
     app.get("/private/:userID/dashboard", async (req, res) => {
         const user = await db.getUser(req.params.userID);
@@ -46,17 +70,12 @@ const UserRoutes = (app, db) => {
         res.render("../Client/dashboard", { user });
     });
 
-    //TODO: create sharking links
+    //TODO: create sharing links
     app.get("/:mid/", (req, res) => {
         // const mid = await db.getMID(req.params.mid);
         // const uid = await db.getUID(req.params.uid);
         // res.sendFile("/login", { root: __dirname })
     });
-
-    // Handle the URL /login (just output the login.html file).
-    app.get("/login", (req, res) =>
-        res.sendFile("Client/LoginCred/login.html", { root: __dirname })
-    );
 
     app.post("/login", async (req, res) => {
         const { username, password } = req.body;
@@ -79,12 +98,6 @@ const UserRoutes = (app, db) => {
         const eventJson = req.body;
         const eventID = await db.addEvent(eventJson);
         res.json({ status: "success", eventID });
-    });
-
-    // Handle logging out (takes us back to the login page).
-    app.get("/logout", (req, res) => {
-        req.logout();
-        res.redirect("/login");
     });
 
     app.get("/private/:userID/dashboard", async (req, res) => {
@@ -128,11 +141,6 @@ const UserRoutes = (app, db) => {
         req.session.username = createUser.username;
         return res.redirect("/private/" + createUser.username + "/dashboard");
     });
-
-    // Register URL
-    app.get("/register", (req, res) =>
-        res.sendFile("../Client/LoginCred/register.html", { root: __dirname })
-    );
 
     return app;
 };
