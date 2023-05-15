@@ -2,13 +2,13 @@
 export async function loadMeetingJSON() {
     // fetch meeting data from db
     try{
-        const res = await fetch(`/private/selectTime`, {
+        const res = await fetch(`/readEvent`, {
             method: 'GET',
         });
         const data = await res.json();
-        const midData = data.mid;
-        const eventData = data.event_json;
-        return { midData, eventData };
+        const mid = data.mid;
+        const event = data.event_json;
+        return { mid, event };
     } 
     catch (err) {
         return { error: err.message };
@@ -16,16 +16,16 @@ export async function loadMeetingJSON() {
 }
 
 export async function loadUserMeetingJSON() {
-    // fetch user meeting data from db, associated with this event
+    // // fetch user meeting data from db, associated with this event
     try{
-        const res = await fetch(`/private/selectTime`, {
+        const res = await fetch(`/readEvent`, {
             method: 'GET',
         });
         const data = await res.json();
-        const midData = data.mid;
-        const userData = data.username;
-        const prefData = data.pref_json;
-        return { midData, userData, prefData};
+        const mid = data.mid;
+        const username = data.username;
+        const pref = data.pref_json;
+        return { mid, username, pref};
     } 
     catch (err) {
         return { error: err.message };

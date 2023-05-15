@@ -131,20 +131,22 @@ const UserRoutes = (app, db) => {
         res.render("../Client/createEvent", { user });
     });
 
-    //FIXME: check if this works
     app.get("/private/selectTime", async (req, res) => {
+        const dbUser = await db.getUser(req.session.username);
+        const data = await db.getMeeting(dbUser.uid);
+        res.render("../Client/selectTimePoll", { data });
+    });
+    // TODO: check if it works
+    app.get("/readEvent", async (req, res) => {
         try {
-            const dbUser = await db.getUser(req.session.username);
-            const data = await db.getMeeting(dbUser.uid);
-            res.render("../Client/selectTimePoll", { data });
-            // for testing purpose
-            // res.json({ data });
+          const dbUser = await db.getUser(req.session.username);
+          const data = await db.getMeeting(dbUser.uid);
+          res.json(data);
         } 
         catch (err) {
-            res.render("../Client/error");
+          res.json({ error: err.message });
         }
     });
-
 
     // Use res.redirect to change URLs.
     app.post("/register", async (req, res) => {
