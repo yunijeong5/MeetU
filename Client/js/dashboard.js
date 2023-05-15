@@ -30,7 +30,6 @@ themeButton.addEventListener("click", switchTheme);
 // display all events associated with the user
 const dashboardBox = document.getElementById("dashboard");
 
-console.log(dashboardBox);
 function renderDashboard() {
     // const events = [{}...] array of events from db
     // TODO: I need meeting title, meeting description, meeting id, and current user id

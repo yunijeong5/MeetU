@@ -1,4 +1,5 @@
-function convertDateToString(date) { // change?
+function convertDateToString(date) {
+    // change?
     let month = date[0];
     let day = date[1];
     let year = date[2];
@@ -181,7 +182,7 @@ function calculateDiffBtwnTwoDates(date1, date2) {
     // let yearAsString = year.toString();
 
     // let dateAsString = `${monthAsString}/${dayAsString}/${yearAsString}`;
-    
+
     let date1AsString = convertDateToString(date1);
     let date2AsString = convertDateToString(date2);
 
@@ -258,33 +259,42 @@ function convertNumToWeekDay(num) {
 }
 
 function getDateStrings(chosenDates) {
-    return chosenDates.map(date => convertDateToString(date));
+    return chosenDates.map((date) => convertDateToString(date));
 }
 
 function getWeekDays(chosenDates) {
-
-    let datesAsStrings = chosenDates.map(date => convertDateToString(date));
+    let datesAsStrings = chosenDates.map((date) => convertDateToString(date));
 
     let dateObject = null;
     let convertedDates = [];
 
-    console.log(datesAsStrings);
+    // console.log(datesAsStrings);
 
     for (let i = 0; i < datesAsStrings.length; ++i) {
         dateObject = new Date(datesAsStrings[i]);
         convertedDates.push(dateObject);
     }
 
-    console.log(convertedDates);
+    // console.log(convertedDates);
 
-    let weekDayNums = convertedDates.map(convertedDate => convertedDate.getDay());
-    console.log("weekDay Numbers", weekDayNums);
-    let weekDayNames = weekDayNums.map(weekDayNum => convertNumToWeekDay(weekDayNum));
-    console.log(weekDayNames)
+    let weekDayNums = convertedDates.map((convertedDate) =>
+        convertedDate.getDay()
+    );
+    // console.log("weekDay Numbers", weekDayNums);
+    let weekDayNames = weekDayNums.map((weekDayNum) =>
+        convertNumToWeekDay(weekDayNum)
+    );
+    // console.log(weekDayNames);
     return weekDayNames;
-
 }
 
-export { findDiffInDatesArray, getWeekDays, calculateDiffBtwnTwoDates, 
-    convertNumToWeekDay, getDateStrings, getNextDay, 
-    convertMonthIntToName, convertNameOfMonthToInt }
+export {
+    findDiffInDatesArray,
+    getWeekDays,
+    calculateDiffBtwnTwoDates,
+    convertNumToWeekDay,
+    getDateStrings,
+    getNextDay,
+    convertMonthIntToName,
+    convertNameOfMonthToInt,
+};

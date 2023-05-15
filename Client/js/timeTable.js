@@ -163,7 +163,7 @@ function generateArrayOfTimeIncrements(startTimeString, endTimeString, dates) {
             let newConstructedDate = new Date(
                 constructedDate.setDate(constructedDate.getDate() + 1)
             );
-            console.log(newConstructedDate);
+            // console.log(newConstructedDate);
 
             let nextDateMonth = newConstructedDate.getUTCMonth();
             let nextDateMonthAsString = convertMonthIntToName(nextDateMonth);
