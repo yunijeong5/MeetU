@@ -123,14 +123,15 @@ const UserRoutes = (app, db) => {
         try {
             const dbUser = await db.getUser(req.session.username);
             const eventData = await db.getMeeting(dbUser.uid);
+            // const prefData = await db.getMeeting(dbUser.uid);
+
             // res.status(200).json({ eventData });
+            // TODO: add prefData inside here the args
             res.render("../Client/selectTimePoll", { eventData });
         } catch (err) {
             // res.status(500).json({ error: err.message });
             res.render("../Client/error", { user });
         }
-        
-        
     });
 
 
