@@ -72,9 +72,9 @@ const UserRoutes = (app, db) => {
     });
     /*
         TODO: Check if sharable link works in database: 
-        http://localhost:4444/private/selectTime?acfb5196-2444-47e6-b845-b1663ef02d11
+        http://localhost:4444/private/selectTime/acfb5196-2444-47e6-b845-b1663ef02d11
         OR
-        http://localhost:4444/private/selectTime? (any mid you have in database)
+        http://localhost:4444/private/selectTime/ (any mid you have in database)
     */
     // create sharable links
     app.get("/private/selectTime/:mid/", async (req, res) => {
