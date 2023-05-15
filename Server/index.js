@@ -99,7 +99,9 @@ const UserRoutes = (app, db) => {
         const eventID = await db.addEvent(eventJson, dbUser.uid);
         res.json({ status: "success", eventID });
     });
+    app.post("/sendUserMeeting", async(req, res) => {
 
+    });
     app.get("/private/dashboard", async (req, res) => {
         const dbUser = await db.getUser(req.session.username);
         const user = dbUser.username;

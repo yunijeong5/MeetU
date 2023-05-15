@@ -33,7 +33,7 @@ const UserQuery = (client) => {
                 'event_json JSONB NOT NULL, ' +
                 'mid VARCHAR(50) NOT NULL, ' +
                 'uid VARCHAR(50) NOT NULL ' +
-                ');';
+                'preference_json JSONB NOT NULL);';
             await client.query(queryTxt);
             const mid = uuidv4();
             const { rows } = await client.query(`INSERT INTO events (event_json, mid, uid) VALUES ($1, $2, $3) RETURNING id`, [eventJson, mid, uid]);
