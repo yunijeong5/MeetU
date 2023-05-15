@@ -6,8 +6,9 @@ export async function loadMeetingJSON() {
             method: 'GET',
         });
         const data = await res.json();
+        const midData = data.mid;
         const eventData = data.event_json;
-        return { eventData };
+        return { midData, eventData };
     } 
     catch (err) {
         return { error: err.message };
@@ -21,8 +22,10 @@ export async function loadUserMeetingJSON() {
             method: 'GET',
         });
         const data = await res.json();
+        const midData = data.mid;
+        const userData = data.username;
         const prefData = data.pref_json;
-        return { prefData };
+        return { midData, userData, prefData};
     } 
     catch (err) {
         return { error: err.message };
