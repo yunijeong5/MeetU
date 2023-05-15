@@ -1,13 +1,11 @@
 import "dotenv/config";
 import express from "express";
 import expressSession from "express-session";
-import users from "./users.js";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
 import bodyParser from "body-parser";
 import path from "path";
 import { UserDB } from "./database.js";
-import passport from "passport";
 
 // We will use __dirname later on to send files back to the client.
 const __filename = fileURLToPath(import.meta.url);
@@ -109,12 +107,17 @@ const UserRoutes = (app, db) => {
     app.post("/createEvent", async (req, res) => {
         const dbUser = await db.getUser(req.session.username);
         const eventJson = req.body;
-        const eventID = await db.addEvent(eventJson, dbUser.uid);
+        const eventID = await db.addEvent(eventJson, dbUser.uid, null);
         res.json({ status: "success", eventID });
     });
-    app.post("/sendUserMeeting", async(req, res) => {
 
+    app.post("/sendUserMeeting", async(req, res) => {
+        const dbUser = await db.getUser(req.session.username);
+        const prefJson = req.body;
+        const prefID = await db.addEvent(req.body, dbUser.uid, prefJson);
+        res.json({ status: "success", prefID });
     });
+
     app.get("/private/dashboard", async (req, res) => {
         const dbUser = await db.getUser(req.session.username);
         const user = dbUser.username;
@@ -128,24 +131,17 @@ const UserRoutes = (app, db) => {
         res.render("../Client/createEvent", { user });
     });
 
-    //FIXME: remove comments
+    //FIXME: check if this works
     app.get("/private/selectTime", async (req, res) => {
-
-        // const dbUser = await db.getUser(req.session.username);
-        // const eventData = await db.getMeeting(dbUser.uid);
-        // const mid = eventData.mid;
-        // res.render("../Client/selectTimePoll", { mid });
         try {
             const dbUser = await db.getUser(req.session.username);
-            const eventData = await db.getMeeting(dbUser.uid);
-            // const prefData = await db.getMeeting(dbUser.uid);
-
-            // res.status(200).json({ eventData });
-            // TODO: add prefData inside here the args
-            res.render("../Client/selectTimePoll", { eventData });
-        } catch (err) {
-            // res.status(500).json({ error: err.message });
-            res.render("../Client/error", { user });
+            const data = await db.getMeeting(dbUser.uid);
+            res.render("../Client/selectTimePoll", { data });
+            // for testing purpose
+            // res.json({ data });
+        } 
+        catch (err) {
+            res.render("../Client/error");
         }
     });
 

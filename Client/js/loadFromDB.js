@@ -30,5 +30,4 @@ export async function loadUserMeetingJSON() {
     catch (err) {
         return { error: err.message };
     }
-    return {};
 }

@@ -2,6 +2,7 @@ import { loadMeetingJSON, loadUserMeetingJSON } from "./loadFromDB.js";
 
 //TODO: remove later... just for testing fetched data
 const result = await loadMeetingJSON();
+const test = await loadUserMeetingJSON();
 console.log(result);
 
 // title and description

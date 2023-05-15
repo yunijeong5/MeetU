@@ -26,16 +26,16 @@ export const UserDB = (dburl) => {
 };
 const UserQuery = (client) => {
     return {
-        addEvent: async (eventJson, uid) => {
+        addEvent: async (eventJson, uid, prefJson) => {
             const queryTxt = 'CREATE TABLE IF NOT EXISTS events ( ' +
                 'id SERIAL PRIMARY KEY, ' +
                 'event_json JSONB NOT NULL, ' +
                 'mid VARCHAR(50) NOT NULL, ' +
-                'uid VARCHAR(50) NOT NULL ' +
-                'preference_json JSONB NOT NULL);';
+                'uid VARCHAR(50) NOT NULL, ' +
+                'pref_json JSONB DEFAULT NULL);';
             await client.query(queryTxt);
             const mid = uuidv4();
-            const { rows } = await client.query(`INSERT INTO events (event_json, mid, uid) VALUES ($1, $2, $3) RETURNING id`, [eventJson, mid, uid]);
+            const { rows } = await client.query(`INSERT INTO events (event_json, mid, uid, pref_json) VALUES ($1, $2, $3, $4) RETURNING id`, [eventJson, mid, uid, prefJson]);
             return rows[0];
         },
 
@@ -94,12 +94,6 @@ const UserQuery = (client) => {
             const event_json = await client.query(`SELECT event_json FROM events WHERE mid=$1`, [mid]);
             const { rows } = await client.query(`INSERT INTO events (event_json, mid, uid) VALUES ($1, $2, $3) RETURNING id`, [event_json.rows[0].event_json, mid, uid]);
             return rows[0];
-        },
-        //TODO: unused query(?) 
-        getMID: async (event_json) => {
-            const queryText = 'SELECT * from events WHERE event_json = $1;';
-            const res = await client.query(queryText, [event_json]);
-            return res.rows.length > 0 ? res.rows[0] : null;
         }
     };
   };
