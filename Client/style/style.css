@@ -308,6 +308,11 @@ tbody tr td:first-child {
 
 td {
     border: #dee2e6 1px solid;
+    cursor: pointer;
+}
+
+tr td.highlight {
+    background: #29c5f6;
 }
 
 /* ************************************** */

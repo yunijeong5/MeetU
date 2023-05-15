@@ -115,13 +115,25 @@ const UserRoutes = (app, db) => {
         res.render("../Client/createEvent", { user });
     });
 
-    //TODO: might replace this for read event(? for loadfromDB)
-    // route to private username of the selectTime page
+    //TODO: remove comments
     app.get("/private/selectTime", async (req, res) => {
-        const dbUser = await db.getUser(req.session.username);
-        const eventData = db.getMeeting(dbUser.uid);
-        const meetingID = eventData.mid;
-        res.render("../Client/selectTimePoll", { meetingID });
+
+        // const dbUser = await db.getUser(req.session.username);
+        // const eventData = await db.getMeeting(dbUser.uid);
+        // const mid = eventData.mid;
+        // res.render("../Client/selectTimePoll", { mid });
+        try {
+            const dbUser = await db.getUser(req.session.username);
+            const eventData = await db.getMeeting(dbUser.uid);
+            // const prefData = await db.getMeeting(dbUser.uid);
+
+            // res.status(200).json({ eventData });
+            // TODO: add prefData inside here the args
+            res.render("../Client/selectTimePoll", { eventData });
+        } catch (err) {
+            // res.status(500).json({ error: err.message });
+            res.render("../Client/error", { user });
+        }
     });
 
 

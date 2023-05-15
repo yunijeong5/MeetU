@@ -5,8 +5,10 @@ import {
     getDateStrings,
     getNextDay,
     convertMonthIntToName,
-    convertNameOfMonthToInt
+    convertNameOfMonthToInt,
 } from "./weekdays.js";
+
+import { loadMeetingJSON, loadUserMeetingJSON } from "./loadFromDB.js";
 
 // convertTimeToNumber(timeString)
 function convertTimeToNumber(timeString) {
@@ -125,10 +127,10 @@ function generateArrayOfTimeIncrements(startTimeString, endTimeString, dates) {
         while (currTimeNumber <= midnight) {
             if (currTimeNumber === midnight) {
                 currTimeNumber = 0;
-                
+
                 currTimeAsString = convertNumberToTime(currTimeNumber);
                 arrOfTimeIncrements.push(currTimeAsString);
-                
+
                 break;
             }
 
@@ -140,9 +142,11 @@ function generateArrayOfTimeIncrements(startTimeString, endTimeString, dates) {
         daysAndTimes[weekDays[currDay]] = [...arrOfTimeIncrements];
         arrOfTimeIncrements = [];
 
-        if (differenceInNumberOfDays[differenceInDaysTracker] > 1 
-            || differenceInNumberOfDays[differenceInDaysTracker] === 0 
-            || differenceInNumberOfDays.length < 1) {
+        if (
+            differenceInNumberOfDays[differenceInDaysTracker] > 1 ||
+            differenceInNumberOfDays[differenceInDaysTracker] === 0 ||
+            differenceInNumberOfDays.length < 1
+        ) {
             // get next day
             nextWeekDay = getNextDay(weekDays[currDay]);
 
@@ -151,18 +155,28 @@ function generateArrayOfTimeIncrements(startTimeString, endTimeString, dates) {
             let storedDateDay = dates[0][1];
             let storedDateYear = dates[0][2];
 
-            let constructedDate = new Date(storedDateYear, storedDateMonthAsInt, storedDateDay);
-            let newConstructedDate = new Date(constructedDate.setDate(constructedDate.getDate() + 1));
+            let constructedDate = new Date(
+                storedDateYear,
+                storedDateMonthAsInt,
+                storedDateDay
+            );
+            let newConstructedDate = new Date(
+                constructedDate.setDate(constructedDate.getDate() + 1)
+            );
             console.log(newConstructedDate);
 
             let nextDateMonth = newConstructedDate.getUTCMonth();
             let nextDateMonthAsString = convertMonthIntToName(nextDateMonth);
-            
+
             let nextDateDay = newConstructedDate.getUTCDate();
             let nextDateYear = newConstructedDate.getUTCFullYear();
 
-            let storedNextDate = [nextDateMonthAsString, nextDateDay, nextDateYear];
-            
+            let storedNextDate = [
+                nextDateMonthAsString,
+                nextDateDay,
+                nextDateYear,
+            ];
+
             dates.push(storedNextDate);
         }
 
@@ -173,7 +187,7 @@ function generateArrayOfTimeIncrements(startTimeString, endTimeString, dates) {
             arrOfTimeIncrements.push(currTimeAsString);
             currTimeNumber += 0.5;
         }
-        
+
         daysAndTimes[nextWeekDay] = [...arrOfTimeIncrements];
     }
 
@@ -254,9 +268,6 @@ function renderTable(userTable) {
 
     const dateStrings = getDateStrings(dates);
 
-
-
-
     for (let i = 0; i < selectedDays.length; ++i) {
         if (i === 0) {
             let thHead = document.createElement("th");
@@ -289,6 +300,29 @@ function renderTable(userTable) {
             let newCell = newRow.insertCell(j);
             newCell.id = `${tableType}.${i}x${j}`;
             newCell.classList.add("td");
+
+            if (tableType === "u") {
+                newCell.addEventListener("mousedown", async function () {
+                    this.classList.toggle("highlight");
+                    // TODO: send updated data to backend
+                    // send {selectedTimes: ['1x10',....], selectedOptions: ['o1'....], user: username, mid: meetingID}
+                    const res = await fetch("/sendUserMeeting", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            user: username,
+                            mid: meetingID,
+                            selectedTimes: selectedTimes, // TODO:
+                            selectedOptions: selectedOptions, // TODO:
+                        }),
+                    });
+
+                    // TODO: rerender groups table
+                    // fetch all users' input for this meeting.
+                });
+            }
         }
 
         // let th = document.createElement("th");
