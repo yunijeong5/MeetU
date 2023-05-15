@@ -70,12 +70,25 @@ const UserRoutes = (app, db) => {
         const user = dbUser.username;
         res.render("../Client/dashboard", { user });
     });
+    /*
+        TODO: Check if sharable link works in database: 
+        http://localhost:4444/private/selectTime?acfb5196-2444-47e6-b845-b1663ef02d11
+        OR
+        http://localhost:4444/private/selectTime? (any mid you have in database)
+    */
+    // create sharable links
+    app.get("/private/selectTime/:mid/", async (req, res) => {
+        const mid = req.params.mid;
+        // add the event to the user in session 
+        if (req.session && req.session.username) {
+            const dbUser = await db.getUser(req.session.username);
+            const eventData = await db.updateUserEvent(dbUser.uid, mid);
+            res.render("../Client/selectTimePoll", { eventData });
+        }
+        else{
+            res.render("../Client/error", { mid });
+        }
 
-    //TODO: create sharing links
-    app.get("/:mid/", (req, res) => {
-        // const mid = await db.getMID(req.params.mid);
-        // const uid = await db.getUID(req.params.uid);
-        // res.sendFile("/login", { root: __dirname })
     });
 
     app.post("/login", async (req, res) => {
@@ -115,7 +128,7 @@ const UserRoutes = (app, db) => {
         res.render("../Client/createEvent", { user });
     });
 
-    //TODO: remove comments
+    //FIXME: remove comments
     app.get("/private/selectTime", async (req, res) => {
 
         // const dbUser = await db.getUser(req.session.username);
