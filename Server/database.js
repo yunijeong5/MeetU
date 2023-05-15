@@ -35,13 +35,8 @@ const UserQuery = (client) => {
                 'pref_json JSONB DEFAULT NULL);';
             await client.query(queryTxt);
             const mid = uuidv4();
-            const { rows } = await client.query(`INSERT INTO events (event_json, mid, uid, pref_json) VALUES ($1, $2, $3, $4) RETURNING id`, [eventJson, mid, uid, prefJson]);
-            return rows[0];
-        },
-
-        readEvent: async (id) => {
-            const { rows } = await client.query(`SELECT * FROM events WHERE id = $1`, [id]);
-            return rows[0];
+            const { rows } = await client.query(`INSERT INTO events (event_json, mid, uid, pref_json) VALUES ($1, $2, $3, $4) RETURNING mid, uid`, [eventJson, mid, uid, prefJson]);
+            return rows;
         },
         createUser: async (username, password) => {
             const uid = uuidv4();
@@ -59,6 +54,20 @@ const UserQuery = (client) => {
             const res = await client.query(queryText, [username, password, uid]);
             return res.rows[0];
         },
+        addUserMeeting: async (uid, mid) => {
+            const initText = `
+            CREATE TABLE IF NOT EXISTS users (
+                id SERIAL PRIMARY KEY,
+                mid VARCHAR(50) NOT NULL,
+                uid VARCHAR(50) NOT NULL,
+            );`;
+            await client.query(initText);
+            const queryText = `
+                INSERT INTO users (uid, mid) VALUES ($1, $2) RETURNING *;
+            `;
+            const res = await client.query(queryText, [uid, mid]);
+            return res.rows[0];
+        },
         getUser: async (username) => {
             const initText = `
             CREATE TABLE IF NOT EXISTS users (
@@ -73,7 +82,7 @@ const UserQuery = (client) => {
             // checks if the username is not found
             return res.rows.length > 0 ? res.rows[0] : null;
         },
-        getMeeting: async (uid) => {
+        getMeeting: async (uid, mid) => {
             const initText = `
                 CREATE TABLE IF NOT EXISTS events (
                     id SERIAL PRIMARY KEY,
@@ -83,8 +92,8 @@ const UserQuery = (client) => {
                 );
             `;
             await client.query(initText);
-            const queryText = `SELECT * FROM events WHERE uid = $1;`;
-            const res = await client.query(queryText, [uid]);
+            const queryText = `SELECT * FROM events WHERE uid = $1 AND mid = $2;`;
+            const res = await client.query(queryText, [uid, mid]);
             return res.rows.length > 0 ? res.rows[0] : null;
         },
         //TODO: Used for sharable link, check if it works

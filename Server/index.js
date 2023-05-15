@@ -108,7 +108,9 @@ const UserRoutes = (app, db) => {
         const dbUser = await db.getUser(req.session.username);
         const eventJson = req.body;
         const eventID = await db.addEvent(eventJson, dbUser.uid, null);
-        res.json({ status: "success", eventID });
+        req.session.mid = eventID[0].mid;
+        // req.session.uid = eventID[0].uid;
+        res.json({ status: "success", eventID});
     });
 
     app.post("/sendUserMeeting", async(req, res) => {
@@ -140,7 +142,7 @@ const UserRoutes = (app, db) => {
     app.get("/readEvent", async (req, res) => {
         try {
           const dbUser = await db.getUser(req.session.username);
-          const data = await db.getMeeting(dbUser.uid);
+          const data = await db.getMeeting(dbUser.uid, req.session.mid);
           res.json(data);
         } 
         catch (err) {
