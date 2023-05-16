@@ -38,7 +38,7 @@ const UserQuery = (client) => {
             const { rows } = await client.query(`INSERT INTO events (event_json, mid, uid, pref_json) VALUES ($1, $2, $3, $4) RETURNING mid, uid`, [eventJson, mid, uid, prefJson]);
             return rows;
         },
-        updateEvent: async (eventJson, uid, mid, prefJson) => {
+        updateEvent: async (uid, mid, prefJson) => {
           const queryTxt = `
             CREATE TABLE IF NOT EXISTS events (
               id SERIAL PRIMARY KEY,
