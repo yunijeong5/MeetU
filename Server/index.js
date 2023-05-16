@@ -72,21 +72,21 @@ const UserRoutes = (app, db) => {
         TODO: Check if sharable link works in database: 
         http://localhost:4444/private/selectTime/acfb5196-2444-47e6-b845-b1663ef02d11
         OR
-        http://localhost:4444/private/selectTime/ (any mid you have in database)
+        http://localhost:4444/private/selectTime/:mid (any mid you have in database)
     */
-    // create sharable links
-    app.get("/private/selectTime/:mid/", async (req, res) => {
-        const mid = req.params.mid;
+    // copy sharable links
+    app.get("/getMID", async (req, res) => {
         // add the event to the user in session 
         if (req.session && req.session.username) {
             const dbUser = await db.getUser(req.session.username);
-            const eventData = await db.updateUserEvent(dbUser.uid, mid);
-            res.render("../Client/selectTimePoll", { eventData });
+            const eventData = await db.updateUserEvent(dbUser.uid, req.session.mid);
+            // checks if mid in eventData exists
+            console.log(eventData.mid);
+            res.json(eventData.mid);
         }
         else{
-            res.render("../Client/error", { mid });
+            res.json({ mid : ""});
         }
-
     });
 
     app.post("/login", async (req, res) => {
@@ -141,9 +141,10 @@ const UserRoutes = (app, db) => {
     // TODO: check if it works
     app.get("/readEvent", async (req, res) => {
         try {
-          const dbUser = await db.getUser(req.session.username);
+            const username = req.session.username;
+          const dbUser = await db.getUser(username);
           const data = await db.getMeeting(dbUser.uid, req.session.mid);
-          res.json(data);
+          res.json({data, username});
         } 
         catch (err) {
           res.json({ error: err.message });
