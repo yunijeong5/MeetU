@@ -116,7 +116,7 @@ const UserRoutes = (app, db) => {
     app.post("/sendUserMeeting", async(req, res) => {
         const dbUser = await db.getUser(req.session.username);
         const prefJson = req.body;
-        const prefID = await db.addEvent(req.body, dbUser.uid, prefJson);
+        const prefID = await db.updateEvent(dbUser.uid, req.session.mid, prefJson);
         res.json({ status: "success", prefID });
     });
 
