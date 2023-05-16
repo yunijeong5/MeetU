@@ -7,13 +7,16 @@ const footer = document.getElementById("footer");
 
 function switchTheme() {
     const theme = htmlDiv.getAttribute("data-bs-theme");
-    if (theme == "light") {
+    // TODO: Fix this weird bodge, I have no idea why this is happening
+    // I tried debugging, and for only the dashboard, the attributes are coming in as opposites
+    // So light theme => data-bs-theme = dark and vice versa
+    if (theme == "dark") {
         htmlDiv.setAttribute("data-bs-theme", "dark");
         themeButton.src = "./moon-svgrepo-com.svg";
         navBar.style.borderBottom = "1px solid #343a40";
         footer.style.borderTop = "1px solid #343a40";
     } else {
-        htmlDiv.setAttribute("data-bs-theme", "light");
+        htmlDiv.setAttribute("data-bs-theme", "light");s
         themeButton.src = "./sun-svgrepo-com.svg";
         navBar.style.borderBottom = "1px solid #e9ecef";
         footer.style.borderTop = "1px solid #e9ecef";
