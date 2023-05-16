@@ -75,18 +75,15 @@ const UserRoutes = (app, db) => {
         http://localhost:4444/private/selectTime/:mid (any mid you have in database)
     */
     // copy sharable links
-    app.get("/getMID", async (req, res) => {
+    app.get("/getMID/:mid", async (req, res) => {
         // add the event to the user in session 
         if (req.session && req.session.username) {
             const dbUser = await db.getUser(req.session.username);
-            const eventData = await db.updateUserEvent(dbUser.uid, req.session.mid);
-            // checks if mid in eventData exists
-            console.log(eventData.mid);
-            res.json(eventData.mid);
-        }
-        else{
-            res.json({ mid : ""});
-        }
+            const eventData = await db.shareUserMID(dbUser.uid, req.params.mid);
+            res.render("../Client/selectTimePoll", {eventData});
+        } 
+        else
+            res.render("../Client/error");
     });
 
     app.post("/login", async (req, res) => {
