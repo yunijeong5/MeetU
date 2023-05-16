@@ -5,10 +5,11 @@ export async function loadMeetingJSON() {
         const res = await fetch(`/readEvent`, {
             method: 'GET',
         });
-        const data = await res.json();
-        const mid = data.mid;
-        const value = data.event_json;
-        return { mid, value };
+        const obj = await res.json();
+        const mid = obj.data.mid;
+        const value = obj.data.event_json;
+        const username = obj.username
+        return { mid, value, username};
     } 
     catch (err) {
         return { error: err.message };
