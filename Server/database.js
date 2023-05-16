@@ -38,6 +38,34 @@ const UserQuery = (client) => {
             const { rows } = await client.query(`INSERT INTO events (event_json, mid, uid, pref_json) VALUES ($1, $2, $3, $4) RETURNING mid, uid`, [eventJson, mid, uid, prefJson]);
             return rows;
         },
+        updateEvent: async (eventJson, uid, mid, prefJson) => {
+          const queryTxt = `
+            CREATE TABLE IF NOT EXISTS events (
+              id SERIAL PRIMARY KEY,
+              event_json JSONB NOT NULL,
+              mid VARCHAR(50) NOT NULL,
+              uid VARCHAR(50) NOT NULL,
+              pref_json JSONB DEFAULT NULL
+            );
+          `;
+          await client.query(queryTxt);
+
+          const existingRecord = await client.query(
+            'SELECT mid, uid FROM events WHERE mid = $1 AND uid = $2',
+            [mid, uid]
+          );
+
+          if (existingRecord.rows.length > 0) {
+            await client.query(
+              'UPDATE events SET pref_json = $1 WHERE mid = $2 AND uid = $3',
+              [prefJson, mid, uid]
+            );
+
+            return prefJson;
+          }
+
+          return -1;
+        },
         createUser: async (username, password) => {
             const uid = uuidv4();
             const initText = `
