@@ -8,7 +8,7 @@ export async function loadMeetingJSON() {
         const obj = await res.json();
         const mid = obj.data.mid;
         const value = obj.data.event_json;
-        const username = obj.username
+        const username = obj.username;
         return { mid, value, username};
     } 
     catch (err) {
@@ -22,10 +22,10 @@ export async function loadUserMeetingJSON() {
         const res = await fetch(`/readEvent`, {
             method: 'GET',
         });
-        const data = await res.json();
-        const mid = data.mid;
-        const user = data.username;
-        const pref = data.pref_json;
+        const obj = await res.json();
+        const mid = obj.data.mid;
+        const user =  obj.username
+        const pref = obj.data.pref_json;
         return { mid, user, pref};
     } 
     catch (err) {
