@@ -173,16 +173,16 @@ function generateArrayOfTimeIncrements(startTimeString, endTimeString, dates) {
 
 let userTable = document.getElementById("user-table");
 let groupTable = document.getElementById("group-table");
-let startingTime = "6:00 PM";
+let startingTime = "0:00 AM";
 let endingTime = "0:00 AM";
 
 let dates = [
   ["May", 11, 2023],
 //   ["May", 12, 2023],
-    ["May", 13, 2023],
+    // ["May", 13, 2023],
 //   ["May", 14, 2023],
 //   ["May", 15, 2023],
-  // ["May", 16, 2023],
+//   ["May", 16, 2023],
   // ["May", 17, 2023],
 ];
 
@@ -232,10 +232,16 @@ function renderTable(userTable) {
     );
     numRows = differenceBetweenStartAndEndTimes * 4;
   } else if (endTimeAsNumber === 0 && startTimeAsNumber > endTimeAsNumber) {
-    endTimeAsNumber = 23.5
+    endTimeAsNumber = 23.5;
     differenceBetweenStartAndEndTimes = Math.abs(endTimeAsNumber - startTimeAsNumber);
     numRows = (differenceBetweenStartAndEndTimes * 4) + 1;
-  } else {
+  } else if (endTimeAsNumber === 0 && startTimeAsNumber === 0) {
+    endTimeAsNumber = 23.5;
+    differenceBetweenStartAndEndTimes = Math.abs(endTimeAsNumber - startTimeAsNumber);
+    numRows = (differenceBetweenStartAndEndTimes * 4) + 1;
+  }
+  
+  else {
     differenceBetweenStartAndEndTimes = endTimeAsNumber - startTimeAsNumber; // changing just leaving here for now.
   }
 
