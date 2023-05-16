@@ -145,36 +145,61 @@ function convertNameOfMonthToInt(nameOfMonth) {
     return monthInt;
 }
 
-function getNextDay(dayAsString) {
-    let nextDayAsString = "";
+function getNextDay(date, diff) {
+    let d;
 
-    switch (dayAsString) {
-        case "Monday":
-            nextDayAsString = "Tuesday";
-            break;
-        case "Tuesday":
-            nextDayAsString = "Wednesday";
-            break;
-        case "Wednesday":
-            nextDayAsString = "Thursday";
-            break;
-        case "Thursday":
-            nextDayAsString = "Friday";
-            break;
-        case "Friday":
-            nextDayAsString = "Saturday";
-            break;
-        case "Saturday":
-            nextDayAsString = "Sunday";
-            break;
-        case "Sunday":
-            nextDayAsString = "Monday";
-            break;
-        default:
-            console.log(`Sorry - ${dayAsString} is not a weekday`);
+    if (diff === 0 || diff === 1) {
+        d = 1;
+    } else {
+        d = diff
     }
 
-    return nextDayAsString;
+    let storedDateMonth = date[0];
+    let storedDateMonthAsInt = convertNameOfMonthToInt(storedDateMonth);
+    let storedDateDay = date[1];
+    let storedDateYear = date[2];
+
+    let constructedDate = new Date(storedDateYear, storedDateMonthAsInt, storedDateDay);
+    let newConstructedDate = new Date(constructedDate.setDate(constructedDate.getDate() + d));
+    // console.log(newConstructedDate);
+
+    let nextDateMonth = newConstructedDate.getUTCMonth();
+    let nextDateMonthAsString = convertMonthIntToName(nextDateMonth);
+
+    let nextDateDay = newConstructedDate.getUTCDate();
+    let nextDateYear = newConstructedDate.getUTCFullYear();
+
+    let storedNextDate = [nextDateMonthAsString, nextDateDay, nextDateYear];
+
+    return storedNextDate;
+
+    // switch (dayAsString) {
+    //     case "Monday":
+    //         nextDayAsString = "Tuesday";
+    //         break;
+    //     case "Tuesday":
+    //         nextDayAsString = "Wednesday";
+    //         break;
+    //     case "Wednesday":
+    //         nextDayAsString = "Thursday";
+    //         break;
+    //     case "Thursday":
+    //         nextDayAsString = "Friday";
+    //         break;
+    //     case "Friday":
+    //         nextDayAsString = "Saturday";
+    //         break;
+    //     case "Saturday":
+    //         nextDayAsString = "Sunday";
+    //         break;
+    //     case "Sunday":
+    //         nextDayAsString = "Monday";
+    //         break;
+    //     default:
+    //         console.log(`Sorry - ${dayAsString} is not a weekday`);
+    // }
+
+    // return nextDayAsString;
 }
 
 function calculateDiffBtwnTwoDates(date1, date2) {
