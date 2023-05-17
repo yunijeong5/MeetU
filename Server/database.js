@@ -124,6 +124,19 @@ const UserQuery = (client) => {
             const res = await client.query(queryText, [uid, mid]);
             return res.rows.length > 0 ? res.rows[0] : null;
         },
+        getAllPref: async (mid) => {
+            const initText = `
+                CREATE TABLE IF NOT EXISTS events (
+                id SERIAL PRIMARY KEY,
+                event_json JSONB NOT NULL,
+                mid VARCHAR(50) NOT NULL,
+                uid VARCHAR(50) NOT NULL,
+                pref_json JSONB DEFAULT NULL
+                );`;
+            await client.query(initText);
+            const pref = await client.query(`SELECT pref_json FROM events WHERE mid = $1;`, [mid]);
+            return pref.rows.map(row => row.pref_json);
+        },
         //TODO: Used for sharable link, check if it works
         // adds a new event if user clicks on link 
         shareUserMID: async (uid, mid) => {

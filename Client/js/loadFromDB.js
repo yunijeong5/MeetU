@@ -24,8 +24,8 @@ export async function loadUserMeetingJSON() {
         });
         const obj = await res.json();
         const mid = obj.data.mid;
-        const user =  obj.username
-        const pref = obj.data.pref_json;
+        const user =  obj.username;
+        const pref = obj.prefs;
         return { mid, user, pref};
     } 
     catch (err) {

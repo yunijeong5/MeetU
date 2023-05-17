@@ -1,3 +1,4 @@
+
 import "dotenv/config";
 import express from "express";
 import expressSession from "express-session";
@@ -143,9 +144,11 @@ const UserRoutes = (app, db) => {
             const username = req.session.username;
             const dbUser = await db.getUser(username);
             const data = await db.getMeeting(dbUser.uid, req.session.mid);
-            res.json({ data, username });
-        } catch (err) {
-            res.json({ error: err.message });
+            const prefs = await db.getAllPref(req.session.mid);
+            res.json({data, username, prefs});
+        } 
+        catch (err) {
+          res.json({ error: err.message });
         }
     });
 
