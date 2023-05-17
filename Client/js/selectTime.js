@@ -186,9 +186,10 @@ await renderPoll();
 // Share Event (copy url)
 const copyURL = document.getElementById("copy-url");
 
-// TODO: replace with functioning URL.
-copyURL.addEventListener("click", () => {
-    const url = "http://meetu.com/mid=meetingID";
+// replace with functioning URL.
+copyURL.addEventListener("click", async () => {
+    const meeting = await loadMeetingJSON();
+    const url = `http://localhost:4444/getMID/${meeting.mid}`;
     navigator.clipboard.writeText(url);
 });
 

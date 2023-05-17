@@ -148,20 +148,21 @@ const UserQuery = (client) => {
             );
             return pref.rows.map((row) => row.pref_json);
         },
-        //TODO: Used for sharable link, check if it works
         // adds a new event if user clicks on link
         shareUserMID: async (uid, mid) => {
             // updates uid with a new event_json
             const res = await client.query(
-                `SELECT event_json FROM events WHERE mid=$1`,
+                `SELECT event_json, pref_json FROM events WHERE mid=$1`,
                 [mid]
             );
-            const event_json = res.rows[0].event_json;
+            const event = res.rows[0].event_json;
+            const pref = res.rows[0].pref_json;
+
             const insertEvent = await client.query(
-                "INSERT INTO events (event_json, mid, uid) VALUES ($1, $2, $3) RETURNING id",
-                [event_json, mid, uid]
+                "INSERT INTO events (event_json, mid, uid, pref_json) VALUES ($1, $2, $3, $4) RETURNING id",
+                [event, mid, uid, pref]
             );
-            return insertEvent.rows[0];
-        },
+            return insertEvent.rows;
+        }
     };
 };
