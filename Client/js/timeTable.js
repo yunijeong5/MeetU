@@ -1,98 +1,99 @@
 import {
-  calculateDiffBtwnTwoDates,
-  getWeekDays,
-  findDiffInDatesArray,
-  getDateStrings,
-  getNextDay,
-  convertMonthIntToName,
-  convertNameOfMonthToInt,
-  convertNumToWeekDay,
+    calculateDiffBtwnTwoDates,
+    getWeekDays,
+    findDiffInDatesArray,
+    getDateStrings,
+    getNextDay,
+    convertMonthIntToName,
+    convertNameOfMonthToInt,
+    convertNumToWeekDay,
 } from "./weekdays.js";
 
 import { loadMeetingJSON, loadUserMeetingJSON } from "./loadFromDB.js";
 
 // convertTimeToNumber(timeString)
 function convertTimeToNumber(timeString) {
-  const indexOfIncrement = timeString.indexOf(":");
-  const firstLetterOfIncrement = indexOfIncrement + 1;
-  const secondLetterOfIncrement = indexOfIncrement + 3;
+    const indexOfIncrement = timeString.indexOf(":");
+    const firstLetterOfIncrement = indexOfIncrement + 1;
+    const secondLetterOfIncrement = indexOfIncrement + 3;
 
-  const increment = Number(
-    timeString.slice(firstLetterOfIncrement, secondLetterOfIncrement)
-  );
-  const beforeAfterMidDay = timeString.slice(-2).toUpperCase();
+    const increment = Number(
+        timeString.slice(firstLetterOfIncrement, secondLetterOfIncrement)
+    );
+    const beforeAfterMidDay = timeString.slice(-2).toUpperCase();
 
-  let hour = Number(timeString.slice(0, indexOfIncrement));
+    let hour = Number(timeString.slice(0, indexOfIncrement));
 
-  if (beforeAfterMidDay === "PM" && hour !== 12) {
-    hour += 12;
-  }
+    if (beforeAfterMidDay === "PM" && hour !== 12) {
+        hour += 12;
+    }
 
-  let computedTime;
+    let computedTime;
 
-  if (increment === 0) {
-    computedTime = hour;
-  }
+    if (increment === 0) {
+        computedTime = hour;
+    }
 
-  if (increment === 30) {
-    computedTime = hour + 0.5;
-  }
+    if (increment === 30) {
+        computedTime = hour + 0.5;
+    }
 
-  return computedTime;
+    return computedTime;
 }
 
 // convertNumberToTime(timeAsNumber)
 function convertNumberToTime(timeAsNumber) {
-  if (timeAsNumber < 0 || timeAsNumber > 23.5) {
-    console.log("Time must be valid");
-    return null;
-  }
-
-  let timeAsString = "";
-  let newString = "";
-
-  if (timeAsNumber >= 12 && timeAsNumber < 13) {
-    if (timeAsNumber % 1 === 0) {
-      timeAsString = timeAsNumber.toString();
-      newString = timeAsString.concat("", ":00 PM");
-    } else {
-      timeAsNumber -= 0.5;
-      timeAsString = timeAsNumber.toString();
-      newString = timeAsString.concat("", ":30 PM");
+    if (timeAsNumber < 0 || timeAsNumber > 23.5) {
+        console.log("Time must be valid");
+        return null;
     }
-  } else if (timeAsNumber >= 13) {
-    timeAsNumber -= 12;
-    if (timeAsNumber % 1 === 0) {
-      timeAsString = timeAsNumber.toString();
-      newString = timeAsString.concat("", ":00 PM");
-    } else {
-      timeAsNumber -= 0.5;
-      timeAsString = timeAsNumber.toString();
-      newString = timeAsString.concat("", ":30 PM");
-    }
-  } else {
-    if (timeAsNumber % 1 === 0) {
-      timeAsString = timeAsNumber.toString();
-      newString = timeAsString.concat("", ":00 AM");
-    } else {
-      timeAsNumber -= 0.5;
-      timeAsString = timeAsNumber.toString();
-      newString = timeAsString.concat("", ":30 AM");
-    }
-  }
 
-  return newString;
+    let timeAsString = "";
+    let newString = "";
+
+    if (timeAsNumber >= 12 && timeAsNumber < 13) {
+        if (timeAsNumber % 1 === 0) {
+            timeAsString = timeAsNumber.toString();
+            newString = timeAsString.concat("", ":00 PM");
+        } else {
+            timeAsNumber -= 0.5;
+            timeAsString = timeAsNumber.toString();
+            newString = timeAsString.concat("", ":30 PM");
+        }
+    } else if (timeAsNumber >= 13) {
+        timeAsNumber -= 12;
+        if (timeAsNumber % 1 === 0) {
+            timeAsString = timeAsNumber.toString();
+            newString = timeAsString.concat("", ":00 PM");
+        } else {
+            timeAsNumber -= 0.5;
+            timeAsString = timeAsNumber.toString();
+            newString = timeAsString.concat("", ":30 PM");
+        }
+    } else {
+        if (timeAsNumber % 1 === 0) {
+            timeAsString = timeAsNumber.toString();
+            newString = timeAsString.concat("", ":00 AM");
+        } else {
+            timeAsNumber -= 0.5;
+            timeAsString = timeAsNumber.toString();
+            newString = timeAsString.concat("", ":30 AM");
+        }
+    }
+
+    return newString;
 }
 
-function generateStLessThanET(stn, etn, times, dAndT, wd) { // times is an array of strings
+function generateStLessThanET(stn, etn, times, dAndT, wd) {
+    // times is an array of strings
     let ctn = stn;
     let ctString = "";
     console.log("the etn is: " + etn);
 
     while (ctn <= etn) {
-      ctString = convertNumberToTime(ctn);
-      times.push(ctString);
-      ctn += 0.5;
+        ctString = convertNumberToTime(ctn);
+        times.push(ctString);
+        ctn += 0.5;
     }
 
     for (let i = 0; i < wd.length; ++i) {
@@ -103,7 +104,8 @@ function generateStLessThanET(stn, etn, times, dAndT, wd) { // times is an array
     return dAndT;
 }
 
-function generateEtIsMidnight(stn, etn, times, dAndT, wd) { // times is an array of strings
+function generateEtIsMidnight(stn, etn, times, dAndT, wd) {
+    // times is an array of strings
     let ctn = stn;
     let ctString = "";
     console.log("the etn is: " + etn);
@@ -111,9 +113,9 @@ function generateEtIsMidnight(stn, etn, times, dAndT, wd) { // times is an array
     let lastTime = etn + 23.5;
 
     while (ctn <= lastTime) {
-      ctString = convertNumberToTime(ctn);
-      times.push(ctString);
-      ctn += 0.5;
+        ctString = convertNumberToTime(ctn);
+        times.push(ctString);
+        ctn += 0.5;
     }
 
     for (let i = 0; i < wd.length; ++i) {
@@ -127,44 +129,54 @@ function generateEtIsMidnight(stn, etn, times, dAndT, wd) { // times is an array
 // generateArrayOfTimeIncrements
 // generateArrayOfTimeIncrements
 function generateArrayOfTimeIncrements(startTimeString, endTimeString, dates) {
-  let differenceInNumberOfDays = findDiffInDatesArray(dates);
-  console.log("Here's the difference " + differenceInNumberOfDays);
-  let weekDays = getWeekDays(dates);
+    let differenceInNumberOfDays = findDiffInDatesArray(dates);
+    console.log("Here's the difference " + differenceInNumberOfDays);
+    let weekDays = getWeekDays(dates);
 
-  let startTimeNumber = convertTimeToNumber(startTimeString);
-  let endTimeNumber = convertTimeToNumber(endTimeString);
+    let startTimeNumber = convertTimeToNumber(startTimeString);
+    let endTimeNumber = convertTimeToNumber(endTimeString);
 
-//   let arrOfTimeIncrements = [];
-//   let currTimeNumber;
-//   let currTimeAsString = "";
-  let differenceInDaysTracker = 0;
+    //   let arrOfTimeIncrements = [];
+    //   let currTimeNumber;
+    //   let currTimeAsString = "";
+    let differenceInDaysTracker = 0;
 
-  // Test Case #1
-  let daysAndTimes = {};
+    // Test Case #1
+    let daysAndTimes = {};
 
-  if (endTimeNumber === 0) {
-    daysAndTimes = generateEtIsMidnight(startTimeNumber, endTimeNumber, [], daysAndTimes, weekDays);
-    console.log(daysAndTimes);
-  }
+    if (endTimeNumber === 0) {
+        daysAndTimes = generateEtIsMidnight(
+            startTimeNumber,
+            endTimeNumber,
+            [],
+            daysAndTimes,
+            weekDays
+        );
+        console.log(daysAndTimes);
+    } else if (startTimeNumber < endTimeNumber) {
+        // currTimeNumber = startTimeNumber;
 
-  else if (startTimeNumber < endTimeNumber) {
-    // currTimeNumber = startTimeNumber;
+        // while (currTimeNumber <= endTimeNumber) {
+        //   currTimeAsString = convertNumberToTime(currTimeNumber);
+        //   arrOfTimeIncrements.push(currTimeAsString);
+        //   currTimeNumber += 0.5;
+        // }
 
-    // while (currTimeNumber <= endTimeNumber) {
-    //   currTimeAsString = convertNumberToTime(currTimeNumber);
-    //   arrOfTimeIncrements.push(currTimeAsString);
-    //   currTimeNumber += 0.5;
-    // }
+        // for (let i = 0; i < weekDays.length; ++i) {
+        //   daysAndTimes[weekDays[i]] = [...arrOfTimeIncrements];
+        // }
+        daysAndTimes = generateStLessThanET(
+            startTimeNumber,
+            endTimeNumber,
+            [],
+            daysAndTimes,
+            weekDays
+        );
+    } else {
+        return daysAndTimes; // changing later - just here for now
+    }
 
-    // for (let i = 0; i < weekDays.length; ++i) {
-    //   daysAndTimes[weekDays[i]] = [...arrOfTimeIncrements];
-    // }
-    daysAndTimes = generateStLessThanET(startTimeNumber, endTimeNumber, [], daysAndTimes, weekDays);
-  } else {
-    return daysAndTimes; // changing later - just here for now
-  }
-
-  return daysAndTimes;
+    return daysAndTimes;
 }
 
 // Populate Title and Description Fields with information provided by user from the Create Event user interface.
@@ -173,18 +185,24 @@ function generateArrayOfTimeIncrements(startTimeString, endTimeString, dates) {
 
 let userTable = document.getElementById("user-table");
 let groupTable = document.getElementById("group-table");
-let startingTime = "0:00 AM";
-let endingTime = "0:00 AM";
+const res = await loadMeetingJSON();
+const meeting = res["value"];
+const dates = meeting["dates"];
+const startingTime = meeting["time"][0];
+const endingTime = meeting["time"][1];
 
-let dates = [
-  ["May", 11, 2023],
-//   ["May", 12, 2023],
-    // ["May", 13, 2023],
-//   ["May", 14, 2023],
-//   ["May", 15, 2023],
-//   ["May", 16, 2023],
-  // ["May", 17, 2023],
-];
+// let startingTime = "0:00 AM";
+// let endingTime = "0:00 AM";
+
+// let dates = [
+//     ["May", 11, 2023],
+//     //   ["May", 12, 2023],
+//     // ["May", 13, 2023],
+//     //   ["May", 14, 2023],
+//     //   ["May", 15, 2023],
+//     //   ["May", 16, 2023],
+//     // ["May", 17, 2023],
+// ];
 
 // let dates2 = [
 //     ["May", 11, 2023],
@@ -200,133 +218,135 @@ let dates = [
 // Get the body of the table
 // function generateTimeTable(table, startTime, endTime, dates) { // James - commented out startTime, endTime, and dates to for stubbing
 function renderTable(userTable) {
-  const daysWithTimes = generateArrayOfTimeIncrements(
-    startingTime,
-    endingTime,
-    dates
-  );
-
-  let selectedDays = Object.keys(daysWithTimes);
-  let selectedTimes = Object.values(daysWithTimes); // is an array of arrays of timeframes [ [ 6:00, 6:30, 7:00 ], []]
-
-  let timeTableHead = userTable.createTHead();
-  let headRow = timeTableHead.insertRow();
-
-  let timeTableBody = userTable.createTBody();
-
-  // Get the start time provided by the user from the Create Event user interface
-  // const startTime = JSON.parse(localStorage.getItem("serializedRes"))["time"][0];
-  // const endTime = JSON.parse(localStorage.getItem("serializedRes"))["time"][1];
-  // const dates = JSON.parse(localStorage.getItem("serializedRes"))["dates"];
-
-  let startTimeAsNumber = convertTimeToNumber(startingTime);
-  let endTimeAsNumber = convertTimeToNumber(endingTime);
-
-  let differenceBetweenStartAndEndTimes = 0;
-  let numRows;
-
-  // Case #1
-  if (endTimeAsNumber > startTimeAsNumber) {
-    differenceBetweenStartAndEndTimes = Math.abs(
-      endTimeAsNumber - startTimeAsNumber
+    const daysWithTimes = generateArrayOfTimeIncrements(
+        startingTime,
+        endingTime,
+        dates
     );
-    numRows = differenceBetweenStartAndEndTimes * 4;
-  } else if (endTimeAsNumber === 0 && startTimeAsNumber > endTimeAsNumber) {
-    endTimeAsNumber = 23.5;
-    differenceBetweenStartAndEndTimes = Math.abs(endTimeAsNumber - startTimeAsNumber);
-    numRows = (differenceBetweenStartAndEndTimes * 4) + 1;
-  } else if (endTimeAsNumber === 0 && startTimeAsNumber === 0) {
-    endTimeAsNumber = 23.5;
-    differenceBetweenStartAndEndTimes = Math.abs(endTimeAsNumber - startTimeAsNumber);
-    numRows = (differenceBetweenStartAndEndTimes * 4) + 1;
-  }
-  
-  else {
-    differenceBetweenStartAndEndTimes = endTimeAsNumber - startTimeAsNumber; // changing just leaving here for now.
-  }
 
-  // Beginning of Case #2
-//   if (endTimeAsNumber <= startTimeAsNumber) {
-//     differenceBetweenStartAndEndTimes =
-//       Math.abs(24 - startTimeAsNumber) + Math.abs(endTimeAsNumber);
-//   }
+    let selectedDays = Object.keys(daysWithTimes);
+    let selectedTimes = Object.values(daysWithTimes); // is an array of arrays of timeframes [ [ 6:00, 6:30, 7:00 ], []]
 
-  const dateStrings = getDateStrings(dates);
+    let timeTableHead = userTable.createTHead();
+    let headRow = timeTableHead.insertRow();
 
-  for (let i = 0; i < selectedDays.length; ++i) {
-    if (i === 0) {
-      let thHead = document.createElement("th");
+    let timeTableBody = userTable.createTBody();
 
-      headRow.append(thHead);
-      thHead.setAttribute("scope", "col");
+    // Get the start time provided by the user from the Create Event user interface
+    // const startTime = JSON.parse(localStorage.getItem("serializedRes"))["time"][0];
+    // const endTime = JSON.parse(localStorage.getItem("serializedRes"))["time"][1];
+    // const dates = JSON.parse(localStorage.getItem("serializedRes"))["dates"];
+
+    let startTimeAsNumber = convertTimeToNumber(startingTime);
+    let endTimeAsNumber = convertTimeToNumber(endingTime);
+
+    let differenceBetweenStartAndEndTimes = 0;
+    let numRows;
+
+    // Case #1
+    if (endTimeAsNumber > startTimeAsNumber) {
+        differenceBetweenStartAndEndTimes = Math.abs(
+            endTimeAsNumber - startTimeAsNumber
+        );
+        numRows = differenceBetweenStartAndEndTimes * 4;
+    } else if (endTimeAsNumber === 0 && startTimeAsNumber > endTimeAsNumber) {
+        endTimeAsNumber = 23.5;
+        differenceBetweenStartAndEndTimes = Math.abs(
+            endTimeAsNumber - startTimeAsNumber
+        );
+        numRows = differenceBetweenStartAndEndTimes * 4 + 1;
+    } else if (endTimeAsNumber === 0 && startTimeAsNumber === 0) {
+        endTimeAsNumber = 23.5;
+        differenceBetweenStartAndEndTimes = Math.abs(
+            endTimeAsNumber - startTimeAsNumber
+        );
+        numRows = differenceBetweenStartAndEndTimes * 4 + 1;
+    } else {
+        differenceBetweenStartAndEndTimes = endTimeAsNumber - startTimeAsNumber; // changing just leaving here for now.
     }
 
-    let th = document.createElement("th");
-    headRow.append(th);
-    th.classList.add("table-header");
-    th.classList.add("text-center");
-    th.setAttribute("scope", "col");
-    th.textContent = selectedDays[i].slice(0, 3).toUpperCase();
+    // Beginning of Case #2
+    //   if (endTimeAsNumber <= startTimeAsNumber) {
+    //     differenceBetweenStartAndEndTimes =
+    //       Math.abs(24 - startTimeAsNumber) + Math.abs(endTimeAsNumber);
+    //   }
 
-    const dateString = document.createElement("div");
-    dateString.textContent = dateStrings[i].slice(0, -5);
-    th.appendChild(dateString);
-  }
+    const dateStrings = getDateStrings(dates);
 
-  let count = 0;
-  let day = 0;
+    for (let i = 0; i < selectedDays.length; ++i) {
+        if (i === 0) {
+            let thHead = document.createElement("th");
 
-  const tableType = userTable.id.slice(0, 1);
+            headRow.append(thHead);
+            thHead.setAttribute("scope", "col");
+        }
 
-  for (let i = 0; i < numRows + 1; ++i) {
-    let newRow = timeTableBody.insertRow();
+        let th = document.createElement("th");
+        headRow.append(th);
+        th.classList.add("table-header");
+        th.classList.add("text-center");
+        th.setAttribute("scope", "col");
+        th.textContent = selectedDays[i].slice(0, 3).toUpperCase();
 
-    for (let j = 0; j < selectedDays.length; ++j) {
-      let newCell = newRow.insertCell(j);
-      newCell.id = `${tableType}.${i}x${j}`;
-      newCell.classList.add("td");
-
-      if (tableType === "u") {
-        newCell.addEventListener("mousedown", async function () {
-          this.classList.toggle("highlight");
-          // TODO: send updated data to backend
-          // send {selectedTimes: ['1x10',....], selectedOptions: ['o1'....], user: username, mid: meetingID}
-          const res = await fetch("/sendUserMeeting", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              user: username,
-              mid: meetingID,
-              selectedTimes: selectedTimes, // TODO:
-              selectedOptions: selectedOptions, // TODO:
-            }),
-          });
-
-          // TODO: rerender groups table
-          // fetch all users' input for this meeting.
-        });
-      }
+        const dateString = document.createElement("div");
+        dateString.textContent = dateStrings[i].slice(0, -5);
+        th.appendChild(dateString);
     }
 
-    // let th = document.createElement("th");
-    let th = document.createElement("div");
-    newRow.prepend(th);
-    th.classList.add("table-time", "p-0", "m-0");
-    th.setAttribute("scope", "row");
-    th.classList.add(`row-${i}`);
+    let count = 0;
+    let day = 0;
 
-    if (i % 2 === 0) {
-      th.innerHTML = selectedTimes[day][count]; // change put more times on the side?
-      ++count;
+    const tableType = userTable.id.slice(0, 1);
+
+    for (let i = 0; i < numRows + 1; ++i) {
+        let newRow = timeTableBody.insertRow();
+
+        for (let j = 0; j < selectedDays.length; ++j) {
+            let newCell = newRow.insertCell(j);
+            newCell.id = `${tableType}.${i}x${j}`;
+            newCell.classList.add("td");
+
+            if (tableType === "u") {
+                newCell.addEventListener("mousedown", async function () {
+                    this.classList.toggle("highlight");
+                    // TODO: send updated data to backend
+                    // send {selectedTimes: ['1x10',....], selectedOptions: ['o1'....], user: username, mid: meetingID}
+                    const res = await fetch("/sendUserMeeting", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            user: username,
+                            mid: meetingID,
+                            selectedTimes: selectedTimes, // TODO:
+                            selectedOptions: selectedOptions, // TODO:
+                        }),
+                    });
+
+                    // TODO: rerender groups table
+                    // fetch all users' input for this meeting.
+                });
+            }
+        }
+
+        // let th = document.createElement("th");
+        let th = document.createElement("div");
+        newRow.prepend(th);
+        th.classList.add("table-time", "p-0", "m-0");
+        th.setAttribute("scope", "row");
+        th.classList.add(`row-${i}`);
+
+        if (i % 2 === 0) {
+            th.innerHTML = selectedTimes[day][count]; // change put more times on the side?
+            ++count;
+        }
+
+        // if (count === selectedTimes[day].length) {
+        //   ++day;
+        //   count = 1;
+        // }
     }
-
-    // if (count === selectedTimes[day].length) {
-    //   ++day;
-    //   count = 1;
-    // }
-  }
 }
 
 renderTable(userTable);
