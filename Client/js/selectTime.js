@@ -1,3 +1,5 @@
+import { loadMeetingJSON, loadUserMeetingJSON, loadAllMeetingsJSON } from "./loadFromDB.js";
+
 // title and description
 const titleElem = document.getElementById("event-title");
 const descElem = document.getElementById("event-description");

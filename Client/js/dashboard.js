@@ -1,7 +1,8 @@
 // Switch theme button functionality
 // TODO: save theme between pages
 import { loadMeetingJSON, loadUserMeetingJSON, loadAllMeetingsJSON } from "./loadFromDB.js";
-console.log(loadAllMeetingsJSON());
+const test = await loadAllMeetingsJSON();
+console.log(test);
 
 const htmlDiv = document.querySelector("html");
 const themeButton = document.getElementsByClassName("theme-icon")[0];
