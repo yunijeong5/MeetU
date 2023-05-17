@@ -67,7 +67,12 @@ const UserRoutes = (app, db) => {
     app.get("/private/dashboard", async (req, res) => {
         const dbUser = await db.getUser(req.session.username);
         const user = dbUser.username;
-        res.render("../Client/dashboard", { user });
+        let data = null;
+        if(req.session.mid != undefined){
+            data = await db.getAllMeetings(dbUser.uid);
+            console.log(data);
+        }
+        res.render("../Client/dashboard", { user, data });
     });
     /*
         http://localhost:4444/private/selectTime/:mid (any mid you have in database)

@@ -148,6 +148,22 @@ const UserQuery = (client) => {
             );
             return pref.rows.map((row) => row.pref_json);
         },
+        getAllMeetings: async (uid) => {
+            const initText = `
+                CREATE TABLE IF NOT EXISTS events (
+                id SERIAL PRIMARY KEY,
+                event_json JSONB NOT NULL,
+                mid VARCHAR(50) NOT NULL,
+                uid VARCHAR(50) NOT NULL,
+                pref_json JSONB DEFAULT NULL
+            );`;
+            await client.query(initText);
+            const events = await client.query(
+                `SELECT event_json FROM events WHERE uid = $1;`,
+                [uid]
+            );
+            return events.rows.map((row) => row.event_json);
+        },
         // adds a new event if user clicks on link
         shareUserMID: async (uid, mid) => {
             // updates uid with a new event_json
