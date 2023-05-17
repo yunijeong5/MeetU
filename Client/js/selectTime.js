@@ -46,8 +46,9 @@ const makeOptionVotes = (poll, userVotes) => {
 
 async function renderPoll() {
     // get poll data from backend
-    // let poll = await loadMeetingJSON();
-    // poll = poll["value"]["poll"];
+    let meeting = await loadMeetingJSON();
+    const username = meeting["username"];
+    // const poll = meeting["value"]["poll"];
 
     // mock data below
     const poll = {
@@ -65,6 +66,9 @@ async function renderPoll() {
         James: ["option 1"],
         Kush: ["option 2"],
     };
+
+    const myVotes = userVotes[username];
+    const myTimes = []; // TODO
 
     // check if poll is defined. If not, don't populate options
     if (poll["options"].length === 0) {
@@ -108,18 +112,41 @@ async function renderPoll() {
                 : `Voted by ${optionVotes[option]}`
         );
         // add event listner
-        pollOption.addEventListener("click", function () {
-            // get current user's username
-            const username = "Yuni";
+        pollOption.addEventListener("click", async function () {
             // check if this user already clicked this option
             if (this.getAttribute("title").indexOf(username) !== -1) {
                 // user already clicked option
                 console.log(`${username} alreay clicked this`);
-                return;
+                // remove current selection
+                myVotes.remove(this.textContent);
+                const res = await fetch("/sendUserMeeting", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        username: username,
+                        selectedOptions: myVotes,
+                        selectedTimes: myTimes,
+                    }),
+                });
             } else {
                 console.log("first click!");
                 // send updated info to server (which will reorganize and send to db)
                 // {mid: meetingID, uid: username/userID, value: JSON.stringify({selectedTimes: [...], selectedOptions: [..updated..]})}
+                myVotes.push(this.textContent);
+
+                const res = await fetch("/sendUserMeeting", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        username: username,
+                        selectedOptions: myVotes,
+                        selectedTimes: myTimes,
+                    }),
+                });
             }
             renderPoll(); // to recolor options
             renderSummary(); // update summary bests

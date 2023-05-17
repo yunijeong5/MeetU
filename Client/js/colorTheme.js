@@ -41,7 +41,6 @@ const navBar = document.getElementsByClassName("navbar")[0];
 const footer = document.getElementById("footer");
 
 function switchTheme() {
-    console.log("Switch Theme Called");
     const theme = htmlDiv.getAttribute("data-bs-theme");
     if (theme == "light") {
         htmlDiv.setAttribute("data-bs-theme", "dark");
