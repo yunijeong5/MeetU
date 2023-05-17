@@ -356,6 +356,7 @@ async function renderTable(userTable) {
                         }),
                     });
                     await colorTables();
+                    // location.reload(); // solves the issue but visual gets glitchy... not the best
                 }); // end of addEventListener for userTable
             }
         }
