@@ -72,20 +72,10 @@ const UserRoutes = (app, db) => {
 
     // endpoint is to gets all meetings for dashboard
     app.get("/all-meetings", async (req, res) => {
-        try{
-            const username = req.session.username;
-            const dbUser = await db.getUser(username);
-            let data = null;
-            let mid = null; 
-            if(req.session.mid != undefined){
-                data = await db.getAllMeetings(dbUser.uid);
-                mid = req.session.mid;
-            }
-            res.json({ mid, data });
-        }
-        catch(err){
-            res.json({ error: err.message });
-        }
+        const username = req.session.username;
+        const dbUser = await db.getUser(username);
+        let data = await db.getAllMeetings(dbUser.uid);
+        res.json( data );
     });
 
 
