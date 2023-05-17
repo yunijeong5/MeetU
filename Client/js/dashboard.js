@@ -1,14 +1,15 @@
 // Switch theme button functionality
 // TODO: save theme between pages
-import { loadMeetingJSON, loadUserMeetingJSON, loadAllMeetingsJSON } from "./loadFromDB.js";
-const test = await loadAllMeetingsJSON();
-console.log(test);
+import {
+    loadMeetingJSON,
+    loadUserMeetingJSON,
+    loadAllMeetingsJSON,
+} from "./loadFromDB.js";
 
 const htmlDiv = document.querySelector("html");
 const themeButton = document.getElementsByClassName("theme-icon")[0];
 const navBar = document.getElementsByClassName("navbar")[0];
 const footer = document.getElementById("footer");
-
 
 function switchTheme() {
     const theme = htmlDiv.getAttribute("data-bs-theme");
@@ -38,16 +39,12 @@ themeButton.addEventListener("click", switchTheme);
 
 // display all events associated with the user
 const dashboardBox = document.getElementById("dashboard");
+const meetingArr = await loadAllMeetingsJSON();
 
 function renderDashboard() {
     // const events = [{}...] array of events from db
-    // TODO: I need meeting title, meeting description, meeting id, and current user id
-    const mockdata = [
-        { title: "T1", description: "text here" },
-        { title: "T2", description: "text here" },
-    ];
 
-    mockdata.forEach((eventObject) => {
+    meetingArr.forEach((eventObject) => {
         const eventBox = document.createElement("a");
         const titleSpan = document.createElement("span");
         const descSpan = document.createElement("span");
