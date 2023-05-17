@@ -67,18 +67,14 @@ const UserRoutes = (app, db) => {
     app.get("/private/dashboard", async (req, res) => {
         const dbUser = await db.getUser(req.session.username);
         const user = dbUser.username;
-        let data = null;
-        if(req.session.mid != undefined){
-            data = await db.getAllMeetings(dbUser.uid);
-            console.log(data);
-        }
-        res.render("../Client/dashboard", { user, data });
+        res.render("../Client/dashboard", { user });
     });
 
     // endpoint is to gets all meetings for dashboard
     app.get("/all-meetings", async (req, res) => {
         try{
-            const user = dbUser.username;
+            const username = req.session.username;
+            const dbUser = await db.getUser(username);
             let data = null;
             let mid = null; 
             if(req.session.mid != undefined)
@@ -89,6 +85,7 @@ const UserRoutes = (app, db) => {
             res.json({ error: err.message });
         }
     });
+
 
     /*
         http://localhost:4444/private/selectTime/:mid (any mid you have in database)
