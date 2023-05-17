@@ -76,14 +76,12 @@ const UserRoutes = (app, db) => {
     */
     // copy sharable links
     app.get("/getMID/:mid", async (req, res) => {
-        // add the event to the user in session 
+        // add the event to the user in session
         if (req.session && req.session.username) {
             const dbUser = await db.getUser(req.session.username);
             const eventData = await db.shareUserMID(dbUser.uid, req.params.mid);
-            res.render("../Client/selectTimePoll", {eventData});
-        } 
-        else
-            res.render("../Client/error");
+            res.render("../Client/selectTimePoll", { eventData });
+        } else res.render("../Client/error");
     });
 
     app.post("/login", async (req, res) => {
@@ -107,13 +105,17 @@ const UserRoutes = (app, db) => {
         const eventID = await db.addEvent(eventJson, dbUser.uid, null);
         req.session.mid = eventID[0].mid;
         // req.session.uid = eventID[0].uid;
-        res.json({ status: "success", eventID});
+        res.json({ status: "success", eventID });
     });
 
-    app.post("/sendUserMeeting", async(req, res) => {
+    app.post("/sendUserMeeting", async (req, res) => {
         const dbUser = await db.getUser(req.session.username);
         const prefJson = req.body;
-        const prefID = await db.updateEvent(dbUser.uid, req.session.mid, prefJson);
+        const prefID = await db.updateEvent(
+            dbUser.uid,
+            req.session.mid,
+            prefJson
+        );
         res.json({ status: "success", prefID });
     });
 
@@ -139,12 +141,11 @@ const UserRoutes = (app, db) => {
     app.get("/readEvent", async (req, res) => {
         try {
             const username = req.session.username;
-          const dbUser = await db.getUser(username);
-          const data = await db.getMeeting(dbUser.uid, req.session.mid);
-          res.json({data, username});
-        } 
-        catch (err) {
-          res.json({ error: err.message });
+            const dbUser = await db.getUser(username);
+            const data = await db.getMeeting(dbUser.uid, req.session.mid);
+            res.json({ data, username });
+        } catch (err) {
+            res.json({ error: err.message });
         }
     });
 

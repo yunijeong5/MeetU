@@ -1,26 +1,18 @@
 import { loadMeetingJSON, loadUserMeetingJSON } from "./loadFromDB.js";
 
 //TODO: remove later... just for testing fetched data
-const result = await loadMeetingJSON();
-// const test = await loadUserMeetingJSON();
-console.log(result);
+// const meeting = await loadMeetingJSON();
+const test = await loadUserMeetingJSON();
+// console.log("result: ", result);
+console.log("test: ", test);
 
 // title and description
 const titleElem = document.getElementById("event-title");
 const descElem = document.getElementById("event-description");
-function renderTitleDesc() {
+async function renderTitleDesc() {
     // get meeting info
-    // moke data
-    const meeting = {
-        title: "Title Here",
-        description: `Lorem Ipsum is simply dummy text of the printing and
-    typesetting industry. Lorem Ipsum has been the
-    industrys standard dummy text ever since the 1500s,
-    when an unknown printer took a galley of type and
-    scrambled it to make a type specimen book. It has
-    survived not only five centuries, but also the leap into
-    electronic typesetting, remaining essentially unchanged.`,
-    };
+    let meeting = await loadMeetingJSON();
+    meeting = meeting["value"];
 
     titleElem.textContent = meeting["title"];
     descElem.textContent = meeting["description"];
@@ -52,14 +44,16 @@ const makeOptionVotes = (poll, userVotes) => {
     return optionVotes;
 };
 
-function renderPoll() {
+async function renderPoll() {
     // get poll data from backend
-    // const mockMeeting['poll'] = {json}
+    // let poll = await loadMeetingJSON();
+    // poll = poll["value"]["poll"];
+
+    // mock data below
     const poll = {
         title: "Hi!",
         options: ["option 1", "option 2", "option 3", "option 4"],
     };
-    // const poll = {};
 
     // const mockPollVotes['selected_options'] = [list of selected options]
     // const userMeeting = load from db
@@ -73,7 +67,7 @@ function renderPoll() {
     };
 
     // check if poll is defined. If not, don't populate options
-    if (Object.keys(poll).length === 0) {
+    if (poll["options"].length === 0) {
         pollTitle.textContent = "Poll";
         pollBlock.classList.add("text-center");
         pollBlock.textContent = "No poll for this event!";
