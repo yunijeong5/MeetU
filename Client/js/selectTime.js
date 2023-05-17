@@ -1,11 +1,5 @@
 import { loadMeetingJSON, loadUserMeetingJSON } from "./loadFromDB.js";
 
-//TODO: remove later... just for testing fetched data
-// const meeting = await loadMeetingJSON();
-const test = await loadUserMeetingJSON();
-// console.log("result: ", result);
-console.log("test: ", test);
-
 // title and description
 const titleElem = document.getElementById("event-title");
 const descElem = document.getElementById("event-description");
@@ -18,7 +12,7 @@ async function renderTitleDesc() {
     descElem.textContent = meeting["description"];
 }
 
-renderTitleDesc();
+await renderTitleDesc();
 
 // Poll
 // Userid, eventid, send number 1 or -1.
@@ -26,7 +20,7 @@ const pollBlock = document.getElementById("poll-block");
 const pollTitle = document.getElementById("poll-title");
 
 // numLevel: num people voted + 1
-const generateColorScale = (numLevel, colorString) => {
+export const generateColorScale = (numLevel, colorString) => {
     return chroma.scale(["white", colorString]).colors(numLevel);
 };
 
@@ -61,7 +55,7 @@ function makeUserVotes(arr) {
     return res;
 }
 
-function findMyData(myName, allUsers) {
+export function findMyData(myName, allUsers) {
     for (const o of allUsers) {
         if (o.username === myName) {
             return o;
@@ -83,15 +77,15 @@ async function renderPoll() {
     let allUsers = await loadUserMeetingJSON();
     // console.log("All users", allUsers);
 
+    let myVotes = [];
+    let myTimes = [];
     if (allUsers[0] !== null) {
         userVotes = makeUserVotes(allUsers);
         // console.log("USERVOTES", userVotes);
+        const myData = findMyData(username, allUsers);
+        myVotes = myData.selectedOptions;
+        myTimes = myData.selectedTimes;
     }
-
-    // const myVotes = userVotes[username];
-    const myData = findMyData(username, allUsers);
-    const myVotes = myData.selectedOptions;
-    const myTimes = myData.selectedTimes;
 
     // check if poll is defined. If not, don't populate options
     if (poll["options"].length === 0) {
@@ -180,14 +174,14 @@ async function renderPoll() {
                     }),
                 });
             }
-            renderPoll(); // to recolor options
-            renderSummary(); // update summary bests
+            await renderPoll(); // to recolor options
+            await renderSummary(); // update summary bests
         });
         pollBlock.appendChild(pollOption);
     });
 }
 
-renderPoll();
+await renderPoll();
 
 // Share Event (copy url)
 const copyURL = document.getElementById("copy-url");
@@ -201,14 +195,14 @@ copyURL.addEventListener("click", () => {
 // Summary
 const participants = document.getElementById("participants");
 const bestPollsText = document.getElementById("best-polls");
-async function renderSummary() {
+export async function renderSummary() {
     // clear summaryblock
     participants.innerHTML = "";
     bestPollsText.innerHTML = "";
 
     // participants
     const allUsers = await loadUserMeetingJSON();
-    console.log(allUsers);
+    // console.log(allUsers);
 
     if (allUsers[0] !== null) {
         const users = allUsers
@@ -218,9 +212,9 @@ async function renderSummary() {
             )
             .map((o) => o.username);
 
-        console.log("users***", users);
+        // console.log("users***", users);
         const userVotes = makeUserVotes(allUsers);
-        console.log("USERVOTES", userVotes);
+        // console.log("USERVOTES", userVotes);
         users.forEach((option) => {
             const div = document.createElement("div");
             div.classList.add("m-1", "best-bubble", "pill-corner");
@@ -254,7 +248,7 @@ async function renderSummary() {
     }
 }
 
-renderSummary();
+await renderSummary();
 
 // add event listener to table cells
 const userTable = document.getElementById("user-table");

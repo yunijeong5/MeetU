@@ -11,6 +11,8 @@ import {
 
 import { loadMeetingJSON, loadUserMeetingJSON } from "./loadFromDB.js";
 
+import { findMyData, generateColorScale, renderSummary } from "./selectTime.js";
+
 // convertTimeToNumber(timeString)
 function convertTimeToNumber(timeString) {
     const indexOfIncrement = timeString.indexOf(":");
@@ -185,8 +187,11 @@ function generateArrayOfTimeIncrements(startTimeString, endTimeString, dates) {
 
 let userTable = document.getElementById("user-table");
 let groupTable = document.getElementById("group-table");
+
+// meeting basic/common info
 const res = await loadMeetingJSON();
 const meeting = res["value"];
+const username = res["username"];
 const dates = meeting["dates"];
 const startingTime = meeting["time"][0];
 const endingTime = meeting["time"][1];
@@ -217,7 +222,11 @@ const endingTime = meeting["time"][1];
 // Steps to generate the table
 // Get the body of the table
 // function generateTimeTable(table, startTime, endTime, dates) { // James - commented out startTime, endTime, and dates to for stubbing
-function renderTable(userTable) {
+async function renderTable(userTable) {
+    // reset tables
+    userTable.innerHTML = "";
+    groupTable.innerHTML = "";
+
     const daysWithTimes = generateArrayOfTimeIncrements(
         startingTime,
         endingTime,
@@ -306,27 +315,48 @@ function renderTable(userTable) {
             newCell.id = `${tableType}.${i}x${j}`;
             newCell.classList.add("td");
 
+            // only usertable is clickable
             if (tableType === "u") {
                 newCell.addEventListener("mousedown", async function () {
-                    this.classList.toggle("highlight");
-                    // TODO: send updated data to backend
-                    // send {selectedTimes: ['1x10',....], selectedOptions: ['o1'....], user: username}
+                    const allUsers = await loadUserMeetingJSON();
+                    let myVotes = [];
+                    let myTimes = [];
+                    // console.log("allusers", allUsers);
+                    if (allUsers[0] !== null) {
+                        const myData = findMyData(username, allUsers);
+                        myVotes = myData.selectedOptions;
+                        myTimes = myData.selectedTimes;
+                        // console.log(myTimes);
+                    }
+
+                    // if this.id is already selected, this click removes selection
+                    if (myTimes.includes(this.id)) {
+                        // remove current selection
+                        const index = myTimes.indexOf(this.id);
+                        if (index > -1) {
+                            myTimes.splice(index, 1);
+                        }
+                        this.classList.remove("highlight");
+                        // await colorTables();
+                    }
+                    // else, add cur time from myTimes
+                    else {
+                        myTimes.push(this.id);
+                    }
+
                     const res = await fetch("/sendUserMeeting", {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
                         },
                         body: JSON.stringify({
-                            user: username,
-                            mid: meetingID,
-                            selectedTimes: selectedTimes, // TODO:
-                            selectedOptions: selectedOptions, // TODO:
+                            username: username,
+                            selectedTimes: myTimes,
+                            selectedOptions: myVotes,
                         }),
                     });
-
-                    // TODO: rerender groups table
-                    // fetch all users' input for this meeting.
-                });
+                    await colorTables();
+                }); // end of addEventListener for userTable
             }
         }
 
@@ -349,5 +379,59 @@ function renderTable(userTable) {
     }
 }
 
-renderTable(userTable);
-renderTable(groupTable);
+await renderTable(userTable);
+await renderTable(groupTable);
+
+async function colorTables() {
+    const allUsers = await loadUserMeetingJSON();
+    // nothing to color.
+    if (allUsers[0] === null) {
+        return;
+    }
+
+    const myData = findMyData(username, allUsers);
+    const myTimes = myData.selectedTimes;
+
+    // color userTable according to myTimes
+    // console.log("My Times: ", myTimes);
+    for (const id of myTimes) {
+        const timeCell = document.getElementById(id);
+        timeCell.classList.add("highlight");
+    }
+
+    // color groupTablae according to allTimes
+    // TODO: add names as title to each groupTable cell.
+    // get total number of people who selected time and generate color scale
+    const numLevels = Math.max(
+        2,
+        allUsers.filter((o) => o.selectedTimes.length > 0).length + 1
+    );
+    const colorScale = generateColorScale(numLevels, "0d6efd");
+
+    // make {time: [usernames]} object
+    const timeUsers = {};
+    for (const o of allUsers) {
+        o.selectedTimes.forEach((id) => {
+            const cellNum = "g" + id.slice(1);
+            if (cellNum in timeUsers) {
+                timeUsers[cellNum].push(o.username);
+            } else {
+                timeUsers[cellNum] = [o.username];
+            }
+        });
+    }
+
+    // color cells based on number of users who selected that time
+    for (const [cellNum, usernameArr] of Object.entries(timeUsers)) {
+        const matchingGroupCell = document.getElementById(cellNum);
+        matchingGroupCell.style.background = colorScale[usernameArr.length];
+        matchingGroupCell.setAttribute("title", `Selected by ${usernameArr}`);
+    }
+
+    // to update participants list
+    await renderSummary();
+}
+
+await colorTables();
+
+// TODO: Error--Removal of times are not immediately applied to group table view.
