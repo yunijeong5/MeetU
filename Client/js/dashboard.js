@@ -16,7 +16,8 @@ function switchTheme() {
         navBar.style.borderBottom = "1px solid #343a40";
         footer.style.borderTop = "1px solid #343a40";
     } else {
-        htmlDiv.setAttribute("data-bs-theme", "light");s
+        htmlDiv.setAttribute("data-bs-theme", "light");
+        s;
         themeButton.src = "./sun-svgrepo-com.svg";
         navBar.style.borderBottom = "1px solid #e9ecef";
         footer.style.borderTop = "1px solid #e9ecef";
@@ -58,9 +59,9 @@ function renderDashboard() {
         eventBox.style.cursor = "pointer";
         eventBox.style.display = "block";
         titleSpan.textContent = eventObject["title"];
-        titleSpan.classList.add("meeting-title");
+        titleSpan.classList.add("meeting-title", "text-black");
         descSpan.textContent = eventObject["description"];
-        descSpan.classList.add("meeting-desc");
+        descSpan.classList.add("meeting-desc", "text-black");
 
         eventBox.appendChild(titleSpan);
         eventBox.appendChild(document.createElement("br"));
