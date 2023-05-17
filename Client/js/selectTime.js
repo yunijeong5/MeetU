@@ -36,6 +36,7 @@ const makeOptionVotes = (poll, userVotes) => {
     for (const option of poll["options"]) {
         optionVotes[option] = [];
     }
+    console.log("options votes: ", optionVotes);
     for (const [userName, selectedOptions] of Object.entries(userVotes)) {
         selectedOptions.forEach((option) => {
             optionVotes[option].push(userName);
@@ -49,12 +50,16 @@ async function renderPoll() {
     let meeting = await loadMeetingJSON();
     const username = meeting["username"];
     // const poll = meeting["value"]["poll"];
+    // console.log("meeting, ", meeting);
+    // console.log("poll, ", poll);
 
     // mock data below
     const poll = {
         title: "Hi!",
         options: ["option 1", "option 2", "option 3", "option 4"],
     };
+    let allUsers = await loadUserMeetingJSON();
+    console.log("All users", allUsers);
 
     // const mockPollVotes['selected_options'] = [list of selected options]
     // const userMeeting = load from db
@@ -67,7 +72,8 @@ async function renderPoll() {
         Kush: ["option 2"],
     };
 
-    const myVotes = userVotes[username];
+    // const myVotes = userVotes[username];
+    const myVotes = [];
     const myTimes = []; // TODO
 
     // check if poll is defined. If not, don't populate options
@@ -118,7 +124,10 @@ async function renderPoll() {
                 // user already clicked option
                 console.log(`${username} alreay clicked this`);
                 // remove current selection
-                myVotes.remove(this.textContent);
+                const index = myVotes.indexOf(this.textContent);
+                if (index > -1) {
+                    myVotes.splice(index, 1);
+                }
                 const res = await fetch("/sendUserMeeting", {
                     method: "POST",
                     headers: {
