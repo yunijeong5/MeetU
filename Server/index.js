@@ -77,8 +77,10 @@ const UserRoutes = (app, db) => {
             const dbUser = await db.getUser(username);
             let data = null;
             let mid = null; 
-            if(req.session.mid != undefined)
+            if(req.session.mid != undefined){
                 data = await db.getAllMeetings(dbUser.uid);
+                mid = req.session.mid;
+            }
             res.json({ mid, data });
         }
         catch(err){
