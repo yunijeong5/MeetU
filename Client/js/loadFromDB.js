@@ -38,7 +38,7 @@ export async function loadAllMeetingsJSON() {
             method: "GET",
         });
         const obj = await res.json();
-        return { mid, obj };
+        return obj;
     } catch (err) {
         return { error: err.message };
     }
