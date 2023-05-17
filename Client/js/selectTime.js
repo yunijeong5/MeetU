@@ -36,7 +36,7 @@ const makeOptionVotes = (poll, userVotes) => {
     for (const option of poll["options"]) {
         optionVotes[option] = [];
     }
-    console.log("options votes: ", optionVotes);
+    // console.log("options votes: ", optionVotes);
     for (const [userName, selectedOptions] of Object.entries(userVotes)) {
         selectedOptions.forEach((option) => {
             optionVotes[option].push(userName);
@@ -45,36 +45,53 @@ const makeOptionVotes = (poll, userVotes) => {
     return optionVotes;
 };
 
+// arr: [{username: 'a', selectedTimes: Array(0), selectedOptions: Array(1)}]
+// goal:
+// const userVotes = {
+//         Nhi: ["option 1", "option 2"],
+//         Yuni: ["option 3", "option 2"],
+//         James: ["option 1"],
+//         Kush: ["option 2"],
+// };
+function makeUserVotes(arr) {
+    const res = {};
+    for (const o of arr) {
+        res[o.username] = o.selectedOptions;
+    }
+    return res;
+}
+
+function findMyData(myName, allUsers) {
+    for (const o of allUsers) {
+        if (o.username === myName) {
+            return o;
+        }
+    }
+}
+
 async function renderPoll() {
     // get poll data from backend
     let meeting = await loadMeetingJSON();
     const username = meeting["username"];
-    // const poll = meeting["value"]["poll"];
+    const poll = meeting["value"]["poll"];
+    let userVotes = undefined;
+    let optionVotes = undefined;
+
     // console.log("meeting, ", meeting);
     // console.log("poll, ", poll);
 
-    // mock data below
-    const poll = {
-        title: "Hi!",
-        options: ["option 1", "option 2", "option 3", "option 4"],
-    };
     let allUsers = await loadUserMeetingJSON();
-    console.log("All users", allUsers);
+    // console.log("All users", allUsers);
 
-    // const mockPollVotes['selected_options'] = [list of selected options]
-    // const userMeeting = load from db
-    // [{name: username, selectedTimes: ["..."], selectedOptions: [option1, option2]}]
-    // make above into the format below.
-    const userVotes = {
-        Nhi: ["option 1", "option 2"],
-        Yuni: ["option 3", "option 2"],
-        James: ["option 1"],
-        Kush: ["option 2"],
-    };
+    if (allUsers[0] !== null) {
+        userVotes = makeUserVotes(allUsers);
+        // console.log("USERVOTES", userVotes);
+    }
 
     // const myVotes = userVotes[username];
-    const myVotes = [];
-    const myTimes = []; // TODO
+    const myData = findMyData(username, allUsers);
+    const myVotes = myData.selectedOptions;
+    const myTimes = myData.selectedTimes;
 
     // check if poll is defined. If not, don't populate options
     if (poll["options"].length === 0) {
@@ -84,16 +101,18 @@ async function renderPoll() {
         return;
     }
 
-    // generate color scale
-    const colorScale = generateColorScale(
-        Object.keys(userVotes).length + 1,
-        "0d6efd"
-    );
-
     // Set poll title
     pollTitle.textContent = "Poll: " + poll["title"];
 
-    const optionVotes = makeOptionVotes(poll, userVotes);
+    // generate color scale
+    const numLevel =
+        userVotes !== undefined ? Object.keys(userVotes).length + 1 : 2;
+    const colorScale = generateColorScale(numLevel, "0d6efd");
+
+    // if there is previous users
+    if (userVotes) {
+        optionVotes = makeOptionVotes(poll, userVotes);
+    }
 
     // TODO: user cannot vote twice for the same option
 
@@ -109,8 +128,12 @@ async function renderPoll() {
             "cursor-pointer",
             "text-black"
         );
-        const numVotes = optionVotes[option].length;
-        pollOption.style.background = colorScale[numVotes];
+        let numVotes = 0;
+        if (optionVotes !== undefined) {
+            numVotes = optionVotes[option].length;
+            pollOption.style.background = colorScale[numVotes];
+        }
+
         pollOption.setAttribute(
             "title",
             numVotes === 0
@@ -169,6 +192,7 @@ renderPoll();
 // Share Event (copy url)
 const copyURL = document.getElementById("copy-url");
 
+// TODO: replace with functioning URL.
 copyURL.addEventListener("click", () => {
     const url = "http://meetu.com/mid=meetingID";
     navigator.clipboard.writeText(url);
@@ -183,50 +207,51 @@ async function renderSummary() {
     bestPollsText.innerHTML = "";
 
     // participants
-    // mock data
-    const users = ["Yuni", "Nhi", "James", "Kush"];
-    users.forEach((option) => {
-        const div = document.createElement("div");
-        div.classList.add("m-1", "best-bubble", "pill-corner");
-        div.textContent = option;
-        participants.appendChild(div);
-    });
+    const allUsers = await loadUserMeetingJSON();
+    console.log(allUsers);
 
-    // const meeting = await loadMeetingJSON();
-    // const userMeeting = await loadUserMeetingJSON();
+    if (allUsers[0] !== null) {
+        const users = allUsers
+            .filter(
+                (o) =>
+                    o.selectedOptions.length > 0 || o.selectedTimes.length > 0
+            )
+            .map((o) => o.username);
 
-    // mock data
-    const userVotes = [
-        ["option 1", "option 2"],
-        ["option 3", "option 2"],
-        ["option 1"],
-        ["option 2"],
-    ];
-
-    // choose best option
-    const optionsFreq = {};
-    for (const arr of userVotes) {
-        arr.forEach((choice) => {
-            if (choice in optionsFreq) {
-                optionsFreq[choice] += 1;
-            } else {
-                optionsFreq[choice] = 1;
+        console.log("users***", users);
+        const userVotes = makeUserVotes(allUsers);
+        console.log("USERVOTES", userVotes);
+        users.forEach((option) => {
+            const div = document.createElement("div");
+            div.classList.add("m-1", "best-bubble", "pill-corner");
+            div.textContent = option;
+            participants.appendChild(div);
+        });
+        // choose best option
+        const optionsFreq = {};
+        for (const arr of Object.values(userVotes)) {
+            arr.forEach((choice) => {
+                if (choice in optionsFreq) {
+                    optionsFreq[choice] += 1;
+                } else {
+                    optionsFreq[choice] = 1;
+                }
+            });
+        }
+        const maxFreq = Math.max(...Object.values(optionsFreq));
+        let bestOptions = [];
+        for (const [option, freq] of Object.entries(optionsFreq)) {
+            if (freq === maxFreq) {
+                bestOptions.push(option);
             }
+        }
+        bestOptions.forEach((option) => {
+            const op = document.createElement("div");
+            op.classList.add("m-1", "best-bubble", "pill-corner");
+            op.textContent = option;
+            bestPollsText.appendChild(op);
         });
     }
-    const maxFreq = Math.max(...Object.values(optionsFreq));
-    let bestOptions = [];
-    for (const [option, freq] of Object.entries(optionsFreq)) {
-        if (freq === maxFreq) {
-            bestOptions.push(option);
-        }
-    }
-    bestOptions.forEach((option) => {
-        const op = document.createElement("div");
-        op.classList.add("m-1", "best-bubble", "pill-corner");
-        op.textContent = option;
-        bestPollsText.appendChild(op);
-    });
 }
 
 renderSummary();

@@ -21,8 +21,11 @@ export async function loadUserMeetingJSON() {
             method: "GET",
         });
         const { data, username, prefs } = await res.json();
-        const mid = data.mid;
-        return { mid, user: username, pref: prefs };
+        // const mid = data.mid;
+        // const result = {};
+        // result[username] = prefs;
+        // return { mid, user: username, pref: prefs };
+        return prefs;
     } catch (err) {
         return { error: err.message };
     }

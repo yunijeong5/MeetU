@@ -310,7 +310,7 @@ function renderTable(userTable) {
                 newCell.addEventListener("mousedown", async function () {
                     this.classList.toggle("highlight");
                     // TODO: send updated data to backend
-                    // send {selectedTimes: ['1x10',....], selectedOptions: ['o1'....], user: username, mid: meetingID}
+                    // send {selectedTimes: ['1x10',....], selectedOptions: ['o1'....], user: username}
                     const res = await fetch("/sendUserMeeting", {
                         method: "POST",
                         headers: {
