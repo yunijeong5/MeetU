@@ -74,6 +74,22 @@ const UserRoutes = (app, db) => {
         }
         res.render("../Client/dashboard", { user, data });
     });
+
+    // endpoint is to gets all meetings for dashboard
+    app.get("/all-meetings", async (req, res) => {
+        try{
+            const user = dbUser.username;
+            let data = null;
+            let mid = null; 
+            if(req.session.mid != undefined)
+                data = await db.getAllMeetings(dbUser.uid);
+            res.json({ mid, data });
+        }
+        catch(err){
+            res.json({ error: err.message });
+        }
+    });
+
     /*
         http://localhost:4444/private/selectTime/:mid (any mid you have in database)
     */

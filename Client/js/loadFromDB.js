@@ -30,3 +30,16 @@ export async function loadUserMeetingJSON() {
         return { error: err.message };
     }
 }
+
+export async function loadAllMeetingsJSON() {
+    // fetch meeting data from db
+    try {
+        const res = await fetch(`/all-meetings`, {
+            method: "GET",
+        });
+        const obj = await res.json();
+        return { mid, obj };
+    } catch (err) {
+        return { error: err.message };
+    }
+}
