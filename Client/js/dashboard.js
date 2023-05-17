@@ -1,9 +1,13 @@
 // Switch theme button functionality
 // TODO: save theme between pages
+import { loadMeetingJSON, loadUserMeetingJSON, loadAllMeetingsJSON } from "./loadFromDB.js";
+console.log(loadAllMeetingsJSON());
+
 const htmlDiv = document.querySelector("html");
 const themeButton = document.getElementsByClassName("theme-icon")[0];
 const navBar = document.getElementsByClassName("navbar")[0];
 const footer = document.getElementById("footer");
+
 
 function switchTheme() {
     const theme = htmlDiv.getAttribute("data-bs-theme");
